@@ -1,5 +1,5 @@
 //
-//  SecondViewController.swift
+//  FirstViewController.swift
 //  motified
 //
 //  Created by Giancarlo Anemone on 3/10/15.
@@ -8,18 +8,16 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class EventFeedViewController: UIViewController {
 
     override func viewDidLoad() {
+        NSLog("View did load")
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 
