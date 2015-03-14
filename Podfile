@@ -10,4 +10,3 @@ target 'motifiedTests' do
 end
 
 pod 'AFNetworking', '~> 2.5.1'
-pod 'QuickDialog', '~> 1.0'

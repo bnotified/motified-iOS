@@ -36,6 +36,8 @@
 		3A20C40E1AB0A0E70055BBF4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C39F1AAF7CB40055BBF4 /* LaunchScreen.xib */; };
 		3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */; };
 		3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */; };
+		3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */; };
+		3A20C4141AB49C620055BBF4 /* UserPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */; };
 		E7C0CFADC39AEB645A4796D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 374DD4637BE32A706382ACFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		3A20C4021AAF8E6D0055BBF4 /* columns@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "columns@1x.png"; sourceTree = "<group>"; };
 		3A20C4031AAF8E6D0055BBF4 /* columns@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "columns@2x.png"; sourceTree = "<group>"; };
 		3A20C4041AAF8E6D0055BBF4 /* columns@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "columns@3x.png"; sourceTree = "<group>"; };
+		3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMInputBox.swift; sourceTree = "<group>"; };
+		3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferenceManager.swift; sourceTree = "<group>"; };
 		8F0EA92544ED70729F437F9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +126,7 @@
 		3A20C3911AAF7CB40055BBF4 /* motified */ = {
 			isa = PBXGroup;
 			children = (
+				3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */,
 				3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */,
 				3A20C3EE1AAF80450055BBF4 /* Event.swift */,
 				3A20C3ED1AAF80060055BBF4 /* BridgingHeader.h */,
@@ -129,6 +134,7 @@
 				3A20C3961AAF7CB40055BBF4 /* EventFeedViewController.swift */,
 				3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */,
 				3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */,
+				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
 				3A20C39D1AAF7CB40055BBF4 /* Images.xcassets */,
 				3A20C39F1AAF7CB40055BBF4 /* LaunchScreen.xib */,
 				3A20C3EC1AAF7F290055BBF4 /* images */,
@@ -346,10 +352,12 @@
 				3A20C3F11AAF805C0055BBF4 /* LoginManager.swift in Sources */,
 				3A20C3EF1AAF80450055BBF4 /* Event.swift in Sources */,
 				3A20C3F51AAF8C850055BBF4 /* MainTabBar.swift in Sources */,
+				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
 				3A20C3951AAF7CB40055BBF4 /* AppDelegate.swift in Sources */,
 				3A20C3971AAF7CB40055BBF4 /* EventFeedViewController.swift in Sources */,
+				3A20C4141AB49C620055BBF4 /* UserPreferenceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
