@@ -27,6 +27,15 @@
 		3A20C4051AAF8E6D0055BBF4 /* columns@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C4021AAF8E6D0055BBF4 /* columns@1x.png */; };
 		3A20C4061AAF8E6D0055BBF4 /* columns@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C4031AAF8E6D0055BBF4 /* columns@2x.png */; };
 		3A20C4071AAF8E6D0055BBF4 /* columns@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C4041AAF8E6D0055BBF4 /* columns@3x.png */; };
+		3A20C4081AB0A0CD0055BBF4 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */; };
+		3A20C4091AB0A0CF0055BBF4 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3EE1AAF80450055BBF4 /* Event.swift */; };
+		3A20C40A1AB0A0D70055BBF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3941AAF7CB40055BBF4 /* AppDelegate.swift */; };
+		3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3961AAF7CB40055BBF4 /* EventFeedViewController.swift */; };
+		3A20C40C1AB0A0DD0055BBF4 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */; };
+		3A20C40D1AB0A0E30055BBF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */; };
+		3A20C40E1AB0A0E70055BBF4 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C39F1AAF7CB40055BBF4 /* LaunchScreen.xib */; };
+		3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */; };
+		3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */; };
 		E7C0CFADC39AEB645A4796D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 374DD4637BE32A706382ACFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -289,6 +298,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A20C40E1AB0A0E70055BBF4 /* LaunchScreen.xib in Resources */,
+				3A20C40D1AB0A0E30055BBF4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,7 +357,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */,
+				3A20C40A1AB0A0D70055BBF4 /* AppDelegate.swift in Sources */,
+				3A20C40C1AB0A0DD0055BBF4 /* UserProfileViewController.swift in Sources */,
+				3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */,
+				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,
+				3A20C4091AB0A0CF0055BBF4 /* Event.swift in Sources */,
+				3A20C4081AB0A0CD0055BBF4 /* LoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +501,7 @@
 		};
 		3A20C3B41AAF7CB40055BBF4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F0EA92544ED70729F437F9B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -496,12 +515,14 @@
 				INFOPLIST_FILE = motifiedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motified.app/motified";
 			};
 			name = Debug;
 		};
 		3A20C3B51AAF7CB40055BBF4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2387A0DB163D8F90DAEF6FA5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -511,6 +532,7 @@
 				INFOPLIST_FILE = motifiedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motified.app/motified";
 			};
 			name = Release;

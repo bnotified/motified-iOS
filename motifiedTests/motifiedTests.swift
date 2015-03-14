@@ -21,16 +21,20 @@ class motifiedTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
+    func testRegisterUser() {
+        let expectation: XCTestExpectation = self.expectationWithDescription("Should Register User without Error")
+        
+        LoginManager.registerUserWithUsername("username", password: "password", confirm: "password", success: { () -> Void in
+            expectation.fulfill()
+        }) { (NSURLSessionDataTask, NSError) -> Void in
+            XCTAssertNil(NSError, "Should execute without error")
+            expectation.fulfill()
         }
+        self.waitForExpectationsWithTimeout(2, handler: nil)
     }
     
+    func testLogin() {
+        let expectation: XCTestExpectation = self.expectationWithDescription("Should login OK")
+        
+    }
 }
