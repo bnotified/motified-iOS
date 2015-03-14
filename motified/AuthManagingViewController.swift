@@ -46,7 +46,7 @@ class AuthManagingViewController: UIViewController {
             if (!self.isPasswordValid(password)) {
                 return self.handleRegistrationError("A password must be at least 6 characters long and not contain any whitespace")
             }
-            
+            self.register(username, password: password)
         }
         inputBox.show()
     }
@@ -61,15 +61,19 @@ class AuthManagingViewController: UIViewController {
     }
     
     func register(username: String, password: String) {
-        let hud: MBProgressHUD = MBProgressHUD(view: self.view)
-        hud.labelText = "Registering User"
-        hud.show(true)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.registerUserWithUsername(username, password: password, confirm: password, success: { () -> Void in
             UserPreferenceManager.saveUsernameAndPassword(username, password: password)
-            hud.hide(true)
+            MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            self.view.makeToast("Successfully registered", duration: 2.0, position: CSToastPositionCenter)
         }) { (NSURLSessionDataTask, NSError) -> Void in
-            self.promptForRegistration(message: "Error when registering")
-            hud.hide(true)
+            MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            let response: NSHTTPURLResponse = NSURLSessionDataTask.response as NSHTTPURLResponse
+            if response.statusCode == 400 {
+                self.promptForRegistration(message: NSString(format: "Whoops! The username '%@' is not available", username))
+            } else {
+                self.promptForRegistration(message: "An error occurred when registering. Please check your internet connectivity")
+            }
         }
     }
     

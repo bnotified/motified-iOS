@@ -53,14 +53,21 @@ class UserPreferenceManager: NSObject {
         self.save(defaults)
     }
     
-    class func saveUsernameAndPassword(username: String, password: String) {
+    class func saveUsernameAndPassword(username: String, password: String) -> Void {
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(username, forKey: USERNAME_KEY)
         defaults.setObject(password, forKey: PASSWORD_KEY)
         self.save(defaults)
     }
     
-    class internal func save(defaults: NSUserDefaults) {
+    class func clearUsernameAndPassword() -> Void {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.removeObjectForKey(USERNAME_KEY)
+        defaults.removeObjectForKey(PASSWORD_KEY)
+        self.save(defaults)
+    }
+    
+    class internal func save(defaults: NSUserDefaults) -> Void {
         if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 8, minorVersion: 0, patchVersion: 0)) {
             defaults.synchronize()
         }

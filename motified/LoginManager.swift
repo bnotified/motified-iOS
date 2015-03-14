@@ -13,12 +13,8 @@ let BASE_URL: String = "http://localhost:5000/"
 class LoginManager {
     
     class var manager: AFHTTPSessionManager {
-        let manager = AFHTTPSessionManager(baseURL: NSURL(string: BASE_URL))
-        let username = UserPreferenceManager.loadUsername()
-        let password = UserPreferenceManager.loadPassword()
+    let manager = AFHTTPSessionManager(baseURL: NSURL(string: BASE_URL))
         manager.requestSerializer = AFJSONRequestSerializer()
-        //manager.requestSerializer = AFHTTPRequestSerializer()
-        manager.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password: password)
         manager.responseSerializer = AFJSONResponseSerializer()
         return manager
     }
@@ -38,14 +34,32 @@ class LoginManager {
     }
     
     class func login(success: () -> Void, failure: (NSURLSessionDataTask!, NSError!) -> Void) -> Void {
-        self.manager.POST("user/login", parameters: nil, success: { (NSURLSessionDataTask, AnyObject) -> Void in
-            success()
-            }, failure: failure)
+        let m = self.manager
+        let username = UserPreferenceManager.loadUsername()
+        let password = UserPreferenceManager.loadPassword()
+        m.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password: password)
+        m.POST("user/login", parameters: nil,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                success()
+            },
+            failure: { (NSURLSessionDataTask, NSError) -> Void in
+                let response: NSHTTPURLResponse = NSURLSessionDataTask.response as NSHTTPURLResponse
+                if response.statusCode == 401 {
+                    UserPreferenceManager.clearUsernameAndPassword()
+                }
+                failure(NSURLSessionDataTask, NSError)
+            }
+        )
     }
     
     class func testLogin() {
         self.login({ () -> Void in
             self.isLoggedIn({ (Bool, NSError) -> Void in
+                if(Bool == true) {
+                    NSLog("YAY");
+                } else {
+                    NSLog("POOP")
+                }
             })
             }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Failed to Login: %@", NSError)
@@ -55,8 +69,8 @@ class LoginManager {
     class func isLoggedIn(done: (Bool!, NSError!) -> Void) -> Void {
         self.manager.GET("user/isLoggedIn", parameters: nil, success: { (NSURLSessionDataTask, response) -> Void in
             let jsonResult: Dictionary<String, AnyObject> = response as Dictionary<String, AnyObject>
-            NSLog("Result: %@", jsonResult)
-            done(true, nil)
+            let result: Bool = jsonResult["isLoggedIn"]! as Bool
+            done(result, nil)
             }) { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error: %@", NSError)
                 done(nil, NSError)

@@ -148,6 +148,11 @@ class BMInputBox: UIView {
         messageLabel.textAlignment = .Center
         messageLabel.textColor = (self.blurEffectStyle == .Dark) ? UIColor.whiteColor() : UIColor.blackColor()
         messageLabel.sizeToFit()
+        
+        if self.style == .LoginAndPasswordInput {
+            messageLabel.textColor = UIColor.redColor()
+        }
+        
         self.visualEffectView?.contentView.addSubview(messageLabel)
 
 
