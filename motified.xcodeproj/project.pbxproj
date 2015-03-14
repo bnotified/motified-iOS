@@ -38,6 +38,12 @@
 		3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */; };
 		3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */; };
 		3A20C4141AB49C620055BBF4 /* UserPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */; };
+		3A20C4151AB4A1170055BBF4 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */; };
+		3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */; };
+		3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4171AB4A6960055BBF4 /* delay.swift */; };
+		3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4171AB4A6960055BBF4 /* delay.swift */; };
+		3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */; };
+		3A20C41C1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */; };
 		E7C0CFADC39AEB645A4796D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 374DD4637BE32A706382ACFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +87,8 @@
 		3A20C4041AAF8E6D0055BBF4 /* columns@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "columns@3x.png"; sourceTree = "<group>"; };
 		3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMInputBox.swift; sourceTree = "<group>"; };
 		3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferenceManager.swift; sourceTree = "<group>"; };
+		3A20C4171AB4A6960055BBF4 /* delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = delay.swift; sourceTree = "<group>"; };
+		3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagingViewController.swift; sourceTree = "<group>"; };
 		8F0EA92544ED70729F437F9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,11 +135,13 @@
 			isa = PBXGroup;
 			children = (
 				3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */,
+				3A20C4171AB4A6960055BBF4 /* delay.swift */,
 				3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */,
 				3A20C3EE1AAF80450055BBF4 /* Event.swift */,
 				3A20C3ED1AAF80060055BBF4 /* BridgingHeader.h */,
 				3A20C3941AAF7CB40055BBF4 /* AppDelegate.swift */,
 				3A20C3961AAF7CB40055BBF4 /* EventFeedViewController.swift */,
+				3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */,
 				3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */,
 				3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */,
 				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
@@ -352,10 +362,12 @@
 				3A20C3F11AAF805C0055BBF4 /* LoginManager.swift in Sources */,
 				3A20C3EF1AAF80450055BBF4 /* Event.swift in Sources */,
 				3A20C3F51AAF8C850055BBF4 /* MainTabBar.swift in Sources */,
+				3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */,
 				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
 				3A20C3951AAF7CB40055BBF4 /* AppDelegate.swift in Sources */,
+				3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
 				3A20C3971AAF7CB40055BBF4 /* EventFeedViewController.swift in Sources */,
 				3A20C4141AB49C620055BBF4 /* UserPreferenceManager.swift in Sources */,
 			);
@@ -365,13 +377,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A20C41C1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
+				3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */,
 				3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */,
 				3A20C40A1AB0A0D70055BBF4 /* AppDelegate.swift in Sources */,
 				3A20C40C1AB0A0DD0055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */,
 				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
+				3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,
 				3A20C4091AB0A0CF0055BBF4 /* Event.swift in Sources */,
+				3A20C4151AB4A1170055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C4081AB0A0CD0055BBF4 /* LoginManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

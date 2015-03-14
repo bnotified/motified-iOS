@@ -8,19 +8,21 @@
 
 import UIKit
 
-class EventFeedViewController: UIViewController {
+class EventFeedViewController: AuthManagingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        UserPreferenceManager.saveUsername("testuser")
+        UserPreferenceManager.savePassword("password")
+        LoginManager.testLogin()
     }
 }
 

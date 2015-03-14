@@ -12,4 +12,5 @@
 #endif
 
 #import <AFNetworking/AFNetworking.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
