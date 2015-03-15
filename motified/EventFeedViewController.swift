@@ -12,7 +12,6 @@ class EventFeedViewController: AuthManagingViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserPreferenceManager.clearUsernameAndPassword()
     }
 
     override func didReceiveMemoryWarning() {

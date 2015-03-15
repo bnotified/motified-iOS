@@ -3,7 +3,6 @@
 //  Motified
 //
 //  Created by Giancarlo Anemone on 3/10/15.
-//  Copyright (c) 2015 Marcus Molchany. All rights reserved.
 //
 
 import UIKit
@@ -34,22 +33,18 @@ class LoginManager {
     }
     
     class func login(success: () -> Void, failure: (NSURLSessionDataTask!, NSError!) -> Void) -> Void {
-        let m = self.manager
         let username = UserPreferenceManager.loadUsername()
         let password = UserPreferenceManager.loadPassword()
+        self.loginWithUsername(username, password: password, success: success, failure: failure)
+    }
+    
+    class func loginWithUsername(username: String, password: String, success: () -> Void, failure: (NSURLSessionDataTask!, NSError!) -> Void) -> Void {
+        let m = self.manager
         m.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password: password)
-        m.POST("user/login", parameters: nil,
-            success: { (NSURLSessionDataTask, AnyObject) -> Void in
-                success()
-            },
-            failure: { (NSURLSessionDataTask, NSError) -> Void in
-                let response: NSHTTPURLResponse = NSURLSessionDataTask.response as NSHTTPURLResponse
-                if response.statusCode == 401 {
-                    UserPreferenceManager.clearUsernameAndPassword()
-                }
-                failure(NSURLSessionDataTask, NSError)
-            }
-        )
+        m.POST("user/login", parameters: nil, success: { (NSURLSessionDataTask, AnyObject) -> Void in
+            UserPreferenceManager.saveUsernameAndPassword(username, password: password)
+            success()
+        }, failure: failure)
     }
     
     class func testLogin() {
@@ -75,5 +70,15 @@ class LoginManager {
                 NSLog("Error: %@", NSError)
                 done(nil, NSError)
         }
+    }
+    
+    class func hasValidCookie() -> Bool {
+        let cookies: Array<NSHTTPCookie> = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/"))! as Array<NSHTTPCookie>
+        for cookie in cookies {
+            if cookie.name == "motified_cookie" {
+                return true
+            }
+        }
+        return false
     }
 }
