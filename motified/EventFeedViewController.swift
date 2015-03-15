@@ -16,9 +16,6 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
-            
-        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,7 +25,6 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
-        
         return cell
     }
     
