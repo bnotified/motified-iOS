@@ -17,19 +17,20 @@ enum Category {
 class Event: NSObject {
     let id: Int
     let title: String
-    let subtitle: String
     let desc: String
     let startDate: NSDate
     let endDate: NSDate
     let category: Category
+    let createdBy: Int
     
-    init(id: Int, title: String, subtitle: String, desc: String, startDate: NSDate, endDate: NSDate, category: Category) {
+    init(id: Int, createdBy: Int, title: String, desc: String, startDate: NSDate, endDate: NSDate, category: Category) {
         self.id = id
+        self.createdBy = createdBy
         self.title = title
-        self.subtitle = subtitle
         self.desc = desc
         self.startDate = startDate
         self.endDate = endDate
         self.category = category
     }
+    
 }
