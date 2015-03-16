@@ -16,6 +16,7 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.events = APIManager.sharedInstance.getEventsOnPage(1)
     }
 
     override func didReceiveMemoryWarning() {

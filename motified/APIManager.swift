@@ -12,15 +12,13 @@ private let _APIManagerInstance = APIManager()
 
 class APIManager: NSObject {
     
-    var events: Array<Event>
-    var page: Int
+    var events: Dictionary<Int, Array<Event>>
     var totalPages: Int
     
     class var sharedInstance: APIManager { return _APIManagerInstance }
     
     override init() {
-        self.events = []
-        self.page = 0
+        self.events = Dictionary<Int, Array<Event>>(minimumCapacity: 5)
         self.totalPages = 0
     }
     
@@ -38,26 +36,38 @@ class APIManager: NSObject {
     
     internal func setEventsFromResponse(response: Dictionary<String, AnyObject>) {
         NSLog("Response: %@", response)
+        // Set up date formatter
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
+        
         let num_results = response["num_results"]! as Int
         let objects = response["objects"]! as Array<AnyObject>
-        self.page = response["page"]! as Int
-        self.totalPages = response["total_pages"]! as Int
+        let page = response["page"]! as Int
+        // self.totalPages = response["total_pages"]! as Int
+        
+        self.clearPage(page)
+        
         for obj in objects {
-            let id = obj["id"]! as Int
-            NSLog("OBJ: %@", obj as Dictionary<String, AnyObject>)
-            let createdBy = obj["created_by"]! as String
-            let name = obj["name"]! as String
-            let desc = obj["description"]! as String
-            let startStr = obj["start"]! as String
-            let endStr = obj["end"]! as String
-            let start =  dateFormatter.dateFromString(startStr) as NSDate!
-            let end = dateFormatter.dateFromString(endStr) as NSDate!
-            NSLog("Start: %@", start)
+            let id = obj["id"] as String?
+            let createdBy = obj["created_by"] as String?
+            let name = obj["name"] as String?
+            let desc = obj["description"] as String?
+            let startStr = obj["start"] as String?
+            let endStr = obj["end"] as String?
+            let start =  dateFormatter.dateFromString(startStr!) as NSDate?
+            let end = dateFormatter.dateFromString(endStr!) as NSDate?
             let cat = "temp"
-            events.append(Event(id: id, createdBy: 1, title: name, desc: description, startDate: start!, endDate: end!, category: Category.Education))
+            let event = Event(id: id?.toInt(), createdBy: createdBy?.toInt(), title: name, desc: desc, startDate: start, endDate: end, category: Category.Education)
+            self.events[page]?.append(event)
         }
+    }
+    
+    internal func clearPage(page: Int) {
+        self.events[page] = Array<Event>()
+    }
+    
+    func getEventsOnPage(page: Int) -> Array<Event> {
+        return self.events[page]!
     }
     
 //    func testEvents() {
