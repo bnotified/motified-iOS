@@ -44,6 +44,9 @@
 		3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4171AB4A6960055BBF4 /* delay.swift */; };
 		3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */; };
 		3A20C41C1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */; };
+		3A5152E41AB756A900DC290B /* CategoryCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5152E31AB756A900DC290B /* CategoryCollectionViewController.swift */; };
+		3A5152E61AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5152E51AB756B800DC290B /* CategoryCollectionViewCell.swift */; };
+		3A5152E71AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5152E51AB756B800DC290B /* CategoryCollectionViewCell.swift */; };
 		3ABD294F1AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */; };
 		3ABD29501AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */; };
 		3ABD29521AB6148E0022CE9E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29511AB6148E0022CE9E /* APIManager.swift */; };
@@ -95,6 +98,8 @@
 		3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferenceManager.swift; sourceTree = "<group>"; };
 		3A20C4171AB4A6960055BBF4 /* delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = delay.swift; sourceTree = "<group>"; };
 		3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagingViewController.swift; sourceTree = "<group>"; };
+		3A5152E31AB756A900DC290B /* CategoryCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewController.swift; sourceTree = "<group>"; };
+		3A5152E51AB756B800DC290B /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		3ABD29511AB6148E0022CE9E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
@@ -155,6 +160,8 @@
 				3ABD29511AB6148E0022CE9E /* APIManager.swift */,
 				3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */,
 				3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */,
+				3A5152E31AB756A900DC290B /* CategoryCollectionViewController.swift */,
+				3A5152E51AB756B800DC290B /* CategoryCollectionViewCell.swift */,
 				3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */,
 				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
 				3A20C39D1AAF7CB40055BBF4 /* Images.xcassets */,
@@ -371,11 +378,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5152E61AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */,
 				3ABD294F1AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */,
 				3A20C3F11AAF805C0055BBF4 /* LoginManager.swift in Sources */,
 				3A20C3EF1AAF80450055BBF4 /* Event.swift in Sources */,
 				3ABD29551AB73A4D0022CE9E /* constants.swift in Sources */,
 				3A20C3F51AAF8C850055BBF4 /* MainTabBar.swift in Sources */,
+				3A5152E41AB756A900DC290B /* CategoryCollectionViewController.swift in Sources */,
 				3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */,
 				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
@@ -392,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5152E71AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */,
 				3A20C41C1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
 				3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */,
 				3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */,
