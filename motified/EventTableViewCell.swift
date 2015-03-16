@@ -10,13 +10,10 @@ import UIKit
 
 class EventTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImage: UIImageView!
-    @IBOutlet weak var descriptionTextView: UITextView!
-    @IBOutlet weak var endsLabel: UILabel!
-    @IBOutlet weak var beginsLabel: UILabel!
-    @IBOutlet weak var beginsValueLabel: UILabel!
-    @IBOutlet weak var endsValLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     let event: Event?
     
@@ -39,12 +36,15 @@ class EventTableViewCell: UITableViewCell {
     func setUpWithEvent(event: Event) {
         self.titleLabel.text = event.title
         self.categoryImage.image = event.getImage()
-        self.descriptionTextView.text = event.desc
-        self.endsValLabel.text = self.formatDate(event.startDate!)
-        self.beginsValueLabel.text = self.formatDate(event.endDate!)
+        self.descriptionLabel.text = event.desc
+        let start = self.formatDate(event.startDate!)
+        let end = self.formatDate(event.endDate!)
+        self.dateLabel.text = NSString(format: "%@ - %@", start, end)
     }
     
     func formatDate(date: NSDate) -> String {
-        return "10:00 am"
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MMM d h':'mm a"
+        return dateFormatter.stringFromDate(date)
     }
 }

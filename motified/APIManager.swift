@@ -48,7 +48,7 @@ class APIManager: NSObject {
         self.clearPage(page)
         
         for obj in objects {
-            let id = obj["id"] as String?
+            let id = obj["id"] as Int?
             let createdBy = obj["created_by"] as String?
             let name = obj["name"] as String?
             let desc = obj["description"] as String?
@@ -56,10 +56,15 @@ class APIManager: NSObject {
             let endStr = obj["end"] as String?
             let start =  dateFormatter.dateFromString(startStr!) as NSDate?
             let end = dateFormatter.dateFromString(endStr!) as NSDate?
-            let cat = "temp"
-            let event = Event(id: id?.toInt(), createdBy: createdBy?.toInt(), title: name, desc: desc, startDate: start, endDate: end, category: Category.Education)
+            let categories = obj["categories"] as Array<Dictionary<String, AnyObject>>?
+            let event = Event(id: id, createdBy: createdBy, title: name, desc: desc, startDate: start, endDate: end, categories: categories)
             self.events[page]?.append(event)
         }
+        self.emitChange()
+    }
+    
+    internal func emitChange() {
+        NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATION_LOADED_EVENTS, object: nil)
     }
     
     internal func clearPage(page: Int) {

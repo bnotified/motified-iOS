@@ -48,6 +48,8 @@
 		3ABD29501AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */; };
 		3ABD29521AB6148E0022CE9E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29511AB6148E0022CE9E /* APIManager.swift */; };
 		3ABD29531AB6148E0022CE9E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29511AB6148E0022CE9E /* APIManager.swift */; };
+		3ABD29551AB73A4D0022CE9E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29541AB73A4D0022CE9E /* constants.swift */; };
+		3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29541AB73A4D0022CE9E /* constants.swift */; };
 		E7C0CFADC39AEB645A4796D6 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 374DD4637BE32A706382ACFA /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +97,7 @@
 		3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagingViewController.swift; sourceTree = "<group>"; };
 		3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		3ABD29511AB6148E0022CE9E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
 		8F0EA92544ED70729F437F9B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -120,6 +123,7 @@
 		3A20C3861AAF7CB40055BBF4 = {
 			isa = PBXGroup;
 			children = (
+				3ABD29541AB73A4D0022CE9E /* constants.swift */,
 				3A20C3911AAF7CB40055BBF4 /* motified */,
 				3A20C3A91AAF7CB40055BBF4 /* motifiedTests */,
 				3A20C3901AAF7CB40055BBF4 /* Products */,
@@ -370,6 +374,7 @@
 				3ABD294F1AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */,
 				3A20C3F11AAF805C0055BBF4 /* LoginManager.swift in Sources */,
 				3A20C3EF1AAF80450055BBF4 /* Event.swift in Sources */,
+				3ABD29551AB73A4D0022CE9E /* constants.swift in Sources */,
 				3A20C3F51AAF8C850055BBF4 /* MainTabBar.swift in Sources */,
 				3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */,
 				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
@@ -395,6 +400,7 @@
 				3A20C40C1AB0A0DD0055BBF4 /* UserProfileViewController.swift in Sources */,
 				3ABD29531AB6148E0022CE9E /* APIManager.swift in Sources */,
 				3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */,
+				3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */,
 				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
 				3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,

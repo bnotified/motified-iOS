@@ -20,21 +20,21 @@ class Event: NSObject {
     let desc: String?
     let startDate: NSDate?
     let endDate: NSDate?
-    let category: Category?
-    let createdBy: Int?
+    let categories: Array<Dictionary<String, AnyObject>>?
+    let createdBy: String?
     
-    init(id: Int?, createdBy: Int?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, category: Category?) {
+    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?) {
         self.id = id
         self.createdBy = createdBy
         self.title = title
         self.desc = desc
         self.startDate = startDate
         self.endDate = endDate
-        self.category = category
+        self.categories = categories
     }
     
     func getImage() -> UIImage {
-        return UIImage(named: "airplane")
+        return UIImage(named: "music@3x.png")
     }
     
 }
