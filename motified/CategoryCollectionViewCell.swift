@@ -12,10 +12,10 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var checkImage: UIImageView!
     
     func setUpWithImage(image: UIImage, text: String) {
         self.imageView.image = image
         self.titleLabel.text = text
     }
-    
 }

@@ -17,8 +17,6 @@ class AuthManagingViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if LoginManager.hasValidCookie() {
-            APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
-            });
             return ()
         }
         if UserPreferenceManager.hasUsername() {
@@ -66,8 +64,6 @@ class AuthManagingViewController: UIViewController {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.loginWithUsername(username, password: password,
             { () -> Void in
-                APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
-                })
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 return ()
             }, failure: { (NSURLSessionDataTask, NSError) -> Void in
@@ -111,8 +107,6 @@ class AuthManagingViewController: UIViewController {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.registerUserWithUsername(username, password: password, confirm: password,
             success: { () -> Void in
-                APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
-                })
                 UserPreferenceManager.saveUsernameAndPassword(username, password: password)
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 self.view.makeToast("Successfully registered", duration: 2.0, position: CSToastPositionCenter)

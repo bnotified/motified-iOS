@@ -11,32 +11,57 @@ import UIKit
 let reuseIdentifier = "CategoryCollectionViewCell"
 
 class CategoryCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+    
     @IBOutlet weak var collectionView: UICollectionView!
+    var hasShownToast: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Set up delegates
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
+        
+        // Set up listeners
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onCategoriesChanged", name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.hasShownToast = false
     }
-
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
+    }
+    
+    func showHelperToast() {
+        self.view.makeToast("View the events feed to see only your selected categories", duration: 3, position: CSToastPositionCenter)
+        self.hasShownToast = true
+    }
+    
+    func onCategoriesChanged() {
+        self.collectionView.reloadData()
+    }
+    
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
-
+    
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return APIManager.sharedInstance.categories.count
     }
     
-   func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var selectedIndexes = APIManager.sharedInstance.selectedCategories
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryCollectionViewCell
-        cell.setUpWithImage(UIImage(named: "columns@3x.png"), text: "Volunteering")
+        let categoryText = APIManager.sharedInstance.categories[indexPath.row]["category"]! as String
+        cell.setUpWithImage(UIImage(named: "columns@3x.png"), text: categoryText)
+        if selectedIndexes.containsObject(indexPath.row) {
+            cell.checkImage.hidden = false
+        } else {
+            cell.checkImage.hidden = true
+        }
         return cell
     }
     
@@ -45,36 +70,17 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
         let width = size.width / 3 - 5*3
         return CGSizeMake(width, width + 20)
     }
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    func collectionView(collectionView: UICollectionView!, shouldHighlightItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    func collectionView(collectionView: UICollectionView!, shouldSelectItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    func collectionView(collectionView: UICollectionView!, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath!) -> Bool {
-        return false
-    }
-
-    func collectionView(collectionView: UICollectionView!, canPerformAction action: String!, forItemAtIndexPath indexPath: NSIndexPath!, withSender sender: AnyObject!) -> Bool {
-        return false
-    }
-
-    func collectionView(collectionView: UICollectionView!, performAction action: String!, forItemAtIndexPath indexPath: NSIndexPath!, withSender sender: AnyObject!) {
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        if self.hasShownToast == false {
+            self.showHelperToast()
+        }
+        var selectedIndexes = APIManager.sharedInstance.selectedCategories
+        if selectedIndexes.containsObject(indexPath.row) {
+            selectedIndexes.removeObject(indexPath.row)
+        } else {
+            selectedIndexes.addObject(indexPath.row)
+        }
+        self.collectionView.reloadData()
     }
-    */
-
 }

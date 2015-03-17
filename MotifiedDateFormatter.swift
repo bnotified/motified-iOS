@@ -8,6 +8,31 @@
 
 import UIKit
 
+enum MotifiedDateFormat {
+    case Server
+    case ClientLong
+    case ClientShort
+}
+
 class MotifiedDateFormatter: NSDateFormatter {
-   
+    init(format: MotifiedDateFormat) {
+        super.init()
+        switch format {
+        case MotifiedDateFormat.Server:
+            self.timeZone = NSTimeZone(name: "UTC")
+            self.dateFormat = "yyyy-MM-dd'T'hh:mm:ss'Z'"
+        case MotifiedDateFormat.ClientLong:
+            self.locale = NSLocale.currentLocale()
+            self.timeZone = NSTimeZone.localTimeZone()
+            self.dateFormat = "MMM d h':'mm a"
+        case MotifiedDateFormat.ClientShort:
+            self.locale = NSLocale.currentLocale()
+            self.timeZone = NSTimeZone.localTimeZone()
+            self.dateFormat = "MMM d h':'mm a"
+        }
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

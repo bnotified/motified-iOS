@@ -9,3 +9,6 @@
 import Foundation
 
 let NOTIFICATION_LOADED_EVENTS = "notification_loaded_events"
+let NOTIFICATION_ERROR_EVENTS = "notification_error_events"
+let NOTIFICATION_LOADED_CATEGORIES = "notification_loaded_categories"
+let NOTIFICATION_ERROR_CATEGORIES = "notification_error_categories"
