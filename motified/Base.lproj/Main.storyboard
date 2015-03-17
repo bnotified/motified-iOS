@@ -221,7 +221,19 @@
                     <view key="view" contentMode="scaleToFill" id="HTz-nx-5qM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Title" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8eW-Iy-q60">
+                                <rect key="frame" x="16" y="100" width="288" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8eW-Iy-q60" firstAttribute="leading" secondItem="HTz-nx-5qM" secondAttribute="leadingMargin" id="9jQ-FG-Bgc"/>
+                            <constraint firstItem="8eW-Iy-q60" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="36" id="mZA-k1-5oO"/>
+                            <constraint firstItem="8eW-Iy-q60" firstAttribute="trailing" secondItem="HTz-nx-5qM" secondAttribute="trailingMargin" id="ygF-Kh-Pya"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="tlZ-Ia-GPV"/>
                 </viewController>
