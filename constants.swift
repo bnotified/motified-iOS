@@ -8,6 +8,7 @@
 
 import Foundation
 
+let NOTIFICATION_SELECTED_EVENTS_CHANGED = "notification_selected_events_changed"
 let NOTIFICATION_LOADED_EVENTS = "notification_loaded_events"
 let NOTIFICATION_ERROR_EVENTS = "notification_error_events"
 let NOTIFICATION_LOADED_CATEGORIES = "notification_loaded_categories"

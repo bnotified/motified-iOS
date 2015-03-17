@@ -18,14 +18,27 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "onEventsLoaded", name: NOTIFICATION_LOADED_EVENTS, object: nil)
+        let center = NSNotificationCenter.defaultCenter()
+        center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_LOADED_EVENTS, object: nil)
+        center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let manager = APIManager.sharedInstance
+        if (manager.hasSelectedCategories()) {
+            self.view.makeToast(manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter)
+        }
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NOTIFICATION_LOADED_EVENTS, object: nil)
+        let center = NSNotificationCenter.defaultCenter()
+        center.removeObserver(self, name: NOTIFICATION_LOADED_EVENTS, object: nil)
+        center.removeObserver(self, name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
     }
     
-    func onEventsLoaded() {
+    func onEventsChanged() {
         self.events = APIManager.sharedInstance.getEventsOnPage(1)
         self.tableView.reloadData()
     }

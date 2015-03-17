@@ -110,8 +110,60 @@ class APIManager: NSObject {
         self.events[page] = Array<Event>()
     }
     
+    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
+        var filtered = NSMutableSet()
+        for event in events {
+            for index in self.selectedCategories {
+                if let _index = index as? Int {
+                    let category: Dictionary<String, AnyObject> = self.categories[_index]
+                    if event.isInCategory(category) {
+                        filtered.addObject(event)
+                    }
+                }
+            }
+        }
+        return filtered.allObjects as Array<Event>
+    }
+    
     func getEventsOnPage(page: Int) -> Array<Event> {
-        return self.events[page]!
+        let events = self.events[page]!
+        if self.hasSelectedCategories() {
+            return self.filterToSelectedEvents(events)
+        }
+        return events
+    }
+    
+    func hasSelectedCategories() -> Bool {
+        return self.selectedCategories.count > 0
+    }
+    
+    func getSelectedCategoryMessage() -> String {
+        if self.selectedCategories.count == 1 {
+            let cat = self.getSelectedCategories()[0]
+            let catString = cat["category"]! as String
+            return String(format: "Showing the %@ category", catString)
+        }
+        return String(format: "Showing categories: %@", ", ".join(self.getSelectedCategoryStrings()))
+    }
+    
+    func getSelectedCategoryStrings() -> Array<String> {
+        return self.getCategoryStrings(self.getSelectedCategories())
+    }
+    
+    func getCategoryStrings(categories: Array<Dictionary<String, AnyObject>>) -> Array<String> {
+        func mapCategories(category: Dictionary<String, AnyObject>) -> String {
+            return category["category"]! as String
+        }
+        let cats = categories.map { mapCategories($0) } as Array<String>
+        return cats
+    }
+    
+    func getCategoryIDs(categories: Array<Dictionary<String, AnyObject>>) -> Array<Int> {
+        func mapCategories(category: Dictionary<String, AnyObject>) -> Int {
+            return category["id"]! as Int
+        }
+        let cats = self.getSelectedCategories().map { mapCategories($0) } as Array<Int>
+        return cats
     }
     
     //    func testEvents() {

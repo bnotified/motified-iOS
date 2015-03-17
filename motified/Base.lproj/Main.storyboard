@@ -237,8 +237,21 @@
                             <constraint firstItem="Drr-UL-Eev" firstAttribute="top" secondItem="8qE-FT-akx" secondAttribute="bottom" id="zOU-JI-ysv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Categories" id="fVo-vA-Cck"/>
+                    <navigationItem key="navigationItem" title="Categories" id="fVo-vA-Cck">
+                        <barButtonItem key="leftBarButtonItem" image="arrow-left.png" id="S7y-tU-mwt">
+                            <connections>
+                                <action selector="onBackButtonPressed:" destination="7tf-Tb-PIf" id="j0x-Vh-KEo"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="stop" id="z7F-ta-GO9">
+                            <connections>
+                                <action selector="onClearPressed:" destination="7tf-Tb-PIf" id="1uq-Hp-eak"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="S7y-tU-mwt" id="XLT-bW-AHY"/>
+                        <outlet property="clearButton" destination="z7F-ta-GO9" id="F9c-ku-2h1"/>
                         <outlet property="collectionView" destination="8qE-FT-akx" id="6Gm-bZ-8d3"/>
                     </connections>
                 </viewController>
@@ -425,6 +438,7 @@
     </scenes>
     <resources>
         <image name="airplane.png" width="25" height="25"/>
+        <image name="arrow-left.png" width="25" height="25"/>
         <image name="check.png" width="25" height="25"/>
         <image name="columns@3x.png" width="75" height="75"/>
         <image name="first" width="30" height="30"/>

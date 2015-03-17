@@ -37,4 +37,13 @@ class Event: NSObject {
         return UIImage(named: "music@3x.png")
     }
     
+    func isInCategory(category: Dictionary<String, AnyObject>) -> Bool {
+        for cat in self.categories! {
+            if cat["category"]! as String == category["category"]! as String {
+                return true
+            }
+        }
+        return false
+    }
+    
 }

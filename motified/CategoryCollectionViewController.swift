@@ -12,7 +12,10 @@ let reuseIdentifier = "CategoryCollectionViewCell"
 
 class CategoryCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    
     var hasShownToast: Bool = false
     
     override func viewDidLoad() {
@@ -35,7 +38,7 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
     }
     
     func showHelperToast() {
-        self.view.makeToast("View the events feed to see only your selected categories", duration: 3, position: CSToastPositionCenter)
+        self.navigationController?.navigationBar.makeToast("Events feed updated", duration: 2, position: CSToastPositionTop)
         self.hasShownToast = true
     }
     
@@ -81,6 +84,18 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
         } else {
             selectedIndexes.addObject(indexPath.row)
         }
+        NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
         self.collectionView.reloadData()
     }
+    
+    
+    @IBAction func onClearPressed(sender: AnyObject) {
+        APIManager.sharedInstance.selectedCategories = NSMutableSet()
+        self.collectionView.reloadData()
+    }
+    
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        self.tabBarController?.selectedIndex = 0
+    }
+    
 }
