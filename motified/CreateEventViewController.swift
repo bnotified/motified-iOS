@@ -49,7 +49,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.endPicker.addTarget(self, action: "updateEndLabel", forControlEvents: UIControlEvents.ValueChanged)
     }
     
-    func updateStartLabel() {
+    func   updateStartLabel() {
         self.startLabel.text = self.localFormatter.stringFromDate(self.startPicker.date)
         self.endPicker.minimumDate = self.startPicker.date
     }
