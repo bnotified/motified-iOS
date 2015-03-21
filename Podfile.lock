@@ -21,18 +21,21 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - ESTimePicker (0.4.3)
+  - LocationPickerView (1.2.0)
   - MBProgressHUD (0.9.1)
   - Toast (2.4)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.1)
   - ESTimePicker
+  - LocationPickerView (~> 1.2.0)
   - MBProgressHUD (~> 0.9.1)
   - Toast (~> 2.4)
 
 SPEC CHECKSUMS:
   AFNetworking: 8bee59492a6ff15d69130efa4d0dc67e0094a52a
   ESTimePicker: 187cfe0fb23d0698ca0f797f8422c5f796125a89
+  LocationPickerView: 12b54a7f50c9f8fc2d7c6fb9cd185632486edab3
   MBProgressHUD: f3747dcbd45a9e855a6b0674550651e0b7ed250c
   Toast: 6a3c2b1d70e426b26d130971c369670eac7aa9ce
 

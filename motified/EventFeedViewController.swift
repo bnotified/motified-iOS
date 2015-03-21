@@ -21,7 +21,6 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_LOADED_EVENTS, object: nil)
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
-        
     }
     
     override func viewDidAppear(animated: Bool) {
