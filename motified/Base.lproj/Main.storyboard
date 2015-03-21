@@ -294,7 +294,12 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Category" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UJw-08-3iW">
-                                <rect key="frame" x="16" y="231" width="296" height="30"/>
+                                <rect key="frame" x="16" y="231" width="144" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rG0-hs-RGE">
+                                <rect key="frame" x="168" y="231" width="144" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -304,16 +309,19 @@
                             <constraint firstItem="UJw-08-3iW" firstAttribute="leading" secondItem="HTz-nx-5qM" secondAttribute="leadingMargin" id="0Hy-eA-vO1"/>
                             <constraint firstItem="rqJ-Tx-Foi" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="129" id="0ZP-tC-xxv"/>
                             <constraint firstItem="pjm-ur-Yt3" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="129" id="4PB-iT-Qau"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="rG0-hs-RGE" secondAttribute="trailing" constant="-8" id="4Sg-ci-APg"/>
                             <constraint firstItem="rqJ-Tx-Foi" firstAttribute="leading" secondItem="pjm-ur-Yt3" secondAttribute="trailing" constant="8" id="6Xc-XO-PvW"/>
                             <constraint firstItem="8eW-Iy-q60" firstAttribute="leading" secondItem="HTz-nx-5qM" secondAttribute="leadingMargin" id="9jQ-FG-Bgc"/>
                             <constraint firstItem="pjm-ur-Yt3" firstAttribute="width" secondItem="rqJ-Tx-Foi" secondAttribute="width" id="EOj-Sb-jLf"/>
                             <constraint firstItem="uFQ-Xp-YIC" firstAttribute="trailing" secondItem="HTz-nx-5qM" secondAttribute="trailingMargin" id="IQo-e1-dRJ"/>
                             <constraint firstItem="uFQ-Xp-YIC" firstAttribute="top" secondItem="HTz-nx-5qM" secondAttribute="top" constant="110" id="IRE-hC-UxZ"/>
+                            <constraint firstItem="rG0-hs-RGE" firstAttribute="width" secondItem="UJw-08-3iW" secondAttribute="width" id="JVL-Zm-jeo"/>
                             <constraint firstItem="pjm-ur-Yt3" firstAttribute="leading" secondItem="HTz-nx-5qM" secondAttribute="leadingMargin" id="Kc0-h5-1Hw"/>
                             <constraint firstItem="uFQ-Xp-YIC" firstAttribute="leading" secondItem="HTz-nx-5qM" secondAttribute="leadingMargin" id="QUe-QX-UAo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UJw-08-3iW" secondAttribute="trailing" constant="-8" id="UZg-xh-WlG"/>
+                            <constraint firstItem="rG0-hs-RGE" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="167" id="b0J-MT-d0N"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rqJ-Tx-Foi" secondAttribute="trailing" constant="-8" id="bqJ-M6-1ZY"/>
                             <constraint firstItem="UJw-08-3iW" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="167" id="pJK-IK-BHE"/>
+                            <constraint firstItem="rG0-hs-RGE" firstAttribute="leading" secondItem="UJw-08-3iW" secondAttribute="trailing" constant="8" id="shD-u0-WOh"/>
                             <constraint firstItem="8eW-Iy-q60" firstAttribute="top" secondItem="2B2-Xp-aA4" secondAttribute="bottom" constant="8" id="yYW-FC-hWH"/>
                             <constraint firstItem="8eW-Iy-q60" firstAttribute="trailing" secondItem="HTz-nx-5qM" secondAttribute="trailingMargin" id="ygF-Kh-Pya"/>
                             <constraint firstItem="pjm-ur-Yt3" firstAttribute="top" secondItem="uFQ-Xp-YIC" secondAttribute="bottom" constant="8" symbolic="YES" id="zPL-F9-7Rn"/>
@@ -331,13 +339,62 @@
                         <outlet property="categoryLabel" destination="UJw-08-3iW" id="4yE-K7-QC5"/>
                         <outlet property="descriptionTextEdit" destination="uFQ-Xp-YIC" id="C2Y-8o-6Ja"/>
                         <outlet property="endLabel" destination="rqJ-Tx-Foi" id="0lb-xh-zjr"/>
+                        <outlet property="locationLabel" destination="rG0-hs-RGE" id="vJS-TE-6sv"/>
                         <outlet property="startLabel" destination="pjm-ur-Yt3" id="GtO-ZK-Csb"/>
                         <outlet property="titleLabel" destination="8eW-Iy-q60" id="Wh6-Le-MvJ"/>
+                        <segue destination="fG3-II-qgo" kind="push" identifier="segue_id_get_location" id="aGT-W0-eI1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KvR-kr-11r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1767" y="-354"/>
+        </scene>
+        <!--Location Picker View Controller-->
+        <scene sceneID="eS9-bx-HcX">
+            <objects>
+                <viewController id="fG3-II-qgo" customClass="LocationPickerViewController" customModule="motified" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FoO-cU-jF1"/>
+                        <viewControllerLayoutGuide type="bottom" id="o2l-sx-aDL"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="K95-O6-mj4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="zvn-FK-XpZ">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fdX-xt-Dvf">
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="zvn-FK-XpZ" secondAttribute="centerX" id="3nc-kk-jdG"/>
+                            <constraint firstAttribute="centerX" secondItem="fdX-xt-Dvf" secondAttribute="centerX" id="CVs-yx-mJO"/>
+                            <constraint firstItem="fdX-xt-Dvf" firstAttribute="width" secondItem="K95-O6-mj4" secondAttribute="width" id="Kwa-M0-2xa"/>
+                            <constraint firstItem="zvn-FK-XpZ" firstAttribute="top" secondItem="FoO-cU-jF1" secondAttribute="bottom" id="MRF-an-UZZ"/>
+                            <constraint firstItem="fdX-xt-Dvf" firstAttribute="top" secondItem="FoO-cU-jF1" secondAttribute="bottom" constant="44" id="Pxh-Mn-SPL"/>
+                            <constraint firstItem="zvn-FK-XpZ" firstAttribute="width" secondItem="K95-O6-mj4" secondAttribute="width" id="gaZ-fF-OaY"/>
+                            <constraint firstItem="o2l-sx-aDL" firstAttribute="top" secondItem="fdX-xt-Dvf" secondAttribute="bottom" id="lHe-iT-7rK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="MIy-0p-WFD">
+                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="search" id="kC7-sx-eEE">
+                            <connections>
+                                <action selector="onSearch:" destination="fG3-II-qgo" id="BFq-CC-lmL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="map" destination="fdX-xt-Dvf" id="HDG-cW-dK2"/>
+                        <outlet property="searchBar" destination="zvn-FK-XpZ" id="L45-C8-qVx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDy-qH-pnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2720" y="-354"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -435,6 +492,24 @@
             </objects>
             <point key="canvasLocation" x="441" y="967"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gGe-uL-7iY">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WbT-un-4fN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VNJ-zt-5Q3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fG3-II-qgo" kind="relationship" relationship="rootViewController" id="gMn-4S-sxj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nza-sr-Dp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2296" y="-354"/>
+        </scene>
     </scenes>
     <resources>
         <image name="airplane.png" width="25" height="25"/>
@@ -450,5 +525,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="yZL-gR-QW9"/>
+        <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>
 </document>

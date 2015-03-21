@@ -63,6 +63,8 @@
 		3A5153031AB8A2B700DC290B /* arrow-left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5152FE1AB8A2B700DC290B /* arrow-left@2x.png */; };
 		3A5153041AB8A2B700DC290B /* arrow-left@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5152FF1AB8A2B700DC290B /* arrow-left@1x.png */; };
 		3A5153051AB8A2B700DC290B /* arrow-left@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A5152FF1AB8A2B700DC290B /* arrow-left@1x.png */; };
+		3A5153071ABC802D00DC290B /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5153061ABC802D00DC290B /* LocationPickerViewController.swift */; };
+		3A5153081ABC802D00DC290B /* LocationPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5153061ABC802D00DC290B /* LocationPickerViewController.swift */; };
 		3ABD294F1AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */; };
 		3ABD29501AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */; };
 		3ABD29521AB6148E0022CE9E /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29511AB6148E0022CE9E /* APIManager.swift */; };
@@ -124,6 +126,7 @@
 		3A5152FD1AB8A2B700DC290B /* arrow-left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@3x.png"; sourceTree = "<group>"; };
 		3A5152FE1AB8A2B700DC290B /* arrow-left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@2x.png"; sourceTree = "<group>"; };
 		3A5152FF1AB8A2B700DC290B /* arrow-left@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-left@1x.png"; sourceTree = "<group>"; };
+		3A5153061ABC802D00DC290B /* LocationPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPickerViewController.swift; sourceTree = "<group>"; };
 		3ABD294E1AB5FFB60022CE9E /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		3ABD29511AB6148E0022CE9E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = constants.swift; sourceTree = "<group>"; };
@@ -174,6 +177,7 @@
 		3A20C3911AAF7CB40055BBF4 /* motified */ = {
 			isa = PBXGroup;
 			children = (
+				3A5153061ABC802D00DC290B /* LocationPickerViewController.swift */,
 				3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */,
 				3A20C4171AB4A6960055BBF4 /* delay.swift */,
 				3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */,
@@ -433,6 +437,7 @@
 				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
+				3A5153071ABC802D00DC290B /* LocationPickerViewController.swift in Sources */,
 				3A20C3951AAF7CB40055BBF4 /* AppDelegate.swift in Sources */,
 				3A5152E91AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
@@ -458,6 +463,7 @@
 				3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */,
 				3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */,
 				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
+				3A5153081ABC802D00DC290B /* LocationPickerViewController.swift in Sources */,
 				3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */,
 				3A5152EA1AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,

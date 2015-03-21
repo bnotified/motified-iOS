@@ -15,6 +15,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     @IBOutlet weak var endLabel: UITextField!
     @IBOutlet weak var startLabel: UITextField!
     @IBOutlet weak var categoryLabel: UITextField!
+    @IBOutlet weak var locationLabel: UITextField!
     
     let startPicker: UIDatePicker = UIDatePicker()
     let endPicker: UIDatePicker = UIDatePicker()
@@ -34,6 +35,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.categoryLabel.delegate = self
         self.categoryPicker.delegate = self
         self.categoryPicker.dataSource = self
+        self.locationLabel.delegate = self
         
         // Set up input views
         self.startLabel.inputView = self.startPicker
@@ -54,6 +56,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func updateEndLabel() {
         self.endLabel.text = self.localFormatter.stringFromDate(self.endPicker.date)
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == self.locationLabel {
+            self.performSegueWithIdentifier(SEGUE_ID_GET_LOCATION, sender: self)
+        }
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
