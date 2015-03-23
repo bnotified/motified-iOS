@@ -24,6 +24,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     let categories = APIManager.sharedInstance.categories
     var selectedCategory: String!
+    var selectedLocation: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.startPicker.addTarget(self, action: "updateStartLabel", forControlEvents: UIControlEvents.EditingDidBegin)
         self.endPicker.addTarget(self, action: "updateEndLabel", forControlEvents: UIControlEvents.EditingDidBegin)
         self.endPicker.addTarget(self, action: "updateEndLabel", forControlEvents: UIControlEvents.ValueChanged)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateLocation:", name: NOTIFICATION_LOCATION_PICKED, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NOTIFICATION_LOCATION_PICKED, object: nil)
     }
     
     func   updateStartLabel() {
@@ -58,10 +65,33 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.endLabel.text = self.localFormatter.stringFromDate(self.endPicker.date)
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func updateLocation(aNotification: NSNotification) {
+        if let location = aNotification.userInfo as? Dictionary<String, AnyObject> {
+            self.selectedLocation = location
+            self.updateLocationLabel()
+        }
+    }
+    
+    func updateLocationLabel() {
+        if self.selectedLocation != nil {
+            self.locationLabel.text = self.selectedLocation["display"]! as String
+        } else {
+            self.locationLabel.text = ""
+        }
+    }
+    
+//    func textFieldDidBeginEditing(textField: UITextField) {
+//        if textField == self.locationLabel {
+//            self.performSegueWithIdentifier(SEGUE_ID_GET_LOCATION, sender: self)
+//        }
+//    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == self.locationLabel {
             self.performSegueWithIdentifier(SEGUE_ID_GET_LOCATION, sender: self)
+            return false
         }
+        return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {

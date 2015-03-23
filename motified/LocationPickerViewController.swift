@@ -39,26 +39,31 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     var defaultLocations: Array<Dictionary<String, AnyObject!>> = [
         [
             "title": "The Neutral Zone",
+            "display": "The Neutral Zone",
             "right": "",
             "annotation": nil
         ],
         [
             "title": "Zingerman's Bakehouse",
+            "display": "Zingerman's Bakehouse",
             "right": "",
             "annotation": nil
         ],
         [
             "title": "The Michigan Theater",
+            "display": "The Michigan Theater",
             "right": "",
             "annotation": nil
         ],
         [
             "title": "The Yellow Barn",
+            "display": "The Yellow Barn",
             "right": "",
             "annotation": nil
         ],
         [
             "title": "Washtenaw Community College",
+            "display": "Washtenaw Community College",
             "right": "",
             "annotation": nil
         ]
@@ -68,11 +73,12 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     var selectedLocation: Dictionary<String, AnyObject!>! = nil
     var debouncedSearch: (()->())? = nil
     
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationItem.hidesBackButton = true
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Bordered, target: self, action: "onBackPressed")
         
         // Set up delegates
         self.locationPickerView.delegate = self
@@ -92,10 +98,6 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func onSearch(sender: AnyObject) {
-        self.makeRequest()
     }
     
     func makeRequest() {
@@ -205,9 +207,11 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         for item in mapItems {
             let title = self.getFormattedAddress(item)
             let right = self.getName(item)
+            let display = (right == "") ? title : right
             self.searchResults.append([
                 "title": title,
                 "right": right,
+                "display": display,
                 "annotation": item.placemark
             ])
         }
@@ -314,7 +318,11 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     internal func updateBackButton() {
-        self.navigationItem.leftBarButtonItem?.title = "Done"
+        if self.selectedLocation != nil {
+            self.navigationItem.leftBarButtonItem?.title = "Done"
+        } else {
+            self.navigationItem.leftBarButtonItem?.title = "Cancel"
+        }
     }
     
     internal func showAnnotations() {
@@ -343,6 +351,14 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     func onBackPressed() {
+
+    }
+    
+    @IBAction func onBackPressed(sender: AnyObject) {
+        let notification = NSNotification(name: NOTIFICATION_LOCATION_PICKED, object: nil, userInfo: self.selectedLocation)
+        NSNotificationCenter.defaultCenter().postNotification(notification)
         self.navigationController?.popViewControllerAnimated(true)
     }
+    
+    
 }

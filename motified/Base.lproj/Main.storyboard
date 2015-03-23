@@ -394,18 +394,21 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MIy-0p-WFD">
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="search" id="kC7-sx-eEE">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="GIb-EI-dSd">
                             <connections>
-                                <action selector="onSearch:" destination="fG3-II-qgo" id="BFq-CC-lmL"/>
+                                <action selector="onBackPressed:" destination="fG3-II-qgo" id="D5k-KW-AXl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="backButton" destination="GIb-EI-dSd" id="2iE-td-ow1"/>
                         <outlet property="locationPickerView" destination="y2c-FM-ogI" id="t1N-xT-8n6"/>
                         <outlet property="searchBar" destination="zvn-FK-XpZ" id="ldC-RG-axj"/>
+                        <segue destination="5ab-5W-ne4" kind="unwind" unwindAction="unwindFromLocationPicker:sender:" id="Oji-ZC-cwm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDy-qH-pnX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5ab-5W-ne4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2720" y="-354"/>
         </scene>
