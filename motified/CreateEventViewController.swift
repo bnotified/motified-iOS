@@ -56,7 +56,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NOTIFICATION_LOCATION_PICKED, object: nil)
     }
     
-    func   updateStartLabel() {
+    func updateStartLabel() {
         self.startLabel.text = self.localFormatter.stringFromDate(self.startPicker.date)
         self.endPicker.minimumDate = self.startPicker.date
     }
@@ -67,7 +67,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func updateLocation(aNotification: NSNotification) {
         if let location = aNotification.userInfo as? Dictionary<String, AnyObject> {
-            self.selectedLocation = location
+            NSLog("Location: %@", location)
+            self.selectedLocation = [
+                "address": location["title"]! as String,
+                "address_name": location["right"]! as String
+            ]
             self.updateLocationLabel()
         }
     }
@@ -79,12 +83,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
             self.locationLabel.text = ""
         }
     }
-    
-//    func textFieldDidBeginEditing(textField: UITextField) {
-//        if textField == self.locationLabel {
-//            self.performSegueWithIdentifier(SEGUE_ID_GET_LOCATION, sender: self)
-//        }
-//    }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
         if textField == self.locationLabel {
@@ -98,6 +96,17 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         textField.resignFirstResponder()
         if textField == self.titleLabel {
             self.descriptionTextEdit.becomeFirstResponder()
+        }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == self.startLabel {
+            self.updateStartLabel()
+        } else if textField == self.endLabel {
+            self.updateEndLabel()
+        } else if textField == self.categoryLabel {
+            self.selectedCategory = self.categories[0]["category"]! as String
+            self.categoryLabel.text = self.selectedCategory
         }
     }
     
@@ -136,18 +145,62 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         return 1
     }
     
+    func isFormValid() -> Bool {
+        return (
+            self.isTitleValid() &&
+            self.isDescriptionValid() &&
+            self.isStartDateValid() &&
+            self.isEndDateValid() &&
+            self.isLocationValid() &&
+            self.isCategoryValid()
+        )
+    }
+    
+    internal func isTitleValid() -> Bool {
+        return self.titleLabel.text.utf16Count > 0
+    }
+    
+    internal func isDescriptionValid() -> Bool {
+        return (
+            self.descriptionTextEdit.text.utf16Count > 0 &&
+            self.descriptionTextEdit.text != "Event Description"
+        )
+    }
+    
+    internal func isStartDateValid() -> Bool {
+        return self.startPicker.date.compare(NSDate()) == NSComparisonResult.OrderedDescending
+    }
+    
+    internal func isEndDateValid() -> Bool {
+        return self.endPicker.date.compare(self.startPicker.date) == NSComparisonResult.OrderedDescending
+    }
+    
+    internal func isCategoryValid() -> Bool {
+        return self.selectedCategory != nil
+    }
+    
+    internal func isLocationValid() -> Bool {
+        return self.selectedLocation != nil
+    }
+    
     @IBAction func onSubmit(sender: AnyObject) {
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
-        let params = [
-            "name": self.titleLabel.text,
-            "description": self.descriptionTextEdit.text,
-            "start": serverFormatter.stringFromDate(self.startPicker.date),
-            "end": serverFormatter.stringFromDate(self.endPicker.date),
-            "categories": [
-                ["category": self.selectedCategory]
+        if self.isFormValid() {
+            let params: Dictionary<String, AnyObject> = [
+                "name": self.titleLabel.text,
+                "description": self.descriptionTextEdit.text,
+                "start": serverFormatter.stringFromDate(self.startPicker.date),
+                "end": serverFormatter.stringFromDate(self.endPicker.date),
+                "categories": [
+                    ["category": self.selectedCategory]
+                ],
+                "address": self.selectedLocation["address"]! as String,
+                "address_name": self.selectedLocation["display"]! as String
             ]
-        ]
-        
-        NSLog("Will Submit Params: %@", params)
+            
+            NSLog("Will Submit Params: %@", params)
+        } else {
+            self.view.makeToast("Please ensure you have filled out all the fields correctly.")
+        }
     }
 }

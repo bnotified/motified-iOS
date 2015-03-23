@@ -92,12 +92,16 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         self.locationPickerView.shouldCreateHideMapButton = true
         
         self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
-
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func hideKeyboard() {
+        NSLog("Should hide keyboard")
+        self.view.endEditing(true)
     }
     
     func makeRequest() {
@@ -172,11 +176,14 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
                 return ()
             }
             let items = MKLocalSearchResponse.mapItems as [MKMapItem]
-            let placemark = items.first!.placemark as MKPlacemark
-            let address = self.getFormattedAddress(items.first!)
+            let item = items.first!
+            let placemark = item.placemark as MKPlacemark
+            let address = self.getFormattedAddress(item)
+            let right = self.getName(item)
             self.defaultLocations[index].updateValue(placemark, forKey: "annotation")
-            self.defaultLocations[index].updateValue(address, forKey: "right")
-            
+            self.defaultLocations[index].updateValue(address, forKey: "title")
+            self.defaultLocations[index].updateValue(right, forKey: "right")
+            self.locationPickerView.tableView.reloadData()
         }
     }
     
@@ -208,6 +215,7 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
             let title = self.getFormattedAddress(item)
             let right = self.getName(item)
             let display = (right == "") ? title : right
+            
             self.searchResults.append([
                 "title": title,
                 "right": right,
@@ -306,6 +314,7 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.hideKeyboard()
         let data = self.getDataForRow(indexPath.row)
         let map = self.locationPickerView.mapView
         self.clearAnnotations()
@@ -350,14 +359,14 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         self.debouncedSearch!()
     }
     
-    func onBackPressed() {
-
-    }
-    
     @IBAction func onBackPressed(sender: AnyObject) {
         let notification = NSNotification(name: NOTIFICATION_LOCATION_PICKED, object: nil, userInfo: self.selectedLocation)
         NSNotificationCenter.defaultCenter().postNotification(notification)
         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func locationPicker(locationPicker: LocationPickerView!, mapViewWillExpand mapView: MKMapView!) {
+        self.hideKeyboard()
     }
     
     
