@@ -30,6 +30,7 @@ class APIManager: NSObject {
                 }
             },
             { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Error loading events: %@", NSError)
                 self.emitEventsError()
                 if done != nil {
                     done(NSError)
@@ -48,6 +49,7 @@ class APIManager: NSObject {
                 }
             },
             { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Error loading categories: %@", NSError)
                 self.emitCategoriesError()
                 if done != nil {
                     done(NSError)
