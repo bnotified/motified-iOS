@@ -10,10 +10,10 @@ import UIKit
 
 class EventTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var subscribedLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImage: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
     
     let event: Event?
     
@@ -36,10 +36,13 @@ class EventTableViewCell: UITableViewCell {
     func setUpWithEvent(event: Event) {
         self.titleLabel.text = event.title
         self.categoryImage.image = event.getImage()
-        self.descriptionLabel.text = event.desc
         let start = self.formatDate(event.startDate!)
         let end = self.formatDate(event.endDate!)
         self.dateLabel.text = NSString(format: "%@ - %@", start, end)
+        
+        self.subscribedLabel.layer.borderColor = UIColor.whiteColor().CGColor
+        self.subscribedLabel.layer.borderWidth = 1.0
+        self.subscribedLabel.layer.cornerRadius = 8
     }
     
     func formatDate(date: NSDate) -> String {

@@ -34,7 +34,7 @@ class Event: NSObject {
     }
     
     func getImage() -> UIImage {
-        return UIImage(named: "music@3x.png")
+        return UIImage(named: "Food.png")
     }
     
     func isInCategory(category: Dictionary<String, AnyObject>) -> Bool {
