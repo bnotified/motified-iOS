@@ -14,6 +14,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImage: UIImageView!
+    @IBOutlet weak var locationLabel: UILabel!
     
     let event: Event?
     
@@ -43,6 +44,8 @@ class EventTableViewCell: UITableViewCell {
         self.subscribedLabel.layer.borderColor = UIColor.whiteColor().CGColor
         self.subscribedLabel.layer.borderWidth = 1.0
         self.subscribedLabel.layer.cornerRadius = 8
+        
+        self.locationLabel.text = "The State Theater"
     }
     
     func formatDate(date: NSDate) -> String {

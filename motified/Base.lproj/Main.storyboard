@@ -64,18 +64,34 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="APN-qa-yVt">
+                                                    <rect key="frame" x="145" y="158" width="31" height="15"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Location.png" translatesAutoresizingMaskIntoConstraints="NO" id="8ag-QS-NvP">
+                                                    <rect key="frame" x="125" y="158" width="15" height="15"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="15" id="mq5-2M-cPG"/>
+                                                        <constraint firstAttribute="width" constant="15" id="wLO-Rc-THA"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" red="0.18039215689999999" green="0.69019607839999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="centerX" secondItem="Spl-ns-Ycx" secondAttribute="centerX" constant="-3" id="608-5q-Prk"/>
                                                 <constraint firstItem="Llf-rR-9qD" firstAttribute="trailing" secondItem="1be-Mf-wKq" secondAttribute="trailing" id="6Ue-jP-ccn"/>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="top" secondItem="Kke-x1-nPP" secondAttribute="topMargin" id="7Sy-PC-SZ5"/>
+                                                <constraint firstItem="APN-qa-yVt" firstAttribute="centerY" secondItem="8ag-QS-NvP" secondAttribute="centerY" id="AaT-1s-GqN"/>
                                                 <constraint firstAttribute="centerY" secondItem="D2M-ug-j74" secondAttribute="centerY" id="DbF-vt-qP5"/>
                                                 <constraint firstItem="Spl-ns-Ycx" firstAttribute="centerY" secondItem="1be-Mf-wKq" secondAttribute="centerY" id="EYh-0I-Xi8"/>
                                                 <constraint firstAttribute="centerX" secondItem="D2M-ug-j74" secondAttribute="centerX" id="Ghg-gE-5We"/>
                                                 <constraint firstItem="Llf-rR-9qD" firstAttribute="top" secondItem="V9V-SM-sDI" secondAttribute="top" id="Idl-B8-ljP"/>
                                                 <constraint firstItem="1be-Mf-wKq" firstAttribute="top" secondItem="Llf-rR-9qD" secondAttribute="bottom" constant="3" id="Kgi-kI-JIx"/>
                                                 <constraint firstItem="Spl-ns-Ycx" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leadingMargin" constant="3" id="PSM-eS-L0I"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="APN-qa-yVt" secondAttribute="bottom" constant="-2" id="PYf-oC-hIe"/>
+                                                <constraint firstItem="APN-qa-yVt" firstAttribute="leading" secondItem="8ag-QS-NvP" secondAttribute="trailing" constant="5" id="cZR-pR-GAh"/>
                                                 <constraint firstItem="1be-Mf-wKq" firstAttribute="trailing" secondItem="Kke-x1-nPP" secondAttribute="trailingMargin" id="cat-E7-pJV"/>
                                                 <constraint firstItem="4Ew-H5-92w" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leadingMargin" constant="3" id="dab-D2-irQ"/>
                                                 <constraint firstAttribute="centerX" secondItem="4Ew-H5-92w" secondAttribute="centerX" id="eC1-PQ-8OH"/>
@@ -83,11 +99,13 @@
                                                 <constraint firstItem="Llf-rR-9qD" firstAttribute="leading" secondItem="1be-Mf-wKq" secondAttribute="leading" id="l9R-Ig-pB7"/>
                                                 <constraint firstItem="4Ew-H5-92w" firstAttribute="top" secondItem="D2M-ug-j74" secondAttribute="bottom" constant="10" id="qCa-ZG-dP2"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="4Ew-H5-92w" secondAttribute="trailing" constant="3" id="qpc-hI-GjX"/>
+                                                <constraint firstAttribute="centerX" secondItem="APN-qa-yVt" secondAttribute="centerX" id="wP4-XJ-oBa"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoryImage" destination="V9V-SM-sDI" id="7n6-g6-oix"/>
                                             <outlet property="dateLabel" destination="4Ew-H5-92w" id="kT0-eC-HEX"/>
+                                            <outlet property="locationLabel" destination="APN-qa-yVt" id="kZt-f5-813"/>
                                             <outlet property="subscribedLabel" destination="Llf-rR-9qD" id="6To-Uz-FJx"/>
                                             <outlet property="titleLabel" destination="D2M-ug-j74" id="G5G-Np-JWh"/>
                                         </connections>
@@ -117,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="973" y="-372"/>
+            <point key="canvasLocation" x="973" y="-376"/>
         </scene>
         <!--UserProfile-->
         <scene sceneID="wg7-f3-ORb">
@@ -542,6 +560,7 @@
     </scenes>
     <resources>
         <image name="Food.png" width="512" height="512"/>
+        <image name="Location.png" width="25" height="25"/>
         <image name="arrow-left.png" width="25" height="25"/>
         <image name="check.png" width="25" height="25"/>
         <image name="columns@3x.png" width="75" height="75"/>
