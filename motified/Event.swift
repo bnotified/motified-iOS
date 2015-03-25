@@ -15,13 +15,14 @@ enum Category {
 }
 
 class Event: NSObject {
-    let id: Int?
-    let title: String?
-    let desc: String?
-    let startDate: NSDate?
-    let endDate: NSDate?
-    let categories: Array<Dictionary<String, AnyObject>>?
-    let createdBy: String?
+    var id: Int?
+    var title: String?
+    var desc: String?
+    var startDate: NSDate?
+    var endDate: NSDate?
+    var categories: Array<Dictionary<String, AnyObject>>?
+    var createdBy: String?
+    var isSubscribed: Bool?
     
     init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?) {
         self.id = id
@@ -31,6 +32,17 @@ class Event: NSObject {
         self.startDate = startDate
         self.endDate = endDate
         self.categories = categories
+    }
+    
+    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?) {
+        self.id = id
+        self.createdBy = createdBy
+        self.title = title
+        self.desc = desc
+        self.startDate = startDate
+        self.endDate = endDate
+        self.categories = categories
+        self.isSubscribed = isSubscribed
     }
     
     func getImage() -> UIImage {
@@ -57,7 +69,7 @@ class Event: NSObject {
         }
     }
     
-    internal func getSameDayDateRange() -> String {
+    private func getSameDayDateRange() -> String {
         let firstFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
         let secondFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientTimeOnly)
         let start = firstFormat.stringFromDate(self.startDate!)
@@ -65,11 +77,10 @@ class Event: NSObject {
         return "\(start)-\(end)"
     }
     
-    internal func getMultipleDayDateRange() -> String {
+    private func getMultipleDayDateRange() -> String {
         let format = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
         let start = format.stringFromDate(self.startDate!)
         let end = format.stringFromDate(self.endDate!)
         return "\(start)-\(end)"
     }
-    
 }
