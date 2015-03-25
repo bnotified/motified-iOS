@@ -7,29 +7,49 @@
 //
 
 import UIKit
+import MapKit
 
 class EventDetailViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var descriptionLabel: UITextView!
+    @IBOutlet weak var openBtn: UIButton!
+    
+    var event: Event!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if self.event == nil {
+            self.handleNoEvent()
+        } else {
+            self.setUp()
+        }
+    }
+    
+    func setUp() {
+        self.titleLabel.text = event.title
+    }
+    
+    func handleNoEvent() {
+        self.view.makeToast("Error: No event loaded")
+        delay(2, { () -> () in
+            self.navigationController?.popViewControllerAnimated(true)
+            return ()
+        })
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue!, sender: AnyObject!) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func onOpenPressed(sender: AnyObject) {
+        
     }
-    */
-
+    
+    @IBAction func onNotifyPressed(sender: AnyObject) {
+        
+    }
 }

@@ -12,6 +12,7 @@ enum MotifiedDateFormat {
     case Server
     case ClientLong
     case ClientShort
+    case ClientTimeOnly
 }
 
 class MotifiedDateFormatter: NSDateFormatter {
@@ -29,6 +30,10 @@ class MotifiedDateFormatter: NSDateFormatter {
             self.locale = NSLocale.currentLocale()
             self.timeZone = NSTimeZone.localTimeZone()
             self.dateFormat = "MMM d h':'mm a"
+        case MotifiedDateFormat.ClientTimeOnly:
+            self.locale = NSLocale.currentLocale()
+            self.timeZone = NSTimeZone.localTimeZone()
+            self.dateFormat = "h':'mm a"
         }
     }
 

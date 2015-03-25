@@ -46,4 +46,30 @@ class Event: NSObject {
         return false
     }
     
+    func getFormattedDateRange() -> String {
+        if self.startDate == nil || self.endDate == nil {
+            return ""
+        }
+        if (self.startDate?.isOnSameDayAs(self.endDate!) != nil) {
+            return self.getSameDayDateRange()
+        } else {
+            return self.getMultipleDayDateRange()
+        }
+    }
+    
+    internal func getSameDayDateRange() -> String {
+        let firstFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
+        let secondFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientTimeOnly)
+        let start = firstFormat.stringFromDate(self.startDate!)
+        let end = secondFormat.stringFromDate(self.endDate!)
+        return "\(start)-\(end)"
+    }
+    
+    internal func getMultipleDayDateRange() -> String {
+        let format = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
+        let start = format.stringFromDate(self.startDate!)
+        let end = format.stringFromDate(self.endDate!)
+        return "\(start)-\(end)"
+    }
+    
 }

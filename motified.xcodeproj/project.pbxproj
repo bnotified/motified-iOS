@@ -99,6 +99,8 @@
 		3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29541AB73A4D0022CE9E /* constants.swift */; };
 		3ADC50DC1AC31AE400545255 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */; };
 		3ADC50DD1AC31AE400545255 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */; };
+		3ADC50E41AC31F2300545255 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E31AC31F2300545255 /* NSDateExtension.swift */; };
+		3ADC50E51AC31F2300545255 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E31AC31F2300545255 /* NSDateExtension.swift */; };
 		3AE26A231AC1E0A7001432E1 /* Location@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A201AC1E0A7001432E1 /* Location@1x.png */; };
 		3AE26A241AC1E0A7001432E1 /* Location@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A201AC1E0A7001432E1 /* Location@1x.png */; };
 		3AE26A251AC1E0A7001432E1 /* Location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A211AC1E0A7001432E1 /* Location@2x.png */; };
@@ -178,6 +180,7 @@
 		3ABD29511AB6148E0022CE9E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = constants.swift; path = ../constants.swift; sourceTree = "<group>"; };
 		3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventDetailViewController.swift; path = ../EventDetailViewController.swift; sourceTree = "<group>"; };
+		3ADC50E31AC31F2300545255 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		3AE26A201AC1E0A7001432E1 /* Location@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@1x.png"; sourceTree = "<group>"; };
 		3AE26A211AC1E0A7001432E1 /* Location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@2x.png"; sourceTree = "<group>"; };
 		3AE26A221AC1E0A7001432E1 /* Location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@3x.png"; sourceTree = "<group>"; };
@@ -229,17 +232,13 @@
 				3ADC50E01AC31B4A00545255 /* Managers */,
 				3ADC50DF1AC31B2700545255 /* Util */,
 				3ADC50DE1AC31AF800545255 /* Events */,
-				3A20C3941AAF7CB40055BBF4 /* AppDelegate.swift */,
-				3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */,
-				3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */,
 				3ADC50E11AC31B6D00545255 /* Categories */,
 				3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */,
 				3A20C39D1AAF7CB40055BBF4 /* Images.xcassets */,
 				3A20C39F1AAF7CB40055BBF4 /* LaunchScreen.xib */,
 				3A20C3EC1AAF7F290055BBF4 /* images */,
 				3A20C3921AAF7CB40055BBF4 /* Supporting Files */,
-				3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */,
-				3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */,
+				3ADC50E21AC31C3300545255 /* Main */,
 			);
 			path = motified;
 			sourceTree = "<group>";
@@ -323,6 +322,7 @@
 		3ADC50DF1AC31B2700545255 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3ADC50E31AC31F2300545255 /* NSDateExtension.swift */,
 				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
 				3A20C3ED1AAF80060055BBF4 /* BridgingHeader.h */,
 				3A20C4171AB4A6960055BBF4 /* delay.swift */,
@@ -349,6 +349,18 @@
 				3A5152E51AB756B800DC290B /* CategoryCollectionViewCell.swift */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		3ADC50E21AC31C3300545255 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				3A20C3941AAF7CB40055BBF4 /* AppDelegate.swift */,
+				3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */,
+				3A20C3981AAF7CB40055BBF4 /* UserProfileViewController.swift */,
+				3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */,
+				3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		51E0188D2114F2C1CF1B1A8B /* Frameworks */ = {
@@ -567,6 +579,7 @@
 				3ADC50DC1AC31AE400545255 /* EventDetailViewController.swift in Sources */,
 				3A5152E41AB756A900DC290B /* CategoryCollectionViewController.swift in Sources */,
 				3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */,
+				3ADC50E41AC31F2300545255 /* NSDateExtension.swift in Sources */,
 				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
@@ -594,6 +607,7 @@
 				3ADC50DD1AC31AE400545255 /* EventDetailViewController.swift in Sources */,
 				3A20C40C1AB0A0DD0055BBF4 /* UserProfileViewController.swift in Sources */,
 				3ABD29531AB6148E0022CE9E /* APIManager.swift in Sources */,
+				3ADC50E51AC31F2300545255 /* NSDateExtension.swift in Sources */,
 				3A20C40B1AB0A0DB0055BBF4 /* EventFeedViewController.swift in Sources */,
 				3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */,
 				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
