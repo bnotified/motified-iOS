@@ -29,7 +29,19 @@ class EventDetailViewController: UIViewController {
     }
     
     func setUp() {
+        if self.event.isSubscribed == true {
+            self.navigationItem.rightBarButtonItem?.title = "Unsubscribe"
+        } else {
+            self.navigationItem.rightBarButtonItem?.title = "Be Notified"
+        }
+        
         self.titleLabel.text = event.title
+        self.dateLabel.text = event.getFormattedDateRange()
+        self.descriptionLabel.text = event.desc
+        
+        self.openBtn.layer.borderWidth = 1.0
+        self.openBtn.layer.cornerRadius = 8.0
+        self.openBtn.layer.borderColor = UIColor.whiteColor().CGColor
     }
     
     func handleNoEvent() {

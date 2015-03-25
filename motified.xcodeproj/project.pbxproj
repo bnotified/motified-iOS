@@ -101,6 +101,8 @@
 		3ADC50DD1AC31AE400545255 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */; };
 		3ADC50E41AC31F2300545255 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E31AC31F2300545255 /* NSDateExtension.swift */; };
 		3ADC50E51AC31F2300545255 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E31AC31F2300545255 /* NSDateExtension.swift */; };
+		3ADC50E71AC3495800545255 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E61AC3495800545255 /* ColorManager.swift */; };
+		3ADC50E81AC3495800545255 /* ColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E61AC3495800545255 /* ColorManager.swift */; };
 		3AE26A231AC1E0A7001432E1 /* Location@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A201AC1E0A7001432E1 /* Location@1x.png */; };
 		3AE26A241AC1E0A7001432E1 /* Location@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A201AC1E0A7001432E1 /* Location@1x.png */; };
 		3AE26A251AC1E0A7001432E1 /* Location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AE26A211AC1E0A7001432E1 /* Location@2x.png */; };
@@ -181,6 +183,7 @@
 		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = constants.swift; path = ../constants.swift; sourceTree = "<group>"; };
 		3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventDetailViewController.swift; path = ../EventDetailViewController.swift; sourceTree = "<group>"; };
 		3ADC50E31AC31F2300545255 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
+		3ADC50E61AC3495800545255 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
 		3AE26A201AC1E0A7001432E1 /* Location@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@1x.png"; sourceTree = "<group>"; };
 		3AE26A211AC1E0A7001432E1 /* Location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@2x.png"; sourceTree = "<group>"; };
 		3AE26A221AC1E0A7001432E1 /* Location@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location@3x.png"; sourceTree = "<group>"; };
@@ -336,6 +339,7 @@
 		3ADC50E01AC31B4A00545255 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				3ADC50E61AC3495800545255 /* ColorManager.swift */,
 				3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */,
 				3ABD29511AB6148E0022CE9E /* APIManager.swift */,
 			);
@@ -585,6 +589,7 @@
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
 				3A5153071ABC802D00DC290B /* LocationPickerViewController.swift in Sources */,
 				3A20C3951AAF7CB40055BBF4 /* AppDelegate.swift in Sources */,
+				3ADC50E71AC3495800545255 /* ColorManager.swift in Sources */,
 				3A5152E91AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
 				3ABD29521AB6148E0022CE9E /* APIManager.swift in Sources */,
@@ -613,6 +618,7 @@
 				3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */,
 				3A5153081ABC802D00DC290B /* LocationPickerViewController.swift in Sources */,
 				3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */,
+				3ADC50E81AC3495800545255 /* ColorManager.swift in Sources */,
 				3A5152EA1AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,
 				3A20C4091AB0A0CF0055BBF4 /* Event.swift in Sources */,

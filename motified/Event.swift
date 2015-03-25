@@ -23,18 +23,9 @@ class Event: NSObject {
     var categories: Array<Dictionary<String, AnyObject>>?
     var createdBy: String?
     var isSubscribed: Bool?
+    var subscribedUsers: Int?
     
-    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?) {
-        self.id = id
-        self.createdBy = createdBy
-        self.title = title
-        self.desc = desc
-        self.startDate = startDate
-        self.endDate = endDate
-        self.categories = categories
-    }
-    
-    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?) {
+    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?) {
         self.id = id
         self.createdBy = createdBy
         self.title = title
@@ -43,6 +34,7 @@ class Event: NSObject {
         self.endDate = endDate
         self.categories = categories
         self.isSubscribed = isSubscribed
+        self.subscribedUsers = subscribedUsers
     }
     
     func getImage() -> UIImage {

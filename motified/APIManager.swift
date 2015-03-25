@@ -83,6 +83,7 @@ class APIManager: NSObject {
     
     internal func setEventsFromResponse(response: Dictionary<String, AnyObject>) {
         // Set up date formatter
+        NSLog("Response: %@", response)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
         
@@ -94,16 +95,21 @@ class APIManager: NSObject {
         self.clearPage(page)
         
         for obj in objects {
-            let id = obj["id"] as Int?
-            let createdBy = obj["created_by"] as String?
-            let name = obj["name"] as String?
-            let desc = obj["description"] as String?
             let startStr = obj["start"] as String?
             let endStr = obj["end"] as String?
             let start =  dateFormatter.dateFromString(startStr!) as NSDate?
             let end = dateFormatter.dateFromString(endStr!) as NSDate?
-            let categories = obj["categories"] as Array<Dictionary<String, AnyObject>>?
-            let event = Event(id: id, createdBy: createdBy, title: name, desc: desc, startDate: start, endDate: end, categories: categories)
+            let event = Event(
+                id: obj["id"] as Int?,
+                createdBy: obj["created_by"] as String?,
+                title: obj["name"] as String?,
+                desc: obj["description"] as String?,
+                startDate: start,
+                endDate: end,
+                categories: obj["categories"] as Array<Dictionary<String, AnyObject>>?,
+                isSubscribed: obj["is_subscribed"] as Bool?,
+                subscribedUsers: obj["subscribed_users"] as Int?
+            )
             self.events[page]?.append(event)
         }
     }

@@ -31,6 +31,14 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let event = sender as Event
+        if segue.identifier == SEGUE_ID_EVENT_DETAIL {
+            let dest = segue.destinationViewController as EventDetailViewController
+            dest.event = event
+        }
+    }
+    
     deinit {
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(self, name: NOTIFICATION_LOADED_EVENTS, object: nil)
@@ -51,6 +59,7 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
         var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)
         cell.setUpWithEvent(ev)
+        cell.contentView.backgroundColor = ColorManager.getColorForIndex(indexPath.row)
         return cell
     }
     
@@ -60,6 +69,11 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.events.count
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let event = self.getEventAtIndexPath(indexPath)
+        self.performSegueWithIdentifier(SEGUE_ID_EVENT_DETAIL, sender: event)
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

@@ -79,7 +79,6 @@
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.18039215689999999" green="0.69019607839999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="centerX" secondItem="Spl-ns-Ycx" secondAttribute="centerX" constant="-3" id="608-5q-Prk"/>
                                                 <constraint firstItem="Llf-rR-9qD" firstAttribute="trailing" secondItem="1be-Mf-wKq" secondAttribute="trailing" id="6Ue-jP-ccn"/>
@@ -103,6 +102,7 @@
                                                 <constraint firstAttribute="centerX" secondItem="APN-qa-yVt" secondAttribute="centerX" id="wP4-XJ-oBa"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.1803921568627451" green="0.80000000000000004" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="categoryImage" destination="V9V-SM-sDI" id="7n6-g6-oix"/>
                                             <outlet property="dateLabel" destination="4Ew-H5-92w" id="kT0-eC-HEX"/>
@@ -132,6 +132,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="yHd-MK-1Tg" id="OXh-eJ-Jd2"/>
+                        <segue destination="rbt-gX-6sP" kind="push" identifier="segue_id_event_detail" id="wBx-K2-qvi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
@@ -326,7 +327,11 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77H-PN-C2C">
-                                <rect key="frame" x="207" y="530" width="97" height="30"/>
+                                <rect key="frame" x="201" y="521" width="112" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="112" id="k9z-3e-uoz"/>
+                                    <constraint firstAttribute="height" constant="42" id="lMu-EB-Q8p"/>
+                                </constraints>
                                 <state key="normal" title="Open in Maps">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -339,7 +344,6 @@
                         <constraints>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="leading" secondItem="VPw-wv-3m7" secondAttribute="leading" id="0dH-gO-6pz"/>
                             <constraint firstItem="aeP-DV-uQ4" firstAttribute="width" secondItem="HVH-l3-QzY" secondAttribute="width" id="2wf-KJ-P0i"/>
-                            <constraint firstItem="77H-PN-C2C" firstAttribute="leading" secondItem="aeP-DV-uQ4" secondAttribute="trailing" constant="-113" id="33R-Vh-YrD"/>
                             <constraint firstItem="jn2-VA-VPb" firstAttribute="top" secondItem="3Nw-Kw-tM0" secondAttribute="bottom" constant="8" id="68d-NZ-7Eq"/>
                             <constraint firstItem="jn2-VA-VPb" firstAttribute="trailing" secondItem="HVH-l3-QzY" secondAttribute="trailingMargin" id="9I2-N3-OX4"/>
                             <constraint firstItem="aeP-DV-uQ4" firstAttribute="top" secondItem="VPw-wv-3m7" secondAttribute="bottom" constant="8" id="ESu-ck-Zjz"/>
@@ -348,15 +352,16 @@
                             <constraint firstItem="VPw-wv-3m7" firstAttribute="top" secondItem="7vK-FL-LSt" secondAttribute="bottom" constant="8" id="Mjn-GY-cer"/>
                             <constraint firstAttribute="centerX" secondItem="aeP-DV-uQ4" secondAttribute="centerX" id="ZCn-M6-mU9"/>
                             <constraint firstItem="aeP-DV-uQ4" firstAttribute="height" secondItem="HVH-l3-QzY" secondAttribute="height" multiplier="0.5" id="ave-Mr-r4c"/>
-                            <constraint firstItem="77H-PN-C2C" firstAttribute="top" secondItem="aeP-DV-uQ4" secondAttribute="bottom" constant="-38" id="dhd-il-19s"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="77H-PN-C2C" secondAttribute="trailing" constant="-9" id="bZI-6A-aQM"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="trailing" secondItem="VPw-wv-3m7" secondAttribute="trailing" id="f2S-ZW-oVt"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="trailing" secondItem="HVH-l3-QzY" secondAttribute="trailingMargin" id="gSK-zz-v2o"/>
+                            <constraint firstItem="aeP-DV-uQ4" firstAttribute="bottom" secondItem="77H-PN-C2C" secondAttribute="bottom" constant="5" id="gss-hg-Kze"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="leading" secondItem="jn2-VA-VPb" secondAttribute="leading" id="iuE-tX-hWB"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="top" secondItem="jn2-VA-VPb" secondAttribute="bottom" constant="8" id="xdj-hc-s2P"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Event Detail" id="0ca-ET-vUR">
-                        <barButtonItem key="rightBarButtonItem" title="Notify Me" id="vLC-w8-Mji">
+                        <barButtonItem key="rightBarButtonItem" title="Be Notified" id="vLC-w8-Mji">
                             <connections>
                                 <action selector="onNotifyPressed:" destination="rbt-gX-6sP" id="CFK-PR-Dfa"/>
                             </connections>
@@ -675,6 +680,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="p3W-ef-F0q"/>
+        <segue reference="wBx-K2-qvi"/>
         <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>
 </document>

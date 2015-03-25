@@ -16,3 +16,4 @@ let NOTIFICATION_ERROR_CATEGORIES = "notification_error_categories"
 let NOTIFICATION_LOCATION_PICKED = "notification_location_picked"
 
 let SEGUE_ID_GET_LOCATION = "segue_id_get_location"
+let SEGUE_ID_EVENT_DETAIL = "segue_id_event_detail"
