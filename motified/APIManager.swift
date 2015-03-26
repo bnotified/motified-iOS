@@ -111,7 +111,9 @@ class APIManager: NSObject {
                 endDate: end,
                 categories: obj["categories"] as Array<Dictionary<String, AnyObject>>?,
                 isSubscribed: obj["is_subscribed"] as Bool?,
-                subscribedUsers: obj["subscribed_users"] as Int?
+                subscribedUsers: obj["subscribed_users"] as Int?,
+                address: "test",//obj["address"] as String?,
+                addressName: "test"//obj["address_name"] as String?
             )
             self.events[page]?.append(event)
         }

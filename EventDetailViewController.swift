@@ -16,6 +16,8 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var descriptionLabel: UITextView!
     @IBOutlet weak var openBtn: UIButton!
+    @IBOutlet weak var beNotifiedBtn: UIButton!
+    @IBOutlet weak var reportBtn: UIButton!
     
     var event: Event!
     
@@ -62,6 +64,10 @@ class EventDetailViewController: UIViewController {
     }
     
     @IBAction func onNotifyPressed(sender: AnyObject) {
+        
+    }
+    
+    @IBAction func onReportPressed(sender: AnyObject) {
         
     }
 }

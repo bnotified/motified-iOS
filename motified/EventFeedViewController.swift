@@ -32,8 +32,8 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let event = sender as Event
         if segue.identifier == SEGUE_ID_EVENT_DETAIL {
+            let event = sender as Event
             let dest = segue.destinationViewController as EventDetailViewController
             dest.event = event
         }
@@ -72,6 +72,7 @@ class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, 
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let event = self.getEventAtIndexPath(indexPath)
         self.performSegueWithIdentifier(SEGUE_ID_EVENT_DETAIL, sender: event)
     }

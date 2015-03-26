@@ -67,11 +67,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func updateLocation(aNotification: NSNotification) {
         if let location = aNotification.userInfo as? Dictionary<String, AnyObject> {
-            NSLog("Location: %@", location)
-            self.selectedLocation = [
-                "address": location["title"]! as String,
-                "address_name": location["right"]! as String
-            ]
+            self.selectedLocation = location
             self.updateLocationLabel()
         }
     }

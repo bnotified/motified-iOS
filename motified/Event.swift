@@ -18,8 +18,10 @@ class Event: NSObject {
     var createdBy: String?
     var isSubscribed: Bool?
     var subscribedUsers: Int?
+    var address: String?
+    var addressName: String?
     
-    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?) {
+    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?, address: String?, addressName: String?) {
         self.id = id
         self.createdBy = createdBy
         self.title = title
@@ -28,6 +30,8 @@ class Event: NSObject {
         self.endDate = endDate
         self.isSubscribed = isSubscribed
         self.subscribedUsers = subscribedUsers
+        self.address = address
+        self.addressName = addressName
         self.categories = categories?.map({ (cat) -> EventCategory in
             return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
         })

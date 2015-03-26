@@ -15,8 +15,9 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var subscribedTextLabel: UILabel!
     
-    let event: Event?
+    var event: Event?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -35,6 +36,7 @@ class EventTableViewCell: UITableViewCell {
     }
     
     func setUpWithEvent(event: Event) {
+        self.event = event
         self.titleLabel.text = event.title
         self.categoryImage.image = event.getImage()
         let start = self.formatDate(event.startDate!)
@@ -44,8 +46,7 @@ class EventTableViewCell: UITableViewCell {
         self.subscribedLabel.layer.borderColor = UIColor.whiteColor().CGColor
         self.subscribedLabel.layer.borderWidth = 1.0
         self.subscribedLabel.layer.cornerRadius = 8
-        
-        self.locationLabel.text = "The State Theater"
+        self.subscribedLabel.text = NSString(format: "%d", self.event!.subscribedUsers!)
     }
     
     func formatDate(date: NSDate) -> String {
