@@ -13,7 +13,7 @@ private let _APIManagerInstance = APIManager()
 class APIManager: NSObject {
     
     var events: Dictionary<Int, Array<Event>> = Dictionary<Int, Array<Event>>(minimumCapacity: 5)
-    var categories: Array<Dictionary<String, AnyObject>> = Array<Dictionary<String, AnyObject>>()
+    var categories: Array<EventCategory> = Array<EventCategory>()
     var selectedCategories: NSMutableSet = NSMutableSet()
     var totalPages: Int = 0
     
@@ -42,7 +42,10 @@ class APIManager: NSObject {
         LoginManager.manager.GET("/api/categories", parameters: nil,
             success: { (NSURLSessionDataTask, response) -> Void in
                 let json = response as Dictionary<String, AnyObject>
-                self.categories = json["objects"]! as Array<Dictionary<String, AnyObject>>
+                let rawCategories = json["objects"]! as Array<Dictionary<String, AnyObject>>
+                self.categories = rawCategories.map({ (cat) -> EventCategory in
+                    return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
+                })
                 self.emitCategoriesChanged()
                 if done != nil {
                     done(nil)
@@ -57,8 +60,8 @@ class APIManager: NSObject {
         })
     }
     
-    func getSelectedCategories() -> Array<Dictionary<String, AnyObject>> {
-        var selected: Array<Dictionary<String, AnyObject>> = Array<Dictionary<String, AnyObject>>()
+    func getSelectedCategories() -> Array<EventCategory> {
+        var selected: Array<EventCategory> = Array<EventCategory>()
         for index in self.selectedCategories {
             selected.append(self.categories[index as Int])
         }
@@ -123,7 +126,7 @@ class APIManager: NSObject {
         for event in events {
             for index in self.selectedCategories {
                 if let _index = index as? Int {
-                    let category: Dictionary<String, AnyObject> = self.categories[_index]
+                    let category = self.categories[_index]
                     if event.isInCategory(category) {
                         filtered.addObject(event)
                     }
@@ -148,7 +151,7 @@ class APIManager: NSObject {
     func getSelectedCategoryMessage() -> String {
         if self.selectedCategories.count == 1 {
             let cat = self.getSelectedCategories()[0]
-            let catString = cat["category"]! as String
+            let catString = cat.category
             return String(format: "Showing the %@ category", catString)
         }
         return String(format: "Showing categories: %@", ", ".join(self.getSelectedCategoryStrings()))
@@ -158,20 +161,16 @@ class APIManager: NSObject {
         return self.getCategoryStrings(self.getSelectedCategories())
     }
     
-    func getCategoryStrings(categories: Array<Dictionary<String, AnyObject>>) -> Array<String> {
-        func mapCategories(category: Dictionary<String, AnyObject>) -> String {
-            return category["category"]! as String
-        }
-        let cats = categories.map { mapCategories($0) } as Array<String>
-        return cats
+    func getCategoryStrings(categories: Array<EventCategory>) -> Array<String> {
+        return categories.map({ (cat: EventCategory) -> String in
+            return cat.category
+        })
     }
     
-    func getCategoryIDs(categories: Array<Dictionary<String, AnyObject>>) -> Array<Int> {
-        func mapCategories(category: Dictionary<String, AnyObject>) -> Int {
-            return category["id"]! as Int
-        }
-        let cats = self.getSelectedCategories().map { mapCategories($0) } as Array<Int>
-        return cats
+    func getCategoryIDs(categories: Array<EventCategory>) -> Array<Int> {
+        return categories.map({ (cat: EventCategory) -> Int in
+            return cat.id
+        })
     }
     
     //    func testEvents() {

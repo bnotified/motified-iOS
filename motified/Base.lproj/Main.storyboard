@@ -236,10 +236,10 @@
                                                         <constraint firstAttribute="height" constant="37" id="xdD-gY-QP1"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="columns@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="etx-ua-tNH">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="etx-ua-tNH">
                                                     <rect key="frame" x="23" y="20" width="55" height="55"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="55" id="3Cv-l3-gdg"/>
@@ -674,7 +674,6 @@
         <image name="Location.png" width="25" height="25"/>
         <image name="arrow-left.png" width="25" height="25"/>
         <image name="check.png" width="25" height="25"/>
-        <image name="columns@3x.png" width="75" height="75"/>
         <image name="first" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

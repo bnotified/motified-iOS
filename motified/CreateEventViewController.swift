@@ -22,8 +22,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     let categoryPicker: UIPickerView = UIPickerView()
     let localFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
     
-    let categories = APIManager.sharedInstance.categories
-    var selectedCategory: String!
+    let categories: Array<EventCategory> = APIManager.sharedInstance.categories
+    var selectedCategory: EventCategory!
     var selectedLocation: Dictionary<String, AnyObject>!
     
     override func viewDidLoad() {
@@ -105,8 +105,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         } else if textField == self.endLabel {
             self.updateEndLabel()
         } else if textField == self.categoryLabel {
-            self.selectedCategory = self.categories[0]["category"]! as String
-            self.categoryLabel.text = self.selectedCategory
+            self.selectedCategory = self.categories[0]
+            self.categoryLabel.text = self.selectedCategory.category
         }
     }
     
@@ -126,15 +126,15 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let categoryString = self.categories[row]["category"]! as String
-        let title = NSAttributedString(string: categoryString)
+        let category = self.categories[row]
+        let title = NSAttributedString(string: category.category)
         return title
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         NSLog("Selected: %@", self.categories[row])
-        self.selectedCategory = self.categories[row]["category"]! as String
-        self.categoryLabel.text = self.selectedCategory
+        self.selectedCategory = self.categories[row]
+        self.categoryLabel.text = self.selectedCategory.category
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

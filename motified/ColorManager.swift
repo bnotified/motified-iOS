@@ -30,4 +30,9 @@ class ColorManager: NSObject {
         let color = rgba(colors[modIndex])
         return color
     }
+    
+    class func getRandomColor() -> UIColor {
+        let rand = Int(arc4random_uniform(8))
+        return getColorForIndex(rand)
+    }
 }

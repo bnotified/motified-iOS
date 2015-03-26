@@ -14,9 +14,12 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var checkImage: UIImageView!
     
-    func setUpWithImage(image: UIImage, text: String) {
-        self.imageView.image = image
-        self.titleLabel.text = text
+    var category: EventCategory!
+    
+    func setUpWithCategory(category: EventCategory) {
+        self.category = category
+        self.imageView.image = category.image
+        self.titleLabel.text = category.category
     }
     
     override func translatesAutoresizingMaskIntoConstraints() -> Bool {

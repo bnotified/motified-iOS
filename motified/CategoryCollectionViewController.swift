@@ -28,6 +28,10 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onCategoriesChanged", name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        self.collectionView.backgroundColor = ColorManager.getRandomColor()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.hasShownToast = false
@@ -58,8 +62,8 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryCollectionViewCell
-        let categoryText = APIManager.sharedInstance.categories[indexPath.row]["category"]! as String
-        cell.setUpWithImage(UIImage(named: "columns@3x.png"), text: categoryText)
+        let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
+        cell.setUpWithCategory(category)
         if selectedIndexes.containsObject(indexPath.row) {
             cell.checkImage.hidden = false
         } else {

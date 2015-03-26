@@ -8,19 +8,13 @@
 
 import Foundation
 
-enum Category {
-    case Education
-    case Travel
-    case Music
-}
-
 class Event: NSObject {
     var id: Int?
     var title: String?
     var desc: String?
     var startDate: NSDate?
     var endDate: NSDate?
-    var categories: Array<Dictionary<String, AnyObject>>?
+    var categories: Array<EventCategory>?
     var createdBy: String?
     var isSubscribed: Bool?
     var subscribedUsers: Int?
@@ -32,21 +26,18 @@ class Event: NSObject {
         self.desc = desc
         self.startDate = startDate
         self.endDate = endDate
-        self.categories = categories
         self.isSubscribed = isSubscribed
         self.subscribedUsers = subscribedUsers
+        self.categories = categories?.map({ (cat) -> EventCategory in
+            return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
+        })
     }
     
     func getImage() -> UIImage {
         return UIImage(named: "Food.png")
     }
     
-    func isInCategory(category: Dictionary<String, AnyObject>) -> Bool {
-        for cat in self.categories! {
-            if cat["category"]! as String == category["category"]! as String {
-                return true
-            }
-        }
+    func isInCategory(category: EventCategory) -> Bool {
         return false
     }
     
