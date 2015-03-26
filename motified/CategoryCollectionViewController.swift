@@ -71,7 +71,7 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         let size = self.view.frame.size
         let width = size.width / 3 - 5*3
-        return CGSizeMake(width, width + 20)
+        return CGSizeMake(width, width + 30)
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

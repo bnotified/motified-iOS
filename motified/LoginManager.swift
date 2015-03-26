@@ -27,7 +27,8 @@ class LoginManager {
         ]
         self.manager.POST("api/users", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
             var jsonResult = response as Dictionary<String, AnyObject>
-            NSLog("Success: %@", jsonResult)
+            APIManager.sharedInstance.loadEvents(nil)
+            APIManager.sharedInstance.loadCategories(nil)
             success()
             }, failure: failure)
     }
@@ -43,6 +44,8 @@ class LoginManager {
         m.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password: password)
         m.POST("user/login", parameters: nil, success: { (NSURLSessionDataTask, AnyObject) -> Void in
             UserPreferenceManager.saveUsernameAndPassword(username, password: password)
+            APIManager.sharedInstance.loadEvents(nil)
+            APIManager.sharedInstance.loadCategories(nil)
             success()
         }, failure: failure)
     }
@@ -51,7 +54,7 @@ class LoginManager {
         self.login({ () -> Void in
             self.isLoggedIn({ (Bool, NSError) -> Void in
                 if(Bool == true) {
-                    NSLog("YAY");
+                    NSLog("YAY")
                 } else {
                     NSLog("POOP")
                 }

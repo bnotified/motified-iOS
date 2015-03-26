@@ -18,4 +18,8 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         self.imageView.image = image
         self.titleLabel.text = text
     }
+    
+    override func translatesAutoresizingMaskIntoConstraints() -> Bool {
+        return true
+    }
 }

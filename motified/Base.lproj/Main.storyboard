@@ -222,18 +222,6 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="125"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Volunteering" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AfQ-kf-iOs">
-                                                    <rect key="frame" x="15" y="104" width="70" height="15"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="columns@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="etx-ua-tNH">
-                                                    <rect key="frame" x="9" y="8" width="84" height="84"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="etx-ua-tNH" secondAttribute="height" multiplier="1:1" id="xGc-rt-v34"/>
-                                                    </constraints>
-                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check.png" translatesAutoresizingMaskIntoConstraints="NO" id="7ry-ZO-EoV">
                                                     <rect key="frame" x="77" y="3" width="20" height="20"/>
                                                     <constraints>
@@ -241,17 +229,33 @@
                                                         <constraint firstAttribute="width" constant="20" id="waN-IT-k7y"/>
                                                     </constraints>
                                                 </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="On-Campus Club Meetings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AfQ-kf-iOs">
+                                                    <rect key="frame" x="10" y="83" width="81" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="90" id="eO6-9q-MuY"/>
+                                                        <constraint firstAttribute="height" constant="37" id="xdD-gY-QP1"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="columns@3x.png" translatesAutoresizingMaskIntoConstraints="NO" id="etx-ua-tNH">
+                                                    <rect key="frame" x="23" y="20" width="55" height="55"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="55" id="3Cv-l3-gdg"/>
+                                                        <constraint firstAttribute="width" secondItem="etx-ua-tNH" secondAttribute="height" multiplier="1:1" id="xGc-rt-v34"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="etx-ua-tNH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="eRV-G8-THe" secondAttribute="leadingMargin" constant="1" id="01E-ce-hxl"/>
                                             <constraint firstItem="7ry-ZO-EoV" firstAttribute="trailing" secondItem="eRV-G8-THe" secondAttribute="trailingMargin" constant="5" id="03f-lO-8Nz"/>
-                                            <constraint firstItem="etx-ua-tNH" firstAttribute="top" secondItem="eRV-G8-THe" secondAttribute="topMargin" id="B6o-LN-IWZ"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="AfQ-kf-iOs" secondAttribute="bottom" constant="-2" id="ZaR-Ac-Q40"/>
-                                            <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="etx-ua-tNH" secondAttribute="trailing" constant="-1" id="hjm-nF-7cz"/>
+                                            <constraint firstAttribute="centerX" secondItem="AfQ-kf-iOs" secondAttribute="centerX" id="CdF-5f-Skl"/>
+                                            <constraint firstItem="AfQ-kf-iOs" firstAttribute="bottom" secondItem="eRV-G8-THe" secondAttribute="bottomMargin" constant="3" id="Ioe-b3-CFG"/>
+                                            <constraint firstAttribute="centerY" secondItem="etx-ua-tNH" secondAttribute="centerY" constant="15" id="LIw-Nh-cCs"/>
+                                            <constraint firstAttribute="centerX" secondItem="etx-ua-tNH" secondAttribute="centerX" id="g4N-Vq-C3s"/>
                                             <constraint firstItem="7ry-ZO-EoV" firstAttribute="top" secondItem="eRV-G8-THe" secondAttribute="topMargin" constant="-5" id="tnK-MC-gHm"/>
-                                            <constraint firstAttribute="centerX" secondItem="AfQ-kf-iOs" secondAttribute="centerX" id="xS1-qm-3B5"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="checkImage" destination="7ry-ZO-EoV" id="QFa-CY-3Ui"/>
@@ -310,7 +314,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aeP-DV-uQ4">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aeP-DV-uQ4">
                                 <rect key="frame" x="0.0" y="284" width="320" height="284"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat. March 5th, 5:00pm - 8:00pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vK-FL-LSt">
@@ -319,14 +323,14 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPw-wv-3m7">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPw-wv-3m7">
                                 <rect key="frame" x="16" y="126" width="288" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77H-PN-C2C">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77H-PN-C2C">
                                 <rect key="frame" x="201" y="521" width="112" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="k9z-3e-uoz"/>
