@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventFeedViewController: AuthManagingViewController, UITableViewDelegate, UITableViewDataSource {
+class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     

@@ -10,53 +10,44 @@ import UIKit
 
 class AuthManagingViewController: UIViewController {
     
+    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var errorDisplay: UITextView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addBorder(self.registerBtn)
+        addBorder(self.loginBtn)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if LoginManager.hasValidCookie() {
-            return ()
+            self.didLogIn()
         }
-        if UserPreferenceManager.hasUsername() {
+        else if UserPreferenceManager.hasUsername() {
             self.login()
-        } else {
-            self.promptForRegistration()
         }
     }
     
-    func promptForRegistration(message: String?=nil) {
-        var inputBox = BMInputBox.boxWithStyle(.LoginAndPasswordInput)
-        self.customizeInput(inputBox)
-        inputBox.title = "Register for B'Notified"
-        if (message != nil) {
-            inputBox.message = message;
-        }
-        inputBox.onSubmit = {(value: AnyObject...) in
-            let results: Array<String> = value as Array<String>
-            let username: String = results[0]
-            let password: String = results[1]
-            if (!self.isUsernameValid(username)) {
-                return self.handleRegistrationError("A username is required, and must contain only letters, numbers, and underscores")
-            }
-            if (!self.isPasswordValid(password)) {
-                return self.handleRegistrationError("A password must be at least 6 characters long and not contain any whitespace")
-            }
-            self.register(username, password: password)
-        }
-        inputBox.show()
+    func showError(message: String) {
+        self.errorDisplay.hidden = false
+        self.errorDisplay.text = message
+        self.errorDisplay.textColor = UIColor.redColor()
+        self.errorDisplay.font = UIFont.systemFontOfSize(17.0)
     }
     
-    func handleRegistrationError(message: String) -> Void {
-        delay(0.5) {
-            self.promptForRegistration(message: message)
-        }
+    func didLogIn() {
+        self.performSegueWithIdentifier(SEGUE_ID_MAIN_TAB, sender: nil)
     }
     
     func login() {
         let username = UserPreferenceManager.loadUsername()
         let password = UserPreferenceManager.loadPassword()
+        self.usernameTextField.text = username
+        self.passwordTextField.text = password
         self.loginWithUsername(username, password: password)
     }
     
@@ -65,60 +56,45 @@ class AuthManagingViewController: UIViewController {
         LoginManager.loginWithUsername(username, password: password,
             { () -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                self.didLogIn()
                 return ()
             }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 let username = UserPreferenceManager.loadUsername()
                 let password = UserPreferenceManager.loadPassword()
-                let message = NSString(format: "Failed to login with username: %@ and password: %@", username, password)
-                self.promptForLogin(message: message)
+                if let response: NSHTTPURLResponse = NSURLSessionDataTask.response as? NSHTTPURLResponse {
+                    NSLog("Status Code: %@", response)
+                    if response.statusCode == 500 {
+                        self.showError("Internal server error. Please try again latter")
+                    } else if response.statusCode == 401 {
+                        self.showError("Incorrect username/password combination")
+                    }
+                } else {
+                    self.showError("Unable to reach server. Please check your internet connection.")
+                }
         })
     }
-    
-    func promptForLogin(message: String?=nil) -> Void {
-        var inputBox = BMInputBox.boxWithStyle(.LoginAndPasswordInput)
-        self.customizeInput(inputBox)
-        inputBox.title = "Login"
-        inputBox.message = message
-        inputBox.cancelButtonText = "Need an Account"
-        inputBox.onSubmit = {(value: AnyObject...) in
-            let results: Array<String> = value as Array<String>
-            let username: String = results[0]
-            let password: String = results[1]
-        }
-        inputBox.onCancel = {() -> Void in
-            self.promptForRegistration()
-        }
-        inputBox.show()
-    }
-    
-    func customizeInput(inputBox: BMInputBox) -> Void {
-        inputBox.customiseInputElement = {(element: UITextField) in
-            if element.secureTextEntry == true {
-                element.placeholder = "Password"
-            } else {
-                element.placeholder = "Username"
-            }
-            return element
-        }
-    }
-    
+
     func register(username: String, password: String) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.registerUserWithUsername(username, password: password, confirm: password,
             success: { () -> Void in
                 UserPreferenceManager.saveUsernameAndPassword(username, password: password)
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                self.view.makeToast("Successfully registered", duration: 2.0, position: CSToastPositionCenter)
+                self.didLogIn()
             })
             { (NSURLSessionDataTask, NSError) -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                let response: NSHTTPURLResponse = NSURLSessionDataTask.response as NSHTTPURLResponse!
-                if response.statusCode == 400 {
-                    self.promptForRegistration(message: NSString(format: "Whoops! The username '%@' is not available", username))
-                } else {
-                    self.promptForRegistration(message: "An error occurred when registering. Please check your internet connectivity")
+                
+                if let response: NSHTTPURLResponse = NSURLSessionDataTask.response as? NSHTTPURLResponse {
+                    if response.statusCode == 400 {
+                        self.showError("Whoops! The username \(username) is not available")
+                    } else if response.statusCode == 500 {
+                        self.showError("Internal server error. Please try again latter")
+                    }
+                    return ()
                 }
+                self.showError("An error occurred when registering. Please check your internet connectivity.")
         }
     }
     
@@ -136,5 +112,23 @@ class AuthManagingViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func didPressRegister(sender: AnyObject) {
+        let username = self.usernameTextField.text
+        let password = self.passwordTextField.text
+        if self.isUsernameValid(username) == false {
+            return self.showError("A username be at least 1 character long and contain only alphaneumeric charcters and underscores")
+        }
+        if self.isPasswordValid(password) == false {
+            return self.showError("A password must be at least 6 characters long and not contain any whitespace")
+        }
+        self.register(username, password: password)
+    }
+    
+    @IBAction func didPressLogin(sender: AnyObject) {
+        let username = self.usernameTextField.text
+        let password = self.passwordTextField.text
+        self.loginWithUsername(username, password: password)
     }
 }
