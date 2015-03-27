@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 private let _APIManagerInstance = APIManager()
 
@@ -112,8 +113,8 @@ class APIManager: NSObject {
                 categories: obj["categories"] as Array<Dictionary<String, AnyObject>>?,
                 isSubscribed: obj["is_subscribed"] as Bool?,
                 subscribedUsers: obj["subscribed_users"] as Int?,
-                address: "test",//obj["address"] as String?,
-                addressName: "test"//obj["address_name"] as String?
+                address: obj["address"] as String?,
+                addressName: obj["address_name"] as String?
             )
             self.events[page]?.append(event)
         }

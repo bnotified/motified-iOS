@@ -315,7 +315,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aeP-DV-uQ4">
-                                <rect key="frame" x="0.0" y="224" width="320" height="251"/>
+                                <rect key="frame" x="0.0" y="224" width="320" height="295"/>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sat. March 5th, 5:00pm - 8:00pm" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vK-FL-LSt">
                                 <rect key="frame" x="16" y="101" width="288" height="17"/>
@@ -324,7 +324,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPw-wv-3m7">
-                                <rect key="frame" x="16" y="126" width="288" height="90"/>
+                                <rect key="frame" x="12" y="126" width="292" height="90"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="6Nv-5v-bfK"/>
@@ -333,70 +333,71 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdF-60-ytI">
+                                <rect key="frame" x="219" y="481" width="91" height="30"/>
+                                <color key="backgroundColor" red="0.16078431369999999" green="0.50196078430000002" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="91" id="wvp-oy-o12"/>
+                                </constraints>
+                                <color key="tintColor" red="0.16078431372549018" green="0.50196078431372548" blue="0.72549019607843135" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Be Notified">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onNotifyPressed:" destination="rbt-gX-6sP" eventType="touchUpInside" id="N4a-yI-tbP"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="77H-PN-C2C">
-                                <rect key="frame" x="208" y="433" width="112" height="42"/>
+                                <rect key="frame" x="198" y="234" width="112" height="35"/>
+                                <color key="backgroundColor" red="0.16078431369999999" green="0.50196078430000002" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="112" id="k9z-3e-uoz"/>
-                                    <constraint firstAttribute="height" constant="42" id="lMu-EB-Q8p"/>
+                                    <constraint firstAttribute="height" constant="35" id="lMu-EB-Q8p"/>
                                 </constraints>
                                 <state key="normal" title="Open in Maps">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="onOpenPressed:" destination="rbt-gX-6sP" eventType="touchUpInside" id="dVO-Gt-BGf"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhf-Uh-fCX">
-                                <rect key="frame" x="0.0" y="475" width="320" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mdF-60-ytI">
-                                        <rect key="frame" x="15" y="7" width="77" height="30"/>
-                                        <state key="normal" title="Be Notified">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onNotifyPressed:" destination="rbt-gX-6sP" eventType="touchUpInside" id="N4a-yI-tbP"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEt-Uc-c3Z">
-                                        <rect key="frame" x="258" y="7" width="47" height="30"/>
-                                        <state key="normal" title="Report">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onReportPressed:" destination="rbt-gX-6sP" eventType="touchUpInside" id="4Xb-BM-Av2"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tEt-Uc-c3Z">
+                                <rect key="frame" x="10" y="481" width="64" height="30"/>
+                                <color key="backgroundColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="mdF-60-ytI" firstAttribute="leading" secondItem="hhf-Uh-fCX" secondAttribute="leading" constant="15" id="90z-sC-2xg"/>
-                                    <constraint firstAttribute="centerY" secondItem="tEt-Uc-c3Z" secondAttribute="centerY" id="ZkZ-oZ-eGo"/>
-                                    <constraint firstAttribute="trailing" secondItem="tEt-Uc-c3Z" secondAttribute="trailing" constant="15" id="hnM-yi-JRr"/>
-                                    <constraint firstAttribute="height" constant="44" id="lma-6M-gUq"/>
-                                    <constraint firstAttribute="centerY" secondItem="mdF-60-ytI" secondAttribute="centerY" id="mN3-pg-W1s"/>
+                                    <constraint firstAttribute="width" constant="64" id="Qkd-yn-yzB"/>
                                 </constraints>
-                            </view>
+                                <state key="normal" title="Report">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onReportPressed:" destination="rbt-gX-6sP" eventType="touchUpInside" id="4Xb-BM-Av2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7vK-FL-LSt" firstAttribute="leading" secondItem="VPw-wv-3m7" secondAttribute="leading" id="0dH-gO-6pz"/>
-                            <constraint firstItem="hhf-Uh-fCX" firstAttribute="top" secondItem="aeP-DV-uQ4" secondAttribute="bottom" id="1OM-ni-Jem"/>
+                            <constraint firstItem="7vK-FL-LSt" firstAttribute="leading" secondItem="VPw-wv-3m7" secondAttribute="leading" constant="4" id="0dH-gO-6pz"/>
+                            <constraint firstItem="wZn-3d-geU" firstAttribute="top" secondItem="aeP-DV-uQ4" secondAttribute="bottom" id="1FT-mi-C36"/>
+                            <constraint firstItem="77H-PN-C2C" firstAttribute="trailing" secondItem="aeP-DV-uQ4" secondAttribute="trailing" constant="-10" id="2Dj-Kg-aXx"/>
                             <constraint firstItem="aeP-DV-uQ4" firstAttribute="width" secondItem="HVH-l3-QzY" secondAttribute="width" id="2wf-KJ-P0i"/>
                             <constraint firstItem="jn2-VA-VPb" firstAttribute="top" secondItem="3Nw-Kw-tM0" secondAttribute="bottom" constant="8" id="68d-NZ-7Eq"/>
+                            <constraint firstItem="aeP-DV-uQ4" firstAttribute="bottom" secondItem="mdF-60-ytI" secondAttribute="bottom" constant="8" id="7Gv-N4-akc"/>
                             <constraint firstItem="jn2-VA-VPb" firstAttribute="trailing" secondItem="HVH-l3-QzY" secondAttribute="trailingMargin" id="9I2-N3-OX4"/>
+                            <constraint firstItem="aeP-DV-uQ4" firstAttribute="leading" secondItem="tEt-Uc-c3Z" secondAttribute="leading" constant="-10" id="9rW-b9-76C"/>
                             <constraint firstItem="aeP-DV-uQ4" firstAttribute="top" secondItem="VPw-wv-3m7" secondAttribute="bottom" constant="8" id="ESu-ck-Zjz"/>
+                            <constraint firstItem="aeP-DV-uQ4" firstAttribute="trailing" secondItem="mdF-60-ytI" secondAttribute="trailing" constant="10" id="FyF-fA-Kfl"/>
                             <constraint firstItem="jn2-VA-VPb" firstAttribute="leading" secondItem="HVH-l3-QzY" secondAttribute="leadingMargin" id="Ka1-RV-gLt"/>
                             <constraint firstItem="VPw-wv-3m7" firstAttribute="top" secondItem="7vK-FL-LSt" secondAttribute="bottom" constant="8" id="Mjn-GY-cer"/>
-                            <constraint firstItem="77H-PN-C2C" firstAttribute="bottom" secondItem="aeP-DV-uQ4" secondAttribute="bottom" id="VTn-rZ-qSg"/>
                             <constraint firstAttribute="centerX" secondItem="aeP-DV-uQ4" secondAttribute="centerX" id="ZCn-M6-mU9"/>
-                            <constraint firstAttribute="width" secondItem="hhf-Uh-fCX" secondAttribute="width" id="cRu-BR-XIu"/>
+                            <constraint firstItem="aeP-DV-uQ4" firstAttribute="bottom" secondItem="tEt-Uc-c3Z" secondAttribute="bottom" constant="8" id="ezW-yR-Xsh"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="trailing" secondItem="VPw-wv-3m7" secondAttribute="trailing" id="f2S-ZW-oVt"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="trailing" secondItem="HVH-l3-QzY" secondAttribute="trailingMargin" id="gSK-zz-v2o"/>
-                            <constraint firstItem="77H-PN-C2C" firstAttribute="trailing" secondItem="aeP-DV-uQ4" secondAttribute="trailing" id="iWn-rs-K7F"/>
+                            <constraint firstItem="77H-PN-C2C" firstAttribute="top" secondItem="aeP-DV-uQ4" secondAttribute="top" constant="10" id="hlq-Ep-EHg"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="leading" secondItem="jn2-VA-VPb" secondAttribute="leading" id="iuE-tX-hWB"/>
-                            <constraint firstAttribute="centerX" secondItem="hhf-Uh-fCX" secondAttribute="centerX" id="pSZ-JS-Zne"/>
-                            <constraint firstItem="wZn-3d-geU" firstAttribute="top" secondItem="hhf-Uh-fCX" secondAttribute="bottom" id="s1h-Mj-cLA"/>
                             <constraint firstItem="7vK-FL-LSt" firstAttribute="top" secondItem="jn2-VA-VPb" secondAttribute="bottom" constant="8" id="xdj-hc-s2P"/>
                         </constraints>
                     </view>

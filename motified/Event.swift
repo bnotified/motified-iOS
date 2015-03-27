@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Event: NSObject {
     var id: Int?
@@ -20,6 +21,8 @@ class Event: NSObject {
     var subscribedUsers: Int?
     var address: String?
     var addressName: String?
+    var location: CLLocation?
+    var isReported: Bool = false
     
     init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?, address: String?, addressName: String?) {
         self.id = id
@@ -32,6 +35,7 @@ class Event: NSObject {
         self.subscribedUsers = subscribedUsers
         self.address = address
         self.addressName = addressName
+        //self.location = coords
         self.categories = categories?.map({ (cat) -> EventCategory in
             return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
         })
@@ -54,6 +58,33 @@ class Event: NSObject {
         } else {
             return self.getMultipleDayDateRange()
         }
+    }
+    
+    func getFormattedDate(date: NSDate) -> String {
+        let formatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+        return formatter.stringFromDate(date)
+    }
+    
+    func getFormattedStartDate() -> String {
+        return self.getFormattedDate(self.startDate!)
+    }
+    
+    func getFormattedEndDate() -> String {
+        return self.getFormattedDate(self.endDate!)
+    }
+    
+    func reportEvent(done: (NSError!) -> ()) {
+        let params = [
+            "is_reported": true
+        ]
+        let url = NSString(format: "api/events/%d" , self.id!)
+        LoginManager.manager.PATCH(url, parameters: params,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                done(nil)
+            },
+            failure: { (NSURLSessionDataTask, NSError) -> Void in
+                done(NSError)
+        })
     }
     
     private func getSameDayDateRange() -> String {

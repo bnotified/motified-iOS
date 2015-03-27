@@ -20,6 +20,7 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var reportBtn: UIButton!
     
     var event: Event!
+    var mapItem: MKMapItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,19 +32,45 @@ class EventDetailViewController: UIViewController {
     }
     
     func setUp() {
+        self.setUpMap()
         if self.event.isSubscribed == true {
-            self.navigationItem.rightBarButtonItem?.title = "Unsubscribe"
+            self.beNotifiedBtn.titleLabel?.text = "Unsubscribe"
         } else {
-            self.navigationItem.rightBarButtonItem?.title = "Be Notified"
+            self.beNotifiedBtn.titleLabel?.text = "Be Notified"
         }
         
         self.titleLabel.text = event.title
         self.dateLabel.text = event.getFormattedDateRange()
         self.descriptionLabel.text = event.desc
         
-        self.openBtn.layer.borderWidth = 1.0
-        self.openBtn.layer.cornerRadius = 8.0
-        self.openBtn.layer.borderColor = UIColor.whiteColor().CGColor
+        addBorder(self.openBtn)
+        addBorder(self.beNotifiedBtn)
+        addBorder(self.reportBtn)
+    }
+    
+    func setUpMap() {
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = self.event.address! + ", Michigan"
+        let map = self.mapView
+        request.region = map.region
+        
+        let localSearch = MKLocalSearch(request: request)
+        localSearch.startWithCompletionHandler { (MKLocalSearchResponse, NSError) -> Void in
+            if NSError != nil {
+                NSLog("Error: %@", NSError)
+                return ()
+            }
+            if MKLocalSearchResponse.mapItems.count == 0 {
+                self.view.makeToast("No results")
+                return ()
+            }
+            let items = MKLocalSearchResponse.mapItems as [MKMapItem]
+            NSLog("Items: %@", items)
+            let first: MKMapItem = items.first!
+            map.addAnnotation(first.placemark)
+            map.showAnnotations(map.annotations, animated: true)
+            self.mapItem = first
+        }
     }
     
     func handleNoEvent() {
@@ -60,6 +87,13 @@ class EventDetailViewController: UIViewController {
     }
 
     @IBAction func onOpenPressed(sender: AnyObject) {
+        if self.mapItem == nil {
+            self.view.makeToast("Please wait for the map to finish loading")
+            return ()
+        }
+
+        let options = []
+        self.mapItem.openInMapsWithLaunchOptions(nil)
         
     }
     

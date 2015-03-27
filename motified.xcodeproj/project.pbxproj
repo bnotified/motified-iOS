@@ -90,6 +90,8 @@
 		3ABD29561AB73A4D0022CE9E /* constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABD29541AB73A4D0022CE9E /* constants.swift */; };
 		3AC9EDA81AC465F3005F5ADB /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9EDA71AC465F3005F5ADB /* EventCategory.swift */; };
 		3AC9EDAB1AC46CA9005F5ADB /* EventCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9EDA71AC465F3005F5ADB /* EventCategory.swift */; };
+		3AC9EDAD1AC5B656005F5ADB /* addBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9EDAC1AC5B656005F5ADB /* addBorder.swift */; };
+		3AC9EDAE1AC5B656005F5ADB /* addBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC9EDAC1AC5B656005F5ADB /* addBorder.swift */; };
 		3ADC50DC1AC31AE400545255 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */; };
 		3ADC50DD1AC31AE400545255 /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */; };
 		3ADC50E41AC31F2300545255 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADC50E31AC31F2300545255 /* NSDateExtension.swift */; };
@@ -166,6 +168,7 @@
 		3ABD29511AB6148E0022CE9E /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		3ABD29541AB73A4D0022CE9E /* constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = constants.swift; path = ../constants.swift; sourceTree = "<group>"; };
 		3AC9EDA71AC465F3005F5ADB /* EventCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategory.swift; sourceTree = "<group>"; };
+		3AC9EDAC1AC5B656005F5ADB /* addBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addBorder.swift; sourceTree = "<group>"; };
 		3ADC50DB1AC31AE400545255 /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EventDetailViewController.swift; path = ../EventDetailViewController.swift; sourceTree = "<group>"; };
 		3ADC50E31AC31F2300545255 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtension.swift; sourceTree = "<group>"; };
 		3ADC50E61AC3495800545255 /* ColorManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorManager.swift; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 		3ADC50DF1AC31B2700545255 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3AC9EDAC1AC5B656005F5ADB /* addBorder.swift */,
 				3ADC50E31AC31F2300545255 /* NSDateExtension.swift */,
 				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
 				3A20C3ED1AAF80060055BBF4 /* BridgingHeader.h */,
@@ -559,6 +563,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A5152E61AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */,
+				3AC9EDAD1AC5B656005F5ADB /* addBorder.swift in Sources */,
 				3ABD294F1AB5FFB60022CE9E /* EventTableViewCell.swift in Sources */,
 				3A20C3F11AAF805C0055BBF4 /* LoginManager.swift in Sources */,
 				3A20C3EF1AAF80450055BBF4 /* Event.swift in Sources */,
@@ -589,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AC9EDAB1AC46CA9005F5ADB /* EventCategory.swift in Sources */,
+				3AC9EDAE1AC5B656005F5ADB /* addBorder.swift in Sources */,
 				3A5152E71AB756B800DC290B /* CategoryCollectionViewCell.swift in Sources */,
 				3A20C41C1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
 				3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */,
