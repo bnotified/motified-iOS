@@ -14,3 +14,10 @@ func addBorder(button: UIButton) -> Void {
     button.layer.borderColor = UIColor.whiteColor().CGColor
     return ()
 }
+
+func addBorderMatchingBackground(button: UIButton) -> Void {
+    button.layer.borderWidth = 1.0
+    button.layer.cornerRadius = 8.0
+    button.layer.borderColor = button.backgroundColor?.CGColor
+    return ()
+}
