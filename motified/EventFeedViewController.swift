@@ -49,7 +49,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func onEventsChanged() {
-        self.events.extend(APIManager.sharedInstance.getEventsOnPage(self.currentPage))
+        self.events = APIManager.sharedInstance.getEventsInRange(self.currentPage)
         self.tableView.reloadData()
     }
     

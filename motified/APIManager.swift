@@ -152,6 +152,14 @@ class APIManager: NSObject {
         return events
     }
     
+    func getEventsInRange(page: Int) -> Array<Event> {
+        var events = self.getEventsOnPage(1)
+        for var i = 2; i <= page; i++ {
+            events.extend(self.getEventsOnPage(i))
+        }
+        return events
+    }
+    
     func hasSelectedCategories() -> Bool {
         return self.selectedCategories.count > 0
     }
