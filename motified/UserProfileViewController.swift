@@ -28,7 +28,16 @@ class UserProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == SEGUE_ID_LOGOUT {
+            let dest = segue.destinationViewController as AuthManagingViewController
+            dest.shouldLogIn = false
+        }
+    }
+    
     @IBAction func onLogout(sender: AnyObject) {
+        LoginManager.logOut()
+        self.performSegueWithIdentifier(SEGUE_ID_LOGOUT, sender: nil)
     }
     
     @IBAction func onContact(sender: AnyObject) {

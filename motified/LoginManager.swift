@@ -44,8 +44,10 @@ class LoginManager {
         m.requestSerializer.setAuthorizationHeaderFieldWithUsername(username, password: password)
         m.POST("user/login", parameters: nil, success: { (NSURLSessionDataTask, AnyObject) -> Void in
             UserPreferenceManager.saveUsernameAndPassword(username, password: password)
-            APIManager.sharedInstance.loadEvents(nil)
-            APIManager.sharedInstance.loadCategories(nil)
+            let instance = APIManager.sharedInstance
+            instance.currentPage = 0
+            instance.loadEvents(nil)
+            instance.loadCategories(nil)
             success()
         }, failure: failure)
     }
@@ -76,12 +78,28 @@ class LoginManager {
     }
     
     class func hasValidCookie() -> Bool {
-        let cookies: Array<NSHTTPCookie> = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/"))! as Array<NSHTTPCookie>
+        let cookie = self.getCookie()
+        return (cookie != nil)
+    }
+    
+    class func getCookies() -> Array<NSHTTPCookie> {
+        return NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/"))! as Array<NSHTTPCookie>
+    }
+    
+    class func getCookie() -> NSHTTPCookie! {
+        let cookies = self.getCookies()
         for cookie in cookies {
             if cookie.name == "motified_cookie" {
-                return true
+                return cookie
             }
         }
-        return false
+        return nil
+    }
+    
+    class func logOut() {
+        let cookie = self.getCookie()
+        if cookie != nil {
+            NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
+        }
     }
 }

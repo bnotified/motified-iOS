@@ -16,6 +16,8 @@ class AuthManagingViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var errorDisplay: UITextView!
     
+    var shouldLogIn = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addBorder(self.registerBtn)
@@ -27,8 +29,12 @@ class AuthManagingViewController: UIViewController {
         if LoginManager.hasValidCookie() {
             self.didLogIn()
         }
-        else if UserPreferenceManager.hasUsername() {
-            self.login()
+        else if UserPreferenceManager.hasUsername() && UserPreferenceManager.hasPassword() {
+            self.usernameTextField.text = UserPreferenceManager.loadUsername()
+            self.passwordTextField.text = UserPreferenceManager.loadPassword()
+            if self.shouldLogIn {
+                self.login()
+            }
         }
     }
     

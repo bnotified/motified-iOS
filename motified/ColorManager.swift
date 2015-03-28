@@ -17,14 +17,14 @@ class ColorManager: NSObject {
     class func getColorForIndex(index: Int) -> UIColor {
         
         let colors: Array<Array<CGFloat>> = [
-            [243, 156, 18,1.0],
-            [26, 188, 156,1.0],
-            [52, 152, 219,1.0],
-            [46, 204, 113,1.0],
-            [155, 89, 182,1.0],
-            [52, 73, 94,1.0],
-            [211, 84, 0,1.0],
-            [192, 57, 43,1.0]
+            [26, 188, 156,1.0], // Turquoise
+            [155, 89, 182,1.0], // Purple
+            [192, 57, 43,1.0],  // Red
+            [243, 156, 18,1.0], // Orange
+            [52, 152, 219,1.0], // Blue
+            [46, 204, 113,1.0], // Green
+            [211, 84, 0,1.0],   // Red/Orange
+            [52, 73, 94,1.0],   // Dark Blue
         ]
         let modIndex = (index >= 8) ? index % 8 : index
         let color = rgba(colors[modIndex])
@@ -33,6 +33,11 @@ class ColorManager: NSObject {
     
     class func getRandomColor() -> UIColor {
         let rand = Int(arc4random_uniform(8))
+        NSLog("Index: %d", rand)
         return getColorForIndex(rand)
+    }
+    
+    class func getColorPurple() -> UIColor {
+        return self.getColorForIndex(1)
     }
 }

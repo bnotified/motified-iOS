@@ -104,6 +104,7 @@
                                         <color key="backgroundColor" red="0.1803921568627451" green="0.80000000000000004" blue="0.44313725490196076" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="categoryImage" destination="V9V-SM-sDI" id="7n6-g6-oix"/>
+                                            <outlet property="categoryLabel" destination="Spl-ns-Ycx" id="ccJ-WN-EG9"/>
                                             <outlet property="dateLabel" destination="4Ew-H5-92w" id="kT0-eC-HEX"/>
                                             <outlet property="locationLabel" destination="APN-qa-yVt" id="kZt-f5-813"/>
                                             <outlet property="subscribedLabel" destination="Llf-rR-9qD" id="6To-Uz-FJx"/>
@@ -230,6 +231,7 @@
                         <outlet property="agreementBtn" destination="7mA-mc-Eed" id="G4B-PH-VnK"/>
                         <outlet property="contactBtn" destination="644-R1-haI" id="neP-ni-95J"/>
                         <outlet property="logoutBtn" destination="tIe-5z-4lI" id="JCi-Eq-2Gi"/>
+                        <segue destination="0Ox-7w-tle" kind="modal" identifier="segue_id_logout" id="b4E-xH-XIR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -868,8 +870,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="yZL-gR-QW9"/>
+        <segue reference="p3W-ef-F0q"/>
+        <segue reference="b4E-xH-XIR"/>
+        <segue reference="wBx-K2-qvi"/>
         <segue reference="aGT-W0-eI1"/>
-        <segue reference="T3C-fp-3bI"/>
     </inferredMetricsTieBreakers>
 </document>

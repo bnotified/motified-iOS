@@ -42,7 +42,12 @@ class Event: NSObject {
     }
     
     func getImage() -> UIImage {
-        return UIImage(named: "Food.png")
+        let cat = self.categories!.first
+        return cat!.image
+    }
+    
+    func getCategoryTitle() -> String {
+        return self.categories!.first!.category
     }
     
     func isInCategory(category: EventCategory) -> Bool {

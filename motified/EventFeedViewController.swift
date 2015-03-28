@@ -13,6 +13,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     
     var events: Array<Event> = Array<Event>()
+    var currentPage: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,9 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if (indexPath.row + 1 == 10 * self.currentPage) {
+            NSLog("Should load next page")
+        }
         var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)
         cell.setUpWithEvent(ev)

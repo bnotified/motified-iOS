@@ -17,12 +17,17 @@ class APIManager: NSObject {
     var categories: Array<EventCategory> = Array<EventCategory>()
     var selectedCategories: NSMutableSet = NSMutableSet()
     var totalPages: Int = 0
+    var currentPage: Int = 1
     
     class var sharedInstance: APIManager { return _APIManagerInstance }
     
     func loadEvents(done: ((NSError!) -> Void)!) {
-        LoginManager.manager.GET("/api/events", parameters: nil,
+        let params = [
+            "page": self.currentPage
+        ]
+        LoginManager.manager.GET("/api/events", parameters: params,
             success: { (NSURLSessionDataTask, response) -> Void in
+                self.currentPage++
                 let json = response as Dictionary<String, AnyObject>
                 self.setEventsFromResponse(json)
                 self.emitEventsChanged()

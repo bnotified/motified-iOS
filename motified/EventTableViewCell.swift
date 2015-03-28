@@ -16,6 +16,7 @@ class EventTableViewCell: UITableViewCell {
     @IBOutlet weak var categoryImage: UIImageView!
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var subscribedTextLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
     
     var event: Event?
     
@@ -39,6 +40,8 @@ class EventTableViewCell: UITableViewCell {
         self.event = event
         self.titleLabel.text = event.title
         self.categoryImage.image = event.getImage()
+        self.categoryLabel.text = event.getCategoryTitle()
+
         let start = self.formatDate(event.startDate!)
         let end = self.formatDate(event.endDate!)
         self.dateLabel.text = NSString(format: "%@ - %@", start, end)

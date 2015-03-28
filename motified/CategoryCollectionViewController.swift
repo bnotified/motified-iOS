@@ -24,12 +24,10 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         
+        self.collectionView.backgroundColor = ColorManager.getColorPurple()
+        
         // Set up listeners
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onCategoriesChanged", name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        self.collectionView.backgroundColor = ColorManager.getRandomColor()
     }
     
     override func viewDidAppear(animated: Bool) {
