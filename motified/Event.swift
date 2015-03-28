@@ -58,6 +58,11 @@ class Event: NSObject {
     }
     
     func isInCategory(category: EventCategory) -> Bool {
+        for cat in self.categories! {
+            if cat.id == category.id {
+                return true
+            }
+        }
         return false
     }
     

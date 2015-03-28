@@ -45,6 +45,10 @@ class APIManager: NSObject {
         })
     }
     
+    func hasNextPage() -> Bool {
+        return self.currentPage < self.totalPages
+    }
+    
     func loadCategories(done: ((NSError!) -> Void)!) {
         LoginManager.manager.GET("/api/categories", parameters: nil,
             success: { (NSURLSessionDataTask, response) -> Void in
@@ -98,8 +102,9 @@ class APIManager: NSObject {
         
         let num_results = response["num_results"]! as Int
         let objects = response["objects"]! as Array<AnyObject>
+        NSLog("Num Result: %d", objects.count)
         let page = response["page"]! as Int
-        // self.totalPages = response["total_pages"]! as Int
+        self.totalPages = response["total_pages"]! as Int
         
         self.clearPage(page)
         

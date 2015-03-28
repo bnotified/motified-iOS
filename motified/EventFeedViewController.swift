@@ -63,9 +63,10 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (indexPath.row + 1 == 10 * self.currentPage) {
+        let apiManager = APIManager.sharedInstance
+        if (indexPath.row == self.events.count - 1 && apiManager.hasNextPage()) {
             self.currentPage++
-            APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
+            apiManager.loadEvents({ (NSError) -> Void in
                 if (NSError != nil) {
                     self.currentPage--
                     return ()
