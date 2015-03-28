@@ -49,6 +49,8 @@ class EventTableViewCell: UITableViewCell {
         self.subscriberContainer.layer.borderWidth = 1.0
         self.subscriberContainer.layer.cornerRadius = 8
         self.subscribedLabel.text = NSString(format: "%d", self.event!.subscribedUsers!)
+        
+        self.locationLabel.text = event.getDisplayAddress()
     }
     
     func formatDate(date: NSDate) -> String {

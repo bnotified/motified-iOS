@@ -41,6 +41,13 @@ class Event: NSObject {
         })
     }
     
+    func getDisplayAddress() -> String {
+        if self.addressName != nil && self.addressName?.utf16Count > 0 {
+            return self.addressName!
+        }
+        return self.address!
+    }
+    
     func getImage() -> UIImage {
         let cat = self.categories!.first
         return cat!.image

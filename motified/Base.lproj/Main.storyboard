@@ -27,7 +27,7 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KAH-Fu-nJy" id="Kke-x1-nPP">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Food.png" translatesAutoresizingMaskIntoConstraints="NO" id="V9V-SM-sDI">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Food.png" translatesAutoresizingMaskIntoConstraints="NO" id="V9V-SM-sDI">
                                                     <rect key="frame" x="18" y="8" width="45" height="45"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="45" id="1qj-lV-bpB"/>
@@ -60,7 +60,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yd3-SU-Ms4">
-                                                    <rect key="frame" x="237" y="9" width="75" height="49"/>
+                                                    <rect key="frame" x="237" y="7" width="75" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-rR-9qD">
                                                             <rect key="frame" x="0.0" y="0.0" width="75" height="32"/>
@@ -91,10 +91,11 @@
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="top" secondItem="Kke-x1-nPP" secondAttribute="topMargin" id="7Sy-PC-SZ5"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="centerY" secondItem="8ag-QS-NvP" secondAttribute="centerY" id="AaT-1s-GqN"/>
                                                 <constraint firstAttribute="centerY" secondItem="D2M-ug-j74" secondAttribute="centerY" id="DbF-vt-qP5"/>
-                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="bottom" secondItem="V9V-SM-sDI" secondAttribute="bottom" constant="5" id="F5e-r6-9E6"/>
+                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="bottom" secondItem="V9V-SM-sDI" secondAttribute="bottom" constant="3" id="F5e-r6-9E6"/>
                                                 <constraint firstAttribute="centerX" secondItem="D2M-ug-j74" secondAttribute="centerX" id="Ghg-gE-5We"/>
+                                                <constraint firstItem="V9V-SM-sDI" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leadingMargin" constant="10" id="NDy-zk-DbP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="APN-qa-yVt" secondAttribute="bottom" constant="-2" id="PYf-oC-hIe"/>
-                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="top" secondItem="V9V-SM-sDI" secondAttribute="top" constant="1" id="XCv-Lo-oUg"/>
+                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="top" secondItem="V9V-SM-sDI" secondAttribute="top" constant="-1" id="XCv-Lo-oUg"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="leading" secondItem="8ag-QS-NvP" secondAttribute="trailing" constant="5" id="cZR-pR-GAh"/>
                                                 <constraint firstItem="4Ew-H5-92w" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leadingMargin" constant="3" id="dab-D2-irQ"/>
                                                 <constraint firstAttribute="centerX" secondItem="4Ew-H5-92w" secondAttribute="centerX" id="eC1-PQ-8OH"/>
