@@ -45,7 +45,7 @@ class LoginManager {
         m.POST("user/login", parameters: nil, success: { (NSURLSessionDataTask, AnyObject) -> Void in
             UserPreferenceManager.saveUsernameAndPassword(username, password: password)
             let instance = APIManager.sharedInstance
-            instance.currentPage = 0
+            instance.currentPage = 1
             instance.loadEvents(nil)
             instance.loadCategories(nil)
             success()

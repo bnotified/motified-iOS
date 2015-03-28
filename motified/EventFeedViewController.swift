@@ -22,6 +22,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         let center = NSNotificationCenter.defaultCenter()
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_LOADED_EVENTS, object: nil)
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
+        center.addObserver(self, selector: "onEventsError", name: NOTIFICATION_ERROR_EVENTS, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,11 +45,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         let center = NSNotificationCenter.defaultCenter()
         center.removeObserver(self, name: NOTIFICATION_LOADED_EVENTS, object: nil)
         center.removeObserver(self, name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
+        center.removeObserver(self, name: NOTIFICATION_ERROR_EVENTS, object: nil)
     }
     
     func onEventsChanged() {
-        self.events = APIManager.sharedInstance.getEventsOnPage(1)
+        self.events.extend(APIManager.sharedInstance.getEventsOnPage(self.currentPage))
         self.tableView.reloadData()
+    }
+    
+    func onEventsError() {
+        self.view.makeToast("Error loading events")
     }
     
     override func didReceiveMemoryWarning() {
@@ -58,7 +64,13 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (indexPath.row + 1 == 10 * self.currentPage) {
-            NSLog("Should load next page")
+            self.currentPage++
+            APIManager.sharedInstance.loadEvents({ (NSError) -> Void in
+                if (NSError != nil) {
+                    self.currentPage--
+                    return ()
+                }
+            })
         }
         var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)

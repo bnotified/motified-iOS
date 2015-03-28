@@ -43,9 +43,9 @@ class EventDetailViewController: UIViewController {
         self.dateLabel.text = event.getFormattedDateRange()
         self.descriptionLabel.text = event.desc
         
-        addBorder(self.openBtn)
-        addBorder(self.beNotifiedBtn)
-        addBorder(self.reportBtn)
+        addBorderMatchingBackground(self.openBtn)
+        addBorderMatchingBackground(self.beNotifiedBtn)
+        addBorderMatchingBackground(self.reportBtn)
     }
     
     func setUpMap() {

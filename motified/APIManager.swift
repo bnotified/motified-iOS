@@ -30,17 +30,18 @@ class APIManager: NSObject {
                 self.currentPage++
                 let json = response as Dictionary<String, AnyObject>
                 self.setEventsFromResponse(json)
-                self.emitEventsChanged()
                 if done != nil {
                     done(nil)
                 }
+                self.emitEventsChanged()
+                
             },
             { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error loading events: %@", NSError)
-                self.emitEventsError()
                 if done != nil {
                     done(NSError)
                 }
+                self.emitEventsError()
         })
     }
     
@@ -91,8 +92,7 @@ class APIManager: NSObject {
     }
     
     internal func setEventsFromResponse(response: Dictionary<String, AnyObject>) {
-        // Set up date formatter
-        NSLog("Response: %@", response)
+        //NSLog("Response: %@", response)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
         
