@@ -19,3 +19,6 @@ let SEGUE_ID_GET_LOCATION = "segue_id_get_location"
 let SEGUE_ID_EVENT_DETAIL = "segue_id_event_detail"
 let SEGUE_ID_MAIN_TAB = "segue_id_main_tab"
 let SEGUE_ID_LOGOUT = "segue_id_logout"
+
+let IS_OS_7_OR_LATER = UIDevice.currentDevice().systemVersion.toInt() >= 7
+let IS_OS_8_OR_LATER = UIDevice.currentDevice().systemVersion.toInt() >= 8

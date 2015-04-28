@@ -68,7 +68,7 @@ class UserPreferenceManager: NSObject {
     }
     
     class internal func save(defaults: NSUserDefaults) -> Void {
-        if !NSProcessInfo().isOperatingSystemAtLeastVersion(NSOperatingSystemVersion(majorVersion: 8, minorVersion: 0, patchVersion: 0)) {
+        if IS_OS_8_OR_LATER {
             defaults.synchronize()
         }
     }

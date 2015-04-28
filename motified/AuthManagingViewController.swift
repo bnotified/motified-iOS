@@ -66,8 +66,6 @@ class AuthManagingViewController: UIViewController {
                 return ()
             }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
-                let username = UserPreferenceManager.loadUsername()
-                let password = UserPreferenceManager.loadPassword()
                 if let response: NSHTTPURLResponse = NSURLSessionDataTask.response as? NSHTTPURLResponse {
                     NSLog("Status Code: %@", response)
                     if response.statusCode == 500 {

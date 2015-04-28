@@ -96,7 +96,6 @@ class APIManager: NSObject {
     }
     
     internal func setEventsFromResponse(response: Dictionary<String, AnyObject>) {
-        //NSLog("Response: %@", response)
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
         
