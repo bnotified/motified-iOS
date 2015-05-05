@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yHd-MK-1Tg">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="474"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventTableViewCell" rowHeight="180" id="KAH-Fu-nJy" customClass="EventTableViewCell" customModule="motified" customModuleProvider="target">
@@ -118,13 +118,24 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-iz-PiT">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yHd-MK-1Tg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="AYZ-q2-rXc"/>
+                            <constraint firstAttribute="centerX" secondItem="PQd-iz-PiT" secondAttribute="centerX" id="CEk-fM-gFb"/>
                             <constraint firstAttribute="bottom" secondItem="yHd-MK-1Tg" secondAttribute="bottom" constant="50" id="Y7b-Nz-01P"/>
+                            <constraint firstItem="PQd-iz-PiT" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="htN-K9-xKt"/>
                             <constraint firstAttribute="trailing" secondItem="yHd-MK-1Tg" secondAttribute="trailing" id="v5A-MK-zLL"/>
-                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="xWv-aY-Cn0"/>
+                            <constraint firstItem="PQd-iz-PiT" firstAttribute="top" secondItem="5yD-WH-R5T" secondAttribute="bottom" id="wTV-cx-fsk"/>
+                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="44" id="xWv-aY-Cn0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="Zcn-Ke-9DF">
@@ -135,6 +146,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="PQd-iz-PiT" id="6bq-H8-3TH"/>
                         <outlet property="tableView" destination="yHd-MK-1Tg" id="OXh-eJ-Jd2"/>
                         <segue destination="rbt-gX-6sP" kind="push" identifier="segue_id_event_detail" id="wBx-K2-qvi"/>
                     </connections>
@@ -569,10 +581,10 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ttb-y0-lqA">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ttb-y0-lqA">
                                 <rect key="frame" x="0.0" y="108" width="320" height="411"/>
                                 <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y2c-FM-ogI" customClass="LocationPickerView">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2c-FM-ogI" customClass="LocationPickerView">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="411"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -714,7 +726,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1s-EF-MJw">
                                 <rect key="frame" x="0.0" y="66" width="320" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-Y2-C0k">
                                 <rect key="frame" x="0.0" y="104" width="80" height="30"/>
@@ -875,7 +887,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="b4E-xH-XIR"/>
         <segue reference="wBx-K2-qvi"/>
-        <segue reference="yZL-gR-QW9"/>
+        <segue reference="p3W-ef-F0q"/>
         <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,12 +8,14 @@
 
 import UIKit
 
-class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     var events: Array<Event> = Array<Event>()
     var currentPage: Int = 1
+    var debouncedSearch: (()->())? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_LOADED_EVENTS, object: nil)
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
         center.addObserver(self, selector: "onEventsError", name: NOTIFICATION_ERROR_EVENTS, object: nil)
+        self.searchBar.delegate = self
+        self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,6 +52,17 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.removeObserver(self, name: NOTIFICATION_ERROR_EVENTS, object: nil)
     }
     
+    func makeRequest() {
+        if self.searchBar.text.utf16Count == 0 {
+            NSLog("Changed to nothing")
+            return ()
+        }
+        NSLog("Making Request: %@", self.searchBar.text)
+        APIManager.sharedInstance.searchEvents(self.searchBar.text, done: { (NSError) -> Void in
+            NSLog("Done searching")
+        })
+    }
+    
     func onEventsChanged() {
         self.events = APIManager.sharedInstance.getEventsInRange(self.currentPage)
         self.tableView.reloadData()
@@ -64,14 +79,9 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let apiManager = APIManager.sharedInstance
-        if (indexPath.row == self.events.count - 1 && apiManager.hasNextPage()) {
+        if (indexPath.row == self.events.count - 1 && apiManager.hasNextPage() && !self.isSearching()) {
             self.currentPage++
-            apiManager.loadEvents({ (NSError) -> Void in
-                if (NSError != nil) {
-                    self.currentPage--
-                    return ()
-                }
-            })
+            loadEvents()
         }
         var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)
@@ -96,6 +106,32 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.debouncedSearch!();
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.text = ""
+        self.currentPage = 1
+        loadEvents()
+        searchBar.resignFirstResponder()
+    }
+    
+    func loadEvents() {
+        APIManager.sharedInstance.loadEvents { (NSError) -> Void in
+            if (NSError != nil) {
+                if self.currentPage > 1 {
+                    self.currentPage--
+                }
+                return ()
+            }
+        }
+    }
+    
+    func isSearching() -> Bool {
+        return self.searchBar.text.utf16Count > 0
     }
 }
 

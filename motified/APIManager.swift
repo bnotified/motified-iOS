@@ -45,6 +45,38 @@ class APIManager: NSObject {
         })
     }
     
+    func searchEvents(searchText: String, done: ((NSError!) -> Void)!) {
+        //"filters":[{"or":[{"name":"age","op":"lt","val":10},{"name":"age","op":"gt","val":20}]}]}
+        let likeString = "%\(searchText)%"
+        let params = [
+            "filters": [["or":[
+                ["name":"description","op":"like","val": likeString],
+                ["name":"name","op":"like","val": likeString]
+                //["name":"address_name","op":"like","val": likeString]
+            ]]]
+        ]
+        let paramString = JSONStringify(params)
+        let finalParams = ["q": paramString]
+        LoginManager.manager.GET("api/events", parameters: finalParams,
+            success: { (NSURLSessionDataTask, response) -> Void in
+                let json = response as Dictionary<String, AnyObject>
+                self.events.removeAll(keepCapacity: true)
+                self.currentPage = 1
+                self.setEventsFromResponse(json)
+                if done != nil {
+                    done(nil)
+                }
+                self.emitEventsChanged()
+            },
+            { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Search Error: %@", NSError)
+                if done != nil {
+                    done(NSError)
+                }
+                self.emitEventsError()
+        })
+    }
+    
     func hasNextPage() -> Bool {
         return self.currentPage < self.totalPages
     }
@@ -149,11 +181,13 @@ class APIManager: NSObject {
     }
     
     func getEventsOnPage(page: Int) -> Array<Event> {
-        let events = self.events[page]!
-        if self.hasSelectedCategories() {
-            return self.filterToSelectedEvents(events)
+        if let events = self.events[page] {
+            if self.hasSelectedCategories() {
+                return self.filterToSelectedEvents(events)
+            }
+            return events
         }
-        return events
+        return []
     }
     
     func getEventsInRange(page: Int) -> Array<Event> {
