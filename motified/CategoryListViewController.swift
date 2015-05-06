@@ -10,10 +10,12 @@ import UIKit
 
 
 class CategoryListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var clearButton: UIBarButtonItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
+    
+    
     var hasShownToast: Bool = false
     let reuseIdentifier = "CategoryTableViewCell"
     
@@ -45,7 +47,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return APIManager.sharedInstance.categories.count
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -53,32 +55,35 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        NSLog("Called this...")
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryTableViewCell
-        cell.backgroundColor = ColorManager.getColorForIndex(indexPath.row)
+        cell.backgroundColor = ColorManager.getColorPurple()
         let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
         cell.setUpWithCategory(category)
-        //        if selectedIndexes.containsObject(indexPath.row) {
-        //            cell.setSelected()
-        //        } else {
-        //            cell.setUnselected()
-        //        }
-        NSLog("Returning Cell: %@", cell)
+        if selectedIndexes.containsObject(indexPath.row) {
+            NSLog("Setting selected")
+            cell.setSelected()
+        } else {
+            NSLog("SEtting unselected")
+            cell.setUnselected()
+        }
         return cell
-        
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Selecting Cell at index: %d", indexPath.row)
         if self.hasShownToast == false {
             self.showHelperToast()
         }
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
         if selectedIndexes.containsObject(indexPath.row) {
+            NSLog("removing")
             selectedIndexes.removeObject(indexPath.row)
         } else {
+            NSLog("Adding")
             selectedIndexes.addObject(indexPath.row)
         }
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
         self.tableView.reloadData()
     }
@@ -91,5 +96,5 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         self.tabBarController?.selectedIndex = 0
     }
-
+    
 }

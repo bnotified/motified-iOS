@@ -12,35 +12,31 @@ class CategoryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImageView: UIImageView!
-    @IBOutlet weak var checkImage: UIImageView!
     
     var isSelected: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func setUpWithCategory(category: EventCategory) {
         self.titleLabel.text = category.category
         self.categoryImageView.image = category.image
-        //self.checkImage.hidden = true
+        self.accessoryType = UITableViewCellAccessoryType.None
     }
     
     func setSelected() {
-        self.checkImage.hidden = false
         self.isSelected = true
+        self.accessoryType = UITableViewCellAccessoryType.Checkmark
     }
     
     func setUnselected() {
-        self.checkImage.hidden = true
         self.isSelected = false
+        self.accessoryType = UITableViewCellAccessoryType.None
     }
 
 }
