@@ -1,38 +1,34 @@
 //
-//  CategoryCollectionViewController.swift
+//  CategoryListViewController.swift
 //  motified
 //
-//  Created by Giancarlo Anemone on 3/16/15.
+//  Created by Giancarlo Anemone on 5/5/15.
 //  Copyright (c) 2015 Giancarlo Anemone. All rights reserved.
 //
 
 import UIKit
 
-let reuseIdentifier = "CategoryCollectionViewCell"
 
-class CategoryCollectionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
+class CategoryListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
     @IBOutlet weak var clearButton: UIBarButtonItem!
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var backButton: UIBarButtonItem!
-    
+    @IBOutlet weak var tableView: UITableView!
     var hasShownToast: Bool = false
+    let reuseIdentifier = "CategoryTableViewCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Set up delegates
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        
-        self.collectionView.backgroundColor = ColorManager.getColorPurple()
-        
         // Set up listeners
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onCategoriesChanged", name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.hasShownToast = false
+        self.tableView.reloadData()
     }
     
     deinit {
@@ -45,38 +41,35 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
     }
     
     func onCategoriesChanged() {
-        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return APIManager.sharedInstance.categories.count
-    }
-    
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        NSLog("Called this...")
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryCollectionViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryTableViewCell
+        cell.backgroundColor = ColorManager.getColorForIndex(indexPath.row)
         let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
         cell.setUpWithCategory(category)
-        if selectedIndexes.containsObject(indexPath.row) {
-            cell.checkImage.hidden = false
-        } else {
-            cell.checkImage.hidden = true
-        }
+        //        if selectedIndexes.containsObject(indexPath.row) {
+        //            cell.setSelected()
+        //        } else {
+        //            cell.setUnselected()
+        //        }
+        NSLog("Returning Cell: %@", cell)
         return cell
+        
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        let size = self.view.frame.size
-        let width = size.width / 3 - 5*3
-        return CGSizeMake(width, width + 30)
-    }
-    
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if self.hasShownToast == false {
             self.showHelperToast()
         }
@@ -87,17 +80,16 @@ class CategoryCollectionViewController: UIViewController, UICollectionViewDelega
             selectedIndexes.addObject(indexPath.row)
         }
         NSNotificationCenter.defaultCenter().postNotificationName(NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
-        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
-    
     
     @IBAction func onClearPressed(sender: AnyObject) {
         APIManager.sharedInstance.selectedCategories = NSMutableSet()
-        self.collectionView.reloadData()
+        self.tableView.reloadData()
     }
     
     @IBAction func onBackButtonPressed(sender: AnyObject) {
         self.tabBarController?.selectedIndex = 0
     }
-    
+
 }
