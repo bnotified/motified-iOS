@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  EventFeedViewController.swift
 //  motified
 //
 //  Created by Giancarlo Anemone on 3/10/15.
@@ -9,13 +9,16 @@
 import UIKit
 
 class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-
-    @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
+    
     var events: Array<Event> = Array<Event>()
     var currentPage: Int = 1
     var debouncedSearch: (()->())? = nil
+    var isSearchShown = false
+    
+    var sunnyRefreshControl: YALSunnyRefreshControl?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +30,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.addObserver(self, selector: "onEventsError", name: NOTIFICATION_ERROR_EVENTS, object: nil)
         self.searchBar.delegate = self
         self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
+        self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -35,6 +39,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         if (manager.hasSelectedCategories()) {
             self.view.makeToast(manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter)
         }
+        self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -50,6 +55,13 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.removeObserver(self, name: NOTIFICATION_LOADED_EVENTS, object: nil)
         center.removeObserver(self, name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
         center.removeObserver(self, name: NOTIFICATION_ERROR_EVENTS, object: nil)
+    }
+    
+    func sunnyControlDidStartAnimation() {
+        APIManager.sharedInstance.reloadEvents({ (NSError) -> Void in
+            self.sunnyRefreshControl?.endRefreshing()
+            return ()
+        })
     }
     
     func makeRequest() {
@@ -119,6 +131,10 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         searchBar.resignFirstResponder()
     }
     
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 1.0
+    }
+    
     func loadEvents() {
         APIManager.sharedInstance.loadEvents { (NSError) -> Void in
             if (NSError != nil) {
@@ -128,6 +144,18 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
                 return ()
             }
         }
+    }
+    
+    @IBAction func onSearchButtonClicked(sender: AnyObject) {
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            var shift: CGFloat = (self.isSearchShown) ? -44 : 44
+            self.isSearchShown = !self.isSearchShown
+            var newSearchFrame = CGRectMake(0, self.searchBar.frame.origin.y + shift, self.searchBar.frame.width, 44)
+            self.searchBar.frame = newSearchFrame
+            var newTableViewFrame = CGRectMake(0, self.tableView.frame.origin.y + shift, self.tableView.frame.width, self.tableView.frame.height - shift)
+            self.tableView.frame = newTableViewFrame
+            return ()
+            }, completion: nil)
     }
     
     func isSearching() -> Bool {

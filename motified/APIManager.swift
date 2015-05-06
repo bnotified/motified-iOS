@@ -21,6 +21,13 @@ class APIManager: NSObject {
     
     class var sharedInstance: APIManager { return _APIManagerInstance }
     
+    func reloadEvents(done: ((NSError!) -> Void)!) {
+        self.currentPage = 1
+        self.totalPages = 0
+        self.events.removeAll(keepCapacity: true)
+        self.loadEvents(done)
+    }
+    
     func loadEvents(done: ((NSError!) -> Void)!) {
         let params = [
             "page": self.currentPage

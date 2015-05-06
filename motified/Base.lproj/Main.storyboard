@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yHd-MK-1Tg">
-                                <rect key="frame" x="0.0" y="44" width="320" height="474"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="EventTableViewCell" rowHeight="180" id="KAH-Fu-nJy" customClass="EventTableViewCell" customModule="motified" customModuleProvider="target">
@@ -119,7 +119,7 @@
                                 <sections/>
                             </tableView>
                             <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-iz-PiT">
-                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -131,14 +131,19 @@
                         <constraints>
                             <constraint firstItem="yHd-MK-1Tg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="AYZ-q2-rXc"/>
                             <constraint firstAttribute="centerX" secondItem="PQd-iz-PiT" secondAttribute="centerX" id="CEk-fM-gFb"/>
-                            <constraint firstAttribute="bottom" secondItem="yHd-MK-1Tg" secondAttribute="bottom" constant="50" id="Y7b-Nz-01P"/>
+                            <constraint firstAttribute="bottom" secondItem="yHd-MK-1Tg" secondAttribute="bottom" id="Y7b-Nz-01P"/>
                             <constraint firstItem="PQd-iz-PiT" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="htN-K9-xKt"/>
                             <constraint firstAttribute="trailing" secondItem="yHd-MK-1Tg" secondAttribute="trailing" id="v5A-MK-zLL"/>
-                            <constraint firstItem="PQd-iz-PiT" firstAttribute="top" secondItem="5yD-WH-R5T" secondAttribute="bottom" id="wTV-cx-fsk"/>
-                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="44" id="xWv-aY-Cn0"/>
+                            <constraint firstItem="PQd-iz-PiT" firstAttribute="top" secondItem="5yD-WH-R5T" secondAttribute="bottom" constant="-44" id="wTV-cx-fsk"/>
+                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="64" id="xWv-aY-Cn0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="Zcn-Ke-9DF">
+                        <barButtonItem key="leftBarButtonItem" systemItem="search" id="lCt-fM-eTJ">
+                            <connections>
+                                <action selector="onSearchButtonClicked:" destination="9pv-A4-QxB" id="ayt-MX-RHe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="drr-H3-gFq">
                             <connections>
                                 <segue destination="7x1-fb-J2x" kind="push" identifier="segue_id_create_event" id="p3W-ef-F0q"/>
@@ -868,8 +873,8 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="b4E-xH-XIR"/>
-        <segue reference="wBx-K2-qvi"/>
         <segue reference="p3W-ef-F0q"/>
+        <segue reference="wBx-K2-qvi"/>
         <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>
 </document>
