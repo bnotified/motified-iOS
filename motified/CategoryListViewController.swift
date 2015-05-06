@@ -25,6 +25,10 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "onCategoriesChanged", name: NOTIFICATION_LOADED_CATEGORIES, object: nil)
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.separatorInset = UIEdgeInsetsZero
+        if IS_OS_8_OR_LATER {
+            self.tableView.layoutMargins = UIEdgeInsetsZero
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,6 +71,12 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
             NSLog("SEtting unselected")
             cell.setUnselected()
         }
+        cell.separatorInset = UIEdgeInsetsZero
+        
+        if IS_OS_8_OR_LATER {
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+        
         return cell
     }
     
