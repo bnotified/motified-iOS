@@ -105,6 +105,8 @@
 		3A68FBCA1AFA80D2003C7438 /* sun.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A68FBB21AFA80D2003C7438 /* sun.png */; };
 		3A68FBCB1AFA80D2003C7438 /* sun@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A68FBB31AFA80D2003C7438 /* sun@2x.png */; };
 		3A68FBCC1AFA80D2003C7438 /* sun@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A68FBB41AFA80D2003C7438 /* sun@3x.png */; };
+		3A8FCBF11AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */; };
+		3A8FCBF21AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */; };
 		3AB859E81AF91F2F00D79F6A /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859E71AF91F2F00D79F6A /* json.swift */; };
 		3AB859E91AF920B100D79F6A /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859E71AF91F2F00D79F6A /* json.swift */; };
 		3AB859EB1AF92E5A00D79F6A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859EA1AF92E5A00D79F6A /* CategoryTableViewCell.swift */; };
@@ -220,6 +222,7 @@
 		3A68FBB21AFA80D2003C7438 /* sun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sun.png; sourceTree = "<group>"; };
 		3A68FBB31AFA80D2003C7438 /* sun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun@2x.png"; sourceTree = "<group>"; };
 		3A68FBB41AFA80D2003C7438 /* sun@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun@3x.png"; sourceTree = "<group>"; };
+		3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
 		3AB859E71AF91F2F00D79F6A /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		3AB859EA1AF92E5A00D79F6A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		3AB859ED1AF93DFF00D79F6A /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
@@ -471,6 +474,7 @@
 		3ADC50DF1AC31B2700545255 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */,
 				3AD1716F1AF2AB4C00523A5D /* debounce.swift */,
 				3AB859E71AF91F2F00D79F6A /* json.swift */,
 				3AC9EDAC1AC5B656005F5ADB /* addBorder.swift */,
@@ -759,6 +763,7 @@
 				3ADC50E71AC3495800545255 /* ColorManager.swift in Sources */,
 				3A5152E91AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3AD171701AF2AB4C00523A5D /* debounce.swift in Sources */,
+				3A8FCBF11AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */,
 				3A20C41B1AB4AC670055BBF4 /* AuthManagingViewController.swift in Sources */,
 				3A68FB941AFA7FEB003C7438 /* YALSunnyRefreshControl.m in Sources */,
 				3AB859E81AF91F2F00D79F6A /* json.swift in Sources */,
@@ -793,6 +798,7 @@
 				3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */,
 				3ADC50E81AC3495800545255 /* ColorManager.swift in Sources */,
 				3A5152EA1AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
+				3A8FCBF21AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */,
 				3AD171711AF2AB4C00523A5D /* debounce.swift in Sources */,
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,
 				3AB859E91AF920B100D79F6A /* json.swift in Sources */,

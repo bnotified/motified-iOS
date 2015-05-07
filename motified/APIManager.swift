@@ -29,9 +29,15 @@ class APIManager: NSObject {
     }
     
     internal func loadEventsWithParams(params: Dictionary<String, AnyObject>!, done: ((NSError!) -> Void)!) {
+        var finalParams: Dictionary<String, AnyObject>  = [
+            "order_by": [["field":"start", "direction":"desc"]]
+        ]
+        if params != nil {
+            finalParams.update(params)
+        }
         LoginManager.manager.GET(
             "/api/events",
-            parameters: params,
+            parameters: ["q": JSONStringify(finalParams), "page": self.currentPage, "results_per_page": 30],
             success: { (NSURLSessionDataTask, response) -> Void in
                 self.currentPage++
                 let json = response as Dictionary<String, AnyObject>
@@ -50,13 +56,12 @@ class APIManager: NSObject {
     }
     
     func loadEvents(done: ((NSError!) -> Void)!) {
-        let params = [
-            "page": self.currentPage
-        ]
-        self.loadEventsWithParams(params, done: done)
+        self.loadEventsWithParams(nil, done: done)
     }
     
     func loadEventsForSelectedCategories(done: ((NSError!) -> Void)!) {
+        self.events.removeAll(keepCapacity: true)
+        self.currentPage = 1
         if self.selectedCategories.count > 0 {
             let params: Dictionary<String, AnyObject> = self.getParamsForCategorySearch()
             self.loadEventsWithParams(params, done: done)
@@ -66,20 +71,17 @@ class APIManager: NSObject {
     }
     
     internal func getParamsForCategorySearch() -> Dictionary<String, AnyObject> {
-        var filters: Dictionary<String, AnyObject> = ["filters": []]
         var categories: Array<EventCategory> = self.getSelectedCategories()
         if categories.count > 1 {
             var or: Array<Dictionary<String, AnyObject>> = []
             for category in categories {
                 or.append(self.getCategoryFilterObject(category))
             }
-            filters = ["filters": [["or": or]]];
-            NSLog("Many selected")
+            return ["filters": [["or": or]]];
+            
         } else {
-            filters = ["filters": [self.getCategoryFilterObject(categories.first!)]]
+            return ["filters": [self.getCategoryFilterObject(categories.first!)]]
         }
-        let paramString = JSONStringify(filters)
-        return ["q": paramString]
     }
     
     internal func getCategoryFilterObject(category: EventCategory) -> Dictionary<String, AnyObject> {
@@ -94,13 +96,9 @@ class APIManager: NSObject {
                 ["name":"name","op":"like","val": likeString]
             ]]]
         ]
-        let paramString = JSONStringify(params)
-        let finalParams = ["q": paramString]
-        // So when incremented it becomes 1... bad i know...
-        self.currentPage = 0
-        // Clear events before search
+        self.currentPage = 1
         self.events.removeAll(keepCapacity: true)
-        self.loadEventsWithParams(finalParams, done: done)
+        self.loadEventsWithParams(params, done: done)
     }
     
     func hasNextPage() -> Bool {

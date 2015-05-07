@@ -101,7 +101,6 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 -(void)calculateShift{
-    
     [self setFrame:CGRectMake(0.f,
                               0.f,
                               self.scrollView.frame.size.width,
@@ -115,10 +114,10 @@ static const CGFloat DefaultScreenWidth = 320.f;
         }
         [self scaleItems];
         [self rotateSunInfinitly];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [self.target performSelector:self.action withObject:nil];
-#pragma clang diagnostic pop
+//#pragma clang diagnostic push
+//#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+//        [self.target performSelector:self.action withObject:nil];
+//#pragma clang diagnostic pop
         self.forbidSunSet = YES;
     }
     
@@ -133,6 +132,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 - (void)startRefreshing {
+    [self.target performSelector:self.action withObject:nil];
     [self.scrollView setContentOffset:CGPointMake(0.f, -DefaultHeight) animated:YES];
     self.forbidOffsetChanges = YES;
 }

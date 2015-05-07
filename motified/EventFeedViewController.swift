@@ -18,6 +18,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     var currentPage: Int = 1
     var debouncedSearch: (()->())? = nil
     var isSearchShown = false
+    var wasShowingSelected = false
     var sunnyRefreshControl: YALSunnyRefreshControl?
     
     override func viewDidLoad() {
@@ -37,8 +38,19 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         let manager = APIManager.sharedInstance
-        if (manager.hasSelectedCategories()) {
-            self.view.makeToast(manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionTop)
+        if (self.wasShowingSelected && !manager.hasSelectedCategories()) {
+            self.wasShowingSelected = false
+            MBProgressHUD(forView: self.view).show(true)
+            manager.reloadEvents({ (NSError) -> Void in
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                return ()
+            })
+        }
+        else if (manager.hasSelectedCategories()) {
+            self.wasShowingSelected = true
+            self.navigationController?.navigationBar.makeToast(
+                manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionTop
+            )
             MBProgressHUD(forView: self.view).show(true)
             manager.loadEventsForSelectedCategories({ (NSError) -> Void in
                 NSLog("Done Loading")
@@ -64,10 +76,11 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func sunnyControlDidStartAnimation() {
-        NSLog("Here...")
         APIManager.sharedInstance.reloadEvents({ (NSError) -> Void in
-            self.sunnyRefreshControl?.endRefreshing()
-            return ()
+            delay(0.5, { () -> () in
+                self.sunnyRefreshControl?.endRefreshing()
+                return ()
+            })
         })
     }
     
