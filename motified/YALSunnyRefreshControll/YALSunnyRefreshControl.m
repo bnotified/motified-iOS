@@ -44,6 +44,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 @property (nonatomic,weak) IBOutlet UIImageView *skyImageView;
 @property (nonatomic,weak) IBOutlet UIImageView *buildingsImageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) id<UITableViewDelegate> delegate;
 @property (nonatomic, assign) id target;
 @property (nonatomic) SEL action;
 @property (nonatomic,assign) BOOL forbidSunSet;
@@ -60,12 +61,13 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 + (YALSunnyRefreshControl*)attachToScrollView:(UIScrollView *)scrollView
-                                      target:(id)target
-                               refreshAction:(SEL)refreshAction{
+                                       target:(id)target
+                                refreshAction:(SEL)refreshAction
+                                     delegate:(id<UITableViewDelegate>)delegate {
     
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"YALSunnyRefreshControl" owner:self options:nil];
     YALSunnyRefreshControl *refreshControl = (YALSunnyRefreshControl *)[topLevelObjects firstObject];
-
+    
     refreshControl.scrollView = scrollView;
     [refreshControl.scrollView addObserver:refreshControl forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:nil];
     refreshControl.target = target;
@@ -77,6 +79,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
                                         0.f)];
     [scrollView addSubview:refreshControl];
     [scrollView setContentOffset:CGPointMake(0, 0)];
+    refreshControl.delegate = delegate;
     return refreshControl;
 }
 
@@ -98,7 +101,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 }
 
 -(void)calculateShift{
-
+    
     [self setFrame:CGRectMake(0.f,
                               0.f,
                               self.scrollView.frame.size.width,
@@ -118,7 +121,7 @@ static const CGFloat DefaultScreenWidth = 320.f;
 #pragma clang diagnostic pop
         self.forbidSunSet = YES;
     }
-   
+    
     if(!self.scrollView.dragging && self.forbidSunSet && self.scrollView.decelerating && !self.forbidOffsetChanges){
         [self startRefreshing];
     }
@@ -222,6 +225,19 @@ static const CGFloat DefaultScreenWidth = 320.f;
     if(self.forbidOffsetChanges){
         
         [self.scrollView setContentInset:UIEdgeInsetsMake(DefaultHeight, 0.f, 0.f, 0.f)];
+    }
+    
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    if ([self.delegate respondsToSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)]) {
+        [self.delegate tableView:tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+    }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+        [self.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
     }
 }
 

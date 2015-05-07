@@ -28,11 +28,10 @@ class APIManager: NSObject {
         self.loadEvents(done)
     }
     
-    func loadEvents(done: ((NSError!) -> Void)!) {
-        let params = [
-            "page": self.currentPage
-        ]
-        LoginManager.manager.GET("/api/events", parameters: params,
+    internal func loadEventsWithParams(params: Dictionary<String, AnyObject>!, done: ((NSError!) -> Void)!) {
+        LoginManager.manager.GET(
+            "/api/events",
+            parameters: params,
             success: { (NSURLSessionDataTask, response) -> Void in
                 self.currentPage++
                 let json = response as Dictionary<String, AnyObject>
@@ -41,10 +40,8 @@ class APIManager: NSObject {
                     done(nil)
                 }
                 self.emitEventsChanged()
-                
-            },
-            { (NSURLSessionDataTask, NSError) -> Void in
-                NSLog("Error loading events: %@", NSError)
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Error loading events %@", NSError)
                 if done != nil {
                     done(NSError)
                 }
@@ -52,36 +49,58 @@ class APIManager: NSObject {
         })
     }
     
+    func loadEvents(done: ((NSError!) -> Void)!) {
+        let params = [
+            "page": self.currentPage
+        ]
+        self.loadEventsWithParams(params, done: done)
+    }
+    
+    func loadEventsForSelectedCategories(done: ((NSError!) -> Void)!) {
+        if self.selectedCategories.count > 0 {
+            let params: Dictionary<String, AnyObject> = self.getParamsForCategorySearch()
+            self.loadEventsWithParams(params, done: done)
+        } else {
+            self.loadEvents(done)
+        }
+    }
+    
+    internal func getParamsForCategorySearch() -> Dictionary<String, AnyObject> {
+        var filters: Dictionary<String, AnyObject> = ["filters": []]
+        var categories: Array<EventCategory> = self.getSelectedCategories()
+        if categories.count > 1 {
+            var or: Array<Dictionary<String, AnyObject>> = []
+            for category in categories {
+                or.append(self.getCategoryFilterObject(category))
+            }
+            filters = ["filters": [["or": or]]];
+            NSLog("Many selected")
+        } else {
+            filters = ["filters": [self.getCategoryFilterObject(categories.first!)]]
+        }
+        let paramString = JSONStringify(filters)
+        return ["q": paramString]
+    }
+    
+    internal func getCategoryFilterObject(category: EventCategory) -> Dictionary<String, AnyObject> {
+        return ["name":"categories","op":"any", "val": ["name":"category","op":"eq", "val": category.category]]
+    }
+    
     func searchEvents(searchText: String, done: ((NSError!) -> Void)!) {
-        //"filters":[{"or":[{"name":"age","op":"lt","val":10},{"name":"age","op":"gt","val":20}]}]}
         let likeString = "%\(searchText)%"
         let params = [
             "filters": [["or":[
                 ["name":"description","op":"like","val": likeString],
                 ["name":"name","op":"like","val": likeString]
-                //["name":"address_name","op":"like","val": likeString]
             ]]]
         ]
         let paramString = JSONStringify(params)
         let finalParams = ["q": paramString]
-        LoginManager.manager.GET("api/events", parameters: finalParams,
-            success: { (NSURLSessionDataTask, response) -> Void in
-                let json = response as Dictionary<String, AnyObject>
-                self.events.removeAll(keepCapacity: true)
-                self.currentPage = 1
-                self.setEventsFromResponse(json)
-                if done != nil {
-                    done(nil)
-                }
-                self.emitEventsChanged()
-            },
-            { (NSURLSessionDataTask, NSError) -> Void in
-                NSLog("Search Error: %@", NSError)
-                if done != nil {
-                    done(NSError)
-                }
-                self.emitEventsError()
-        })
+        // So when incremented it becomes 1... bad i know...
+        self.currentPage = 0
+        // Clear events before search
+        self.events.removeAll(keepCapacity: true)
+        self.loadEventsWithParams(finalParams, done: done)
     }
     
     func hasNextPage() -> Bool {
@@ -172,26 +191,23 @@ class APIManager: NSObject {
         self.events[page] = Array<Event>()
     }
     
-    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
-        var filtered = NSMutableSet()
-        for event in events {
-            for index in self.selectedCategories {
-                if let _index = index as? Int {
-                    let category = self.categories[_index]
-                    if event.isInCategory(category) {
-                        filtered.addObject(event)
-                    }
-                }
-            }
-        }
-        return filtered.allObjects as Array<Event>
-    }
+//    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
+//        var filtered = NSMutableSet()
+//        for event in events {
+//            for index in self.selectedCategories {
+//                if let _index = index as? Int {
+//                    let category = self.categories[_index]
+//                    if event.isInCategory(category) {
+//                        filtered.addObject(event)
+//                    }
+//                }
+//            }
+//        }
+//        return filtered.allObjects as Array<Event>
+//    }
     
     func getEventsOnPage(page: Int) -> Array<Event> {
         if let events = self.events[page] {
-            if self.hasSelectedCategories() {
-                return self.filterToSelectedEvents(events)
-            }
             return events
         }
         return []
@@ -233,40 +249,4 @@ class APIManager: NSObject {
             return cat.id
         })
     }
-    
-    //    func testEvents() {
-    //        let now: NSDate = NSDate()
-    //        let tomorrow = now.dateByAddingTimeInterval(60*60*24)
-    //        let end = tomorrow.dateByAddingTimeInterval(60*60)
-    //        let dateFormatter = NSDateFormatter()
-    //        dateFormatter.dateFormat = "yyyy-MM-dd h:mm a"
-    //        let start = dateFormatter.stringFromDate(tomorrow)
-    //        let endstr = dateFormatter.stringFromDate(end)
-    //        let params = [
-    //            "name": "Another Event",
-    //            "subtitle": "Another Event Subtitle",
-    //            "description": "Another Event Description",
-    //            "start": start,
-    //            "end": endstr
-    //        ]
-    //        let params2 = [
-    //            "name": "A different Event",
-    //            "subtitle": "A Different Subtitle",
-    //            "description": "A different Description",
-    //            "start": start,
-    //            "end": endstr
-    //        ]
-    //        LoginManager.manager.POST("api/events", parameters: params, success: { (NSURLSessionDataTask, AnyObject) -> Void in
-    //            NSLog("Success")
-    //        }, { (NSURLSessionDataTask, NSError) -> Void in
-    //            NSLog("Failure: %@", NSError)
-    //        })
-    //        LoginManager.manager.POST("api/events", parameters: params2, success: { (NSURLSessionDataTask, AnyObject) -> Void in
-    //            NSLog("Success")
-    //            }, { (NSURLSessionDataTask, NSError) -> Void in
-    //                NSLog("Failure: %@", NSError)
-    //        })
-    //    }
-    
-    
 }

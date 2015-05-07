@@ -17,6 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-iz-PiT">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="180" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="yHd-MK-1Tg">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -118,24 +126,16 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
-                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQd-iz-PiT">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
-                                <scopeButtonTitles>
-                                    <string>Title</string>
-                                    <string>Title</string>
-                                </scopeButtonTitles>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="yHd-MK-1Tg" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="AYZ-q2-rXc"/>
                             <constraint firstAttribute="centerX" secondItem="PQd-iz-PiT" secondAttribute="centerX" id="CEk-fM-gFb"/>
                             <constraint firstAttribute="bottom" secondItem="yHd-MK-1Tg" secondAttribute="bottom" id="Y7b-Nz-01P"/>
+                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="PQd-iz-PiT" secondAttribute="bottom" id="Z73-8D-JIy"/>
                             <constraint firstItem="PQd-iz-PiT" firstAttribute="width" secondItem="tsR-hK-woN" secondAttribute="width" id="htN-K9-xKt"/>
                             <constraint firstAttribute="trailing" secondItem="yHd-MK-1Tg" secondAttribute="trailing" id="v5A-MK-zLL"/>
                             <constraint firstItem="PQd-iz-PiT" firstAttribute="top" secondItem="5yD-WH-R5T" secondAttribute="bottom" constant="-44" id="wTV-cx-fsk"/>
-                            <constraint firstItem="yHd-MK-1Tg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" constant="64" id="xWv-aY-Cn0"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Events" id="Zcn-Ke-9DF">
@@ -152,6 +152,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="PQd-iz-PiT" id="6bq-H8-3TH"/>
+                        <outlet property="searchBarConstraint" destination="wTV-cx-fsk" id="1tI-2T-km1"/>
                         <outlet property="tableView" destination="yHd-MK-1Tg" id="OXh-eJ-Jd2"/>
                         <segue destination="rbt-gX-6sP" kind="push" identifier="segue_id_event_detail" id="wBx-K2-qvi"/>
                     </connections>

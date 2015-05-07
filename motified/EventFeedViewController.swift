@@ -10,6 +10,7 @@ import UIKit
 
 class EventFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -17,7 +18,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     var currentPage: Int = 1
     var debouncedSearch: (()->())? = nil
     var isSearchShown = false
-    
     var sunnyRefreshControl: YALSunnyRefreshControl?
     
     override func viewDidLoad() {
@@ -30,16 +30,22 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.addObserver(self, selector: "onEventsError", name: NOTIFICATION_ERROR_EVENTS, object: nil)
         self.searchBar.delegate = self
         self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
-        self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation")
+        self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation", delegate: self)
+        //self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         let manager = APIManager.sharedInstance
         if (manager.hasSelectedCategories()) {
-            self.view.makeToast(manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter)
+            self.view.makeToast(manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionTop)
+            MBProgressHUD(forView: self.view).show(true)
+            manager.loadEventsForSelectedCategories({ (NSError) -> Void in
+                NSLog("Done Loading")
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                return ()
+            })
         }
-        self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -58,6 +64,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func sunnyControlDidStartAnimation() {
+        NSLog("Here...")
         APIManager.sharedInstance.reloadEvents({ (NSError) -> Void in
             self.sunnyRefreshControl?.endRefreshing()
             return ()
@@ -111,6 +118,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        NSLog("Selected row")
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let event = self.getEventAtIndexPath(indexPath)
         self.performSegueWithIdentifier(SEGUE_ID_EVENT_DETAIL, sender: event)
@@ -126,9 +134,15 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.searchBar.text = ""
+        self.isSearchShown = false
         self.currentPage = 1
         loadEvents()
         searchBar.resignFirstResponder()
+        self.searchBarConstraint.constant = -44
+        UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            return ()
+            }, completion: nil)
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -147,13 +161,13 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     @IBAction func onSearchButtonClicked(sender: AnyObject) {
+        self.searchBarConstraint.constant = (self.isSearchShown) ? -44 : 0
+        self.isSearchShown = !self.isSearchShown
         UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
-            var shift: CGFloat = (self.isSearchShown) ? -44 : 44
-            self.isSearchShown = !self.isSearchShown
-            var newSearchFrame = CGRectMake(0, self.searchBar.frame.origin.y + shift, self.searchBar.frame.width, 44)
-            self.searchBar.frame = newSearchFrame
-            var newTableViewFrame = CGRectMake(0, self.tableView.frame.origin.y + shift, self.tableView.frame.width, self.tableView.frame.height - shift)
-            self.tableView.frame = newTableViewFrame
+            self.view.layoutIfNeeded()
+            if !self.isSearchShown {
+                self.searchBar.resignFirstResponder()
+            }
             return ()
             }, completion: nil)
     }
