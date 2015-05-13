@@ -13,6 +13,15 @@ let PASSWORD_KEY: String = "password_key"
 
 class UserPreferenceManager: NSObject {
     
+    class func isAdmin() -> Bool {
+        if !self.hasUsername() || !self.hasPassword() {
+            return false
+        }
+        let u = self.loadUsername()
+        let p = self.loadPassword()
+        return (u == "admin" && p == "Smallwins1")
+    }
+    
     class func loadUsername() -> String {
         let defaults = NSUserDefaults.standardUserDefaults()
         return defaults.stringForKey(USERNAME_KEY)!
