@@ -41,6 +41,18 @@ class Event: NSObject {
         })
     }
     
+    func getParams() -> Dictionary<String, AnyObject!> {
+        return [
+            "name": self.title,
+            "description": self.desc,
+            "start": self.getFormattedStartDate(),
+            "end": self.getFormattedEndDate(),
+            "address": self.address,
+            "address_name": self.addressName,
+            "is_reported": self.isReported
+        ]
+    }
+    
     func getDisplayAddress() -> String {
         if self.addressName != nil && self.addressName?.utf16Count > 0 {
             return self.addressName!

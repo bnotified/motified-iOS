@@ -35,6 +35,12 @@ class APIManager: NSObject {
         if params != nil {
             finalParams.update(params)
         }
+        if finalParams.indexForKey("filters") == nil {
+            finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
+        }
+        var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"]! as Array<Dictionary<String, AnyObject>>
+        filters.append(["and": [["name":"is_approved", "op":"eq", "val": 1]]])
+        finalParams.updateValue(filters, forKey: "filters")
         LoginManager.manager.GET(
             "/api/events",
             parameters: ["q": JSONStringify(finalParams), "page": self.currentPage, "results_per_page": 30],
@@ -68,6 +74,58 @@ class APIManager: NSObject {
         } else {
             self.loadEvents(done)
         }
+    }
+    
+    func toggleSubscription(event: Event, done: ((NSError!) -> Void)!) {
+        if event.isSubscribed! {
+            self.unsubscribeFromEvent(event, done: done)
+        } else {
+            self.subscribeToEvent(event, done: done)
+        }
+    }
+    
+    func subscribeToEvent(event: Event, done: ((NSError!) -> Void)!) {
+        var data = ["event_id": event.id!]
+        LoginManager.manager.POST("/api/event_subscriptions", parameters: data,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                event.isSubscribed = true
+                self.callDoneIfNotNil(done, withError: nil)
+                self.emitEventsChanged()
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                self.callDoneIfNotNil(done, withError: NSError)
+        })
+    }
+    
+    func unsubscribeFromEvent(event: Event, done: ((NSError!) -> Void)!) {
+        var data = ["filters": [["and" : [
+            ["name":"event_id", "op":"eq", "val": event.id!]
+        ]]]]
+        var finalParams = ["q": JSONStringify(data)]
+        LoginManager.manager.DELETE("/api/event_subscriptions", parameters: finalParams,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                event.isSubscribed = false
+                self.callDoneIfNotNil(done, withError: nil)
+                self.emitEventsChanged()
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                self.callDoneIfNotNil(done, withError: NSError)
+        })
+    }
+    
+    func reportEvent(event: Event, done: ((NSError!) -> Void)!) {
+        event.isReported = true
+        self.updateEvent(event, done: done)
+    }
+    
+    func updateEvent(event: Event, done: ((NSError!) -> Void)!) {
+        let params = event.getParams()
+        LoginManager.manager.PATCH("/api/event/\(event.id)", parameters: params,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                self.callDoneIfNotNil(done, withError: nil)
+                self.emitEventsChanged()
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Error updating event: %@", NSError)
+                self.callDoneIfNotNil(done, withError: NSError)
+        })
     }
     
     internal func getParamsForCategorySearch() -> Dictionary<String, AnyObject> {
@@ -114,16 +172,12 @@ class APIManager: NSObject {
                     return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
                 })
                 self.emitCategoriesChanged()
-                if done != nil {
-                    done(nil)
-                }
+                self.callDoneIfNotNil(done, withError: nil)
             },
             { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error loading categories: %@", NSError)
                 self.emitCategoriesError()
-                if done != nil {
-                    done(NSError)
-                }
+                self.callDoneIfNotNil(done, withError: NSError)
         })
     }
     
@@ -157,12 +211,10 @@ class APIManager: NSObject {
         
         let num_results = response["num_results"]! as Int
         let objects = response["objects"]! as Array<AnyObject>
-        NSLog("Num Result: %d", objects.count)
         let page = response["page"]! as Int
         self.totalPages = response["total_pages"]! as Int
         
         self.clearPage(page)
-        
         for obj in objects {
             let startStr = obj["start"] as String?
             let endStr = obj["end"] as String?
@@ -189,20 +241,20 @@ class APIManager: NSObject {
         self.events[page] = Array<Event>()
     }
     
-//    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
-//        var filtered = NSMutableSet()
-//        for event in events {
-//            for index in self.selectedCategories {
-//                if let _index = index as? Int {
-//                    let category = self.categories[_index]
-//                    if event.isInCategory(category) {
-//                        filtered.addObject(event)
-//                    }
-//                }
-//            }
-//        }
-//        return filtered.allObjects as Array<Event>
-//    }
+    //    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
+    //        var filtered = NSMutableSet()
+    //        for event in events {
+    //            for index in self.selectedCategories {
+    //                if let _index = index as? Int {
+    //                    let category = self.categories[_index]
+    //                    if event.isInCategory(category) {
+    //                        filtered.addObject(event)
+    //                    }
+    //                }
+    //            }
+    //        }
+    //        return filtered.allObjects as Array<Event>
+    //    }
     
     func getEventsOnPage(page: Int) -> Array<Event> {
         if let events = self.events[page] {
@@ -246,5 +298,11 @@ class APIManager: NSObject {
         return categories.map({ (cat: EventCategory) -> Int in
             return cat.id
         })
+    }
+    
+    func callDoneIfNotNil(done:((NSError!) -> Void)!, withError: NSError!) {
+        if done != nil {
+            done(withError)
+        }
     }
 }

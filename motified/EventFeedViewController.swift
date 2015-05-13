@@ -32,7 +32,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         self.searchBar.delegate = self
         self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
         self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation", delegate: self)
-        //self.tableView.setContentOffset(CGPointMake(0, 0), animated: true)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -87,21 +86,26 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     func makeRequest() {
         if self.searchBar.text.utf16Count == 0 {
             NSLog("Changed to nothing")
+            if self.events.count == 0 {
+                APIManager.sharedInstance.reloadEvents(nil)
+            }
             return ()
         }
         NSLog("Making Request: %@", self.searchBar.text)
         APIManager.sharedInstance.searchEvents(self.searchBar.text, done: { (NSError) -> Void in
-            NSLog("Done searching")
         })
     }
     
     func onEventsChanged() {
         self.events = APIManager.sharedInstance.getEventsInRange(self.currentPage)
         self.tableView.reloadData()
+        if self.events.count == 0 {
+            self.tableView.makeToast("No Results", duration: 2, position: CSToastPositionCenter)
+        }
     }
     
     func onEventsError() {
-        self.view.makeToast("Error loading events")
+        self.tableView.makeToast("Error loading events", duration: 2, position: CSToastPositionCenter)
     }
     
     override func didReceiveMemoryWarning() {

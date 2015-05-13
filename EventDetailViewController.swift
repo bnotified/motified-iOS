@@ -32,20 +32,24 @@ class EventDetailViewController: UIViewController {
     }
     
     func setUp() {
+        addBorderMatchingBackground(self.openBtn)
+        addBorderMatchingBackground(self.beNotifiedBtn)
+        addBorderMatchingBackground(self.reportBtn)
+        
         self.setUpMap()
-        if self.event.isSubscribed == true {
-            self.beNotifiedBtn.titleLabel?.text = "Unsubscribe"
-        } else {
-            self.beNotifiedBtn.titleLabel?.text = "Be Notified"
-        }
+        self.updateNotifyBtn()
         
         self.titleLabel.text = event.title
         self.dateLabel.text = event.getFormattedDateRange()
         self.descriptionLabel.text = event.desc
-        
-        addBorderMatchingBackground(self.openBtn)
-        addBorderMatchingBackground(self.beNotifiedBtn)
-        addBorderMatchingBackground(self.reportBtn)
+    }
+    
+    func updateNotifyBtn() {
+        if self.event.isSubscribed! {
+            self.beNotifiedBtn.setTitle("Unsubscribe", forState: UIControlState.Normal)
+        } else {
+            self.beNotifiedBtn.setTitle("Be Notified", forState: UIControlState.Normal)
+        }
     }
     
     func setUpMap() {
@@ -98,10 +102,16 @@ class EventDetailViewController: UIViewController {
     }
     
     @IBAction func onNotifyPressed(sender: AnyObject) {
-        
+        APIManager.sharedInstance.toggleSubscription(self.event, done: { (NSError) -> Void in
+            NSLog("Done toggling")
+            self.updateNotifyBtn()
+        })
     }
     
     @IBAction func onReportPressed(sender: AnyObject) {
-        
+        NSLog("About to report")
+        APIManager.sharedInstance.reportEvent(event, done: { (NSError) -> Void in
+            NSLog("Done reporting")
+        })
     }
 }
