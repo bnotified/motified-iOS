@@ -179,22 +179,46 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         return self.selectedLocation != nil
     }
     
+    internal func closeKeyboard() {
+        self.titleLabel.resignFirstResponder()
+        self.descriptionTextEdit.resignFirstResponder()
+        self.startLabel.resignFirstResponder()
+        self.endLabel.resignFirstResponder()
+        self.locationLabel.resignFirstResponder()
+        self.categoryLabel.resignFirstResponder()
+    }
+    
     @IBAction func onSubmit(sender: AnyObject) {
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+        
         if self.isFormValid() {
+            NSLog("Selected Location: %@", self.selectedLocation)
             let params: Dictionary<String, AnyObject> = [
                 "name": self.titleLabel.text,
                 "description": self.descriptionTextEdit.text,
                 "start": serverFormatter.stringFromDate(self.startPicker.date),
                 "end": serverFormatter.stringFromDate(self.endPicker.date),
                 "categories": [
-                    ["category": self.selectedCategory]
+                    ["category": self.selectedCategory.category]
                 ],
-                "address": self.selectedLocation["address"]! as String,
-                "address_name": self.selectedLocation["display"]! as String
+                "address": self.selectedLocation["title"]! as String,
+                "address_name": self.selectedLocation["display"]! as String,
+                "is_reported": 0
             ]
-            
-            NSLog("Will Submit Params: %@", params)
+            self.closeKeyboard()
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            APIManager.sharedInstance.addEvent(params, done: { (NSError) -> Void in
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                if (NSError != nil) {
+                    self.view.makeToast("An error occurred when attempting to create your event.")
+                    return ()
+                }
+                self.view.makeToast("Event Created! Once approved, it will appear on the event feed.", duration: 2.5, position: CSToastPositionCenter)
+                delay(2.5, { () -> () in
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                    return ()
+                })
+            })
         } else {
             self.view.makeToast("Please ensure you have filled out all the fields correctly.")
         }

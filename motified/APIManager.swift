@@ -28,6 +28,16 @@ class APIManager: NSObject {
         self.loadEvents(done)
     }
     
+    func addEvent(params: Dictionary<String, AnyObject>, done: ((NSError!) -> Void)!) -> Void {
+        LoginManager.manager.POST("/api/events", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
+            NSLog("Created Event!")
+            self.callDoneIfNotNil(done, withError: nil)
+        }, { (NSURLSessionDataTask, NSError) -> Void in
+            NSLog("Error creating event: %@", NSError)
+            self.callDoneIfNotNil(done, withError: NSError)
+        })
+    }
+    
     internal func loadEventsWithParams(params: Dictionary<String, AnyObject>!, done: ((NSError!) -> Void)!) {
         var finalParams: Dictionary<String, AnyObject>  = [
             "order_by": [["field":"start", "direction":"desc"]]
@@ -35,12 +45,17 @@ class APIManager: NSObject {
         if params != nil {
             finalParams.update(params)
         }
-        if finalParams.indexForKey("filters") == nil {
-            finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
+        if !UserPreferenceManager.isAdmin() {
+            if finalParams.indexForKey("filters") == nil {
+                finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
+            }
+            var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"]! as Array<Dictionary<String, AnyObject>>
+            filters.append(["and": [
+                ["name":"is_approved", "op":"eq", "val": true],
+                ["name":"is_reported", "op":"eq", "val": false]
+            ]])
+            finalParams.updateValue(filters, forKey: "filters")
         }
-        var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"]! as Array<Dictionary<String, AnyObject>>
-        filters.append(["and": [["name":"is_approved", "op":"eq", "val": 1]]])
-        finalParams.updateValue(filters, forKey: "filters")
         LoginManager.manager.GET(
             "/api/events",
             parameters: ["q": JSONStringify(finalParams), "page": self.currentPage, "results_per_page": 30],
