@@ -23,8 +23,9 @@ class Event: NSObject {
     var addressName: String?
     var location: CLLocation?
     var isReported: Bool = false
+    var isApproved: Bool = false
     
-    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?, address: String?, addressName: String?) {
+    init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?, address: String?, addressName: String?, isApproved: Bool?, isReported: Bool?) {
         self.id = id
         self.createdBy = createdBy
         self.title = title
@@ -35,6 +36,8 @@ class Event: NSObject {
         self.subscribedUsers = subscribedUsers
         self.address = address
         self.addressName = addressName
+        self.isApproved = isApproved!
+        self.isReported = isReported!
         //self.location = coords
         self.categories = categories?.map({ (cat) -> EventCategory in
             return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
@@ -49,7 +52,8 @@ class Event: NSObject {
             "end": self.getFormattedEndDate(),
             "address": self.address,
             "address_name": self.addressName,
-            "is_reported": self.isReported
+            "is_reported": self.isReported,
+            "is_approved": self.isApproved
         ]
     }
     

@@ -128,7 +128,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        NSLog("Selected: %@", self.categories[row])
         self.selectedCategory = self.categories[row]
         self.categoryLabel.text = self.selectedCategory.category
     }
@@ -192,7 +191,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
         
         if self.isFormValid() {
-            NSLog("Selected Location: %@", self.selectedLocation)
             let params: Dictionary<String, AnyObject> = [
                 "name": self.titleLabel.text,
                 "description": self.descriptionTextEdit.text,

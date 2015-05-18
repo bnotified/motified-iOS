@@ -32,9 +32,9 @@ class APIManager: NSObject {
         LoginManager.manager.POST("/api/events", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
             NSLog("Created Event!")
             self.callDoneIfNotNil(done, withError: nil)
-        }, { (NSURLSessionDataTask, NSError) -> Void in
-            NSLog("Error creating event: %@", NSError)
-            self.callDoneIfNotNil(done, withError: NSError)
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                NSLog("Error creating event: %@", NSError)
+                self.callDoneIfNotNil(done, withError: NSError)
         })
     }
     
@@ -78,6 +78,28 @@ class APIManager: NSObject {
     
     func loadEvents(done: ((NSError!) -> Void)!) {
         self.loadEventsWithParams(nil, done: done)
+    }
+    
+    func loadReportedEvents(done: ((NSError!) -> Void)!) {
+        self.currentPage = 1
+        self.totalPages = 0
+        self.events.removeAll(keepCapacity: true)
+        let params = [
+            "filters": [["name": "is_reported", "op": "eq", "val": "1"]
+            ]
+        ]
+        self.loadEventsWithParams(params, done: done)
+    }
+    
+    func loadUnapprovedEvents(done: ((NSError!) -> Void)!) {
+        self.currentPage = 1
+        self.totalPages = 0
+        self.events.removeAll(keepCapacity: true)
+        let params = [
+            "filters": [["name": "is_approved", "op": "eq", "val": "0"]
+            ]
+        ]
+        self.loadEventsWithParams(params, done: done)
     }
     
     func loadEventsForSelectedCategories(done: ((NSError!) -> Void)!) {
@@ -131,9 +153,19 @@ class APIManager: NSObject {
         self.updateEvent(event, done: done)
     }
     
+    func deleteEvent(event: Event, done: ((NSError!) -> Void)!) {
+        LoginManager.manager.DELETE("/api/event/\(event.id)", parameters: nil,
+            success: { (NSURLSessionDataTask, AnyObject) -> Void in
+                self.callDoneIfNotNil(done, withError: nil)
+                self.emitEventsChanged()
+            }, { (NSURLSessionDataTask, NSError) -> Void in
+                self.callDoneIfNotNil(done, withError: NSError)
+        })
+    }
+    
     func updateEvent(event: Event, done: ((NSError!) -> Void)!) {
         let params = event.getParams()
-        LoginManager.manager.PATCH("/api/event/\(event.id)", parameters: params,
+        LoginManager.manager.PATCH("/api/events/\(event.id!)", parameters: params,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
@@ -246,7 +278,9 @@ class APIManager: NSObject {
                 isSubscribed: obj["is_subscribed"] as Bool?,
                 subscribedUsers: obj["subscribed_users"] as Int?,
                 address: obj["address"] as String?,
-                addressName: obj["address_name"] as String?
+                addressName: obj["address_name"] as String?,
+                isApproved: obj["is_approved"] as Bool?,
+                isReported: obj["is_reported"] as Bool?
             )
             self.events[page]?.append(event)
         }
@@ -255,21 +289,6 @@ class APIManager: NSObject {
     internal func clearPage(page: Int) {
         self.events[page] = Array<Event>()
     }
-    
-    //    internal func filterToSelectedEvents(events: Array<Event>) -> Array<Event> {
-    //        var filtered = NSMutableSet()
-    //        for event in events {
-    //            for index in self.selectedCategories {
-    //                if let _index = index as? Int {
-    //                    let category = self.categories[_index]
-    //                    if event.isInCategory(category) {
-    //                        filtered.addObject(event)
-    //                    }
-    //                }
-    //            }
-    //        }
-    //        return filtered.allObjects as Array<Event>
-    //    }
     
     func getEventsOnPage(page: Int) -> Array<Event> {
         if let events = self.events[page] {

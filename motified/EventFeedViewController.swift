@@ -14,12 +14,15 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
     var events: Array<Event> = Array<Event>()
     var currentPage: Int = 1
     var debouncedSearch: (()->())? = nil
     var isSearchShown = false
     var wasShowingSelected = false
     var sunnyRefreshControl: YALSunnyRefreshControl?
+    
+    @IBOutlet weak var segmentControlView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +35,12 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         self.searchBar.delegate = self
         self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
         self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation", delegate: self)
+        if UserPreferenceManager.isAdmin() {
+            self.segmentedControl.addTarget(self, action: "onSegmentChanged", forControlEvents: UIControlEvents.ValueChanged)
+            self.segmentControlView.hidden = false
+        } else {
+            self.segmentControlView.hidden = true
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -64,6 +73,16 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
             let event = sender as Event
             let dest = segue.destinationViewController as EventDetailViewController
             dest.event = event
+        }
+    }
+    
+    func onSegmentChanged() {
+        if self.segmentedControl.selectedSegmentIndex == 0 {
+            APIManager.sharedInstance.reloadEvents(nil)
+        } else if self.segmentedControl.selectedSegmentIndex == 1 {
+            APIManager.sharedInstance.loadUnapprovedEvents(nil)
+        } else {
+            APIManager.sharedInstance.loadReportedEvents(nil)
         }
     }
     

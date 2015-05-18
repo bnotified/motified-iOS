@@ -18,6 +18,7 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var openBtn: UIButton!
     @IBOutlet weak var beNotifiedBtn: UIButton!
     @IBOutlet weak var reportBtn: UIButton!
+    @IBOutlet weak var approveBtn: UIButton!
     
     var event: Event!
     var mapItem: MKMapItem!
@@ -42,6 +43,19 @@ class EventDetailViewController: UIViewController {
         self.titleLabel.text = event.title
         self.dateLabel.text = event.getFormattedDateRange()
         self.descriptionLabel.text = event.desc
+        
+        if UserPreferenceManager.isAdmin() {
+            self.reportBtn.setTitle("Delete", forState: UIControlState.Normal)
+            if !event.isApproved {
+                self.approveBtn.hidden = false
+                addBorderMatchingBackground(self.approveBtn)
+            } else {
+                self.approveBtn.hidden = true
+            }
+        } else {
+            self.reportBtn.setTitle("Report", forState: UIControlState.Normal)
+            self.approveBtn.hidden = true
+        }
     }
     
     func updateNotifyBtn() {
@@ -109,9 +123,47 @@ class EventDetailViewController: UIViewController {
     }
     
     @IBAction func onReportPressed(sender: AnyObject) {
-        NSLog("About to report")
-        APIManager.sharedInstance.reportEvent(event, done: { (NSError) -> Void in
-            NSLog("Done reporting")
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        if UserPreferenceManager.isAdmin() {
+            APIManager.sharedInstance.deleteEvent(event, done: { (NSError) -> Void in
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                if NSError != nil {
+                    self.view.makeToast("An error occurred when trying to delete the event")
+                } else {
+                    self.showMessageThenPop("Deleted Event")
+                }
+            })
+        } else {
+            APIManager.sharedInstance.reportEvent(event, done: { (NSError) -> Void in
+                MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+                if NSError != nil {
+                    self.view.makeToast("An error occurred when trying to delete the event")
+                } else {
+                    self.showMessageThenPop("Reported Event")
+                }
+                return ()
+            })
+        }
+    }
+    
+    func showMessageThenPop(message: String) {
+        self.view.makeToast(message, duration: 2, position: CSToastPositionCenter)
+        delay(2, { () -> () in
+            self.navigationController?.popToRootViewControllerAnimated(true)
+            return ()
+        })
+    }
+    
+    @IBAction func onApprovePressed(sender: AnyObject) {
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        self.event.isApproved = true
+        APIManager.sharedInstance.updateEvent(self.event, done: { (NSError) -> Void in
+            MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
+            if NSError != nil {
+                self.view.makeToast("An error occurred when trying to approve the event.")
+            } else {
+                self.showMessageThenPop("Approved Event")
+            }
         })
     }
 }
