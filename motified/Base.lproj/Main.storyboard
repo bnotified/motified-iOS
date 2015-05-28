@@ -41,7 +41,7 @@
                                                         <constraint firstAttribute="width" secondItem="V9V-SM-sDI" secondAttribute="height" multiplier="1:1" id="D63-WW-pvW"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start - End" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="314" translatesAutoresizingMaskIntoConstraints="NO" id="4Ew-H5-92w">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Start - End" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="314" translatesAutoresizingMaskIntoConstraints="NO" id="4Ew-H5-92w">
                                                     <rect key="frame" x="3" y="112" width="314" height="12"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -100,13 +100,12 @@
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="top" secondItem="Kke-x1-nPP" secondAttribute="top" constant="5" id="7Sy-PC-SZ5"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="centerY" secondItem="8ag-QS-NvP" secondAttribute="centerY" id="AaT-1s-GqN"/>
                                                 <constraint firstAttribute="centerY" secondItem="D2M-ug-j74" secondAttribute="centerY" id="DbF-vt-qP5"/>
+                                                <constraint firstAttribute="centerX" secondItem="4Ew-H5-92w" secondAttribute="centerX" id="IzK-rU-28d"/>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leading" constant="10" id="NDy-zk-DbP"/>
                                                 <constraint firstAttribute="bottom" secondItem="APN-qa-yVt" secondAttribute="bottom" constant="5" id="PYf-oC-hIe"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="leading" secondItem="8ag-QS-NvP" secondAttribute="trailing" constant="5" id="cZR-pR-GAh"/>
-                                                <constraint firstItem="4Ew-H5-92w" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leading" constant="3" id="dab-D2-irQ"/>
                                                 <constraint firstAttribute="centerX" secondItem="D2M-ug-j74" secondAttribute="centerX" id="h3V-JD-lsR"/>
-                                                <constraint firstItem="4Ew-H5-92w" firstAttribute="top" secondItem="D2M-ug-j74" secondAttribute="bottom" constant="10" id="qCa-ZG-dP2"/>
-                                                <constraint firstAttribute="trailing" secondItem="4Ew-H5-92w" secondAttribute="trailing" constant="3" id="qpc-hI-GjX"/>
+                                                <constraint firstAttribute="centerY" secondItem="4Ew-H5-92w" secondAttribute="centerY" constant="-28.5" id="oRp-Q2-As2"/>
                                                 <constraint firstAttribute="centerX" secondItem="APN-qa-yVt" secondAttribute="centerX" id="wP4-XJ-oBa"/>
                                             </constraints>
                                         </tableViewCellContentView>
