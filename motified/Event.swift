@@ -125,15 +125,64 @@ class Event: NSObject {
     private func getSameDayDateRange() -> String {
         let firstFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
         let secondFormat = MotifiedDateFormatter(format: MotifiedDateFormat.ClientTimeOnly)
-        let start = firstFormat.stringFromDate(self.startDate!)
-        let end = secondFormat.stringFromDate(self.endDate!)
+        let start = firstFormat.stringFromDate(self.startDate!.toLocalTime())
+        let end = secondFormat.stringFromDate(self.endDate!.toLocalTime())
         return "\(start)-\(end)"
     }
     
     private func getMultipleDayDateRange() -> String {
         let format = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
-        let start = format.stringFromDate(self.startDate!)
-        let end = format.stringFromDate(self.endDate!)
+        let start = format.stringFromDate(self.startDate!.toLocalTime())
+        let end = format.stringFromDate(self.endDate!.toLocalTime())
         return "\(start)-\(end)"
+    }
+    
+    func notifyUserOnDay() {
+        let dateInterval = self.startDate!.toLocalTime().timeIntervalSinceNow - 60*60
+        self.notifyUserAtInterval(dateInterval, message: "Event Starting In 1 Hour: \(self.title!)")
+    }
+    
+    func notifyUserDayPrior() {
+        let dateInterval = self.startDate!.toLocalTime().timeIntervalSinceNow - 60*60*24
+        self.notifyUserAtInterval(dateInterval, message: "Event Tomorrow: \(self.title!)")
+    }
+    
+    func notifyUserOnStart() {
+        let dateInterval = self.startDate!.toLocalTime().timeIntervalSinceNow
+        self.notifyUserAtInterval(dateInterval, message: "Event Starting Now: \(self.title!)")
+    }
+    
+    func toggleNotify() {
+        if self.isSubscribed! {
+            self.cancelNotify()
+        } else {
+            self.notify()
+        }
+    }
+    
+    func cancelNotify() {
+        
+    }
+    
+    func notify() {
+        if UserPreferenceManager.shouldAlert(PREF_DAY_PRIOR_KEY) {
+            self.notifyUserDayPrior()
+        }
+        if UserPreferenceManager.shouldAlert(PREF_HOUR_PRIOR_KEY) {
+            self.notifyUserOnDay()
+        }
+        if UserPreferenceManager.shouldAlert(PREF_ON_START_KEY) {
+            self.notifyUserOnStart()
+        }
+    }
+    
+    func notifyUserAtInterval(interval: NSTimeInterval, message: String) {
+        if interval < 0 {
+            return ()
+        }
+        let notification = UILocalNotification()
+        notification.fireDate = NSDate(timeIntervalSinceNow: interval)
+        notification.alertBody = message
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 }

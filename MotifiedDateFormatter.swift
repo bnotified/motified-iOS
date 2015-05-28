@@ -21,7 +21,7 @@ class MotifiedDateFormatter: NSDateFormatter {
         switch format {
         case MotifiedDateFormat.Server:
             self.timeZone = NSTimeZone(name: "UTC")
-            self.dateFormat = "yyyy-MM-dd'T'hh:mm:ss'Z'"
+            self.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
         case MotifiedDateFormat.ClientLong:
             self.locale = NSLocale.currentLocale()
             self.timeZone = NSTimeZone.localTimeZone()

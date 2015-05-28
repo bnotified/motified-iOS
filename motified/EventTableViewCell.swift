@@ -40,9 +40,10 @@ class EventTableViewCell: UITableViewCell {
         self.event = event
         self.titleLabel.text = event.title
         self.categoryImage.image = event.getImage()
-
-        let start = self.formatDate(event.startDate!)
-        let end = self.formatDate(event.endDate!)
+        
+        let dateFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
+        let start = dateFormatter.stringFromDate(event.startDate!.toLocalTime())
+        let end = dateFormatter.stringFromDate(event.endDate!.toLocalTime())
         self.dateLabel.text = NSString(format: "%@ - %@", start, end)
         
         self.subscriberContainer.layer.borderColor = UIColor.whiteColor().CGColor
@@ -52,10 +53,5 @@ class EventTableViewCell: UITableViewCell {
         
         self.locationLabel.text = event.getDisplayAddress()
     }
-    
-    func formatDate(date: NSDate) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "MMM d h':'mm a"
-        return dateFormatter.stringFromDate(date)
-    }
+
 }

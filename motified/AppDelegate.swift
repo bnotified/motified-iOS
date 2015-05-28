@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        UserPreferenceManager.setPrefIfNecessary()
+        let now = NSDate()
+        let formatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
         return true
     }
     

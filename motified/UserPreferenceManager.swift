@@ -11,6 +11,8 @@ import UIKit
 let USERNAME_KEY: String = "username_key"
 let PASSWORD_KEY: String = "password_key"
 
+let HAS_SET_ALERT_PREF: String = "has_set_alert_pref"
+
 class UserPreferenceManager: NSObject {
     
     class func isAdmin() -> Bool {
@@ -20,6 +22,28 @@ class UserPreferenceManager: NSObject {
         let u = self.loadUsername()
         let p = self.loadPassword()
         return (u == "admin" && p == "Smallwins1")
+    }
+    
+    class func setPrefIfNecessary() {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey(HAS_SET_ALERT_PREF) == false {
+            self.setAlert(PREF_ON_START_KEY, shouldAlert: true)
+            self.setAlert(PREF_DAY_PRIOR_KEY, shouldAlert: true)
+            self.setAlert(PREF_HOUR_PRIOR_KEY, shouldAlert: true)
+            self.setAlert(HAS_SET_ALERT_PREF, shouldAlert: true)
+            self.save(defaults)
+        }
+    }
+    
+    class func shouldAlert(pref: String) -> Bool {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        return defaults.boolForKey(pref)
+    }
+    
+    class func setAlert(pref: String, shouldAlert: Bool) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setBool(shouldAlert, forKey: pref)
+        self.save(defaults)
     }
     
     class func loadUsername() -> String {

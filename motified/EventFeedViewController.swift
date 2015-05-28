@@ -66,6 +66,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
                 return ()
             })
         }
+        self.tableView.reloadData()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -157,7 +158,6 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         var page = (indexPath.row / 30) as Int
         let index = indexPath.row - (page * 30)
         page++
-        NSLog("Page: %d Index: %d", page, index)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let event = self.getEventAtIndexPath(indexPath)
         event.page = page

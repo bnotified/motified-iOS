@@ -21,4 +21,16 @@ extension NSDate {
         var compTwo: NSDateComponents = calender.components(flags, fromDate: dateTwo);
         return (compOne.day == compTwo.day && compOne.month == compTwo.month && compOne.year == compTwo.year);
     }
+    
+    func toLocalTime() -> NSDate {
+        let tz = NSTimeZone.defaultTimeZone()
+        let seconds = Double(tz.secondsFromGMT)
+        return self.dateByAddingTimeInterval(seconds)
+    }
+    
+    func toGlobalTime() -> NSDate {
+        let tz = NSTimeZone.defaultTimeZone()
+        let seconds = -Double(tz.secondsFromGMT)
+        return self.dateByAddingTimeInterval(seconds)
+    }
 }

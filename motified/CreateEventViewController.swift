@@ -58,7 +58,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func updateStartLabel() {
         self.startLabel.text = self.localFormatter.stringFromDate(self.startPicker.date)
-        self.endPicker.minimumDate = self.startPicker.date
+        self.endPicker.setDate(NSDate(timeIntervalSinceNow: self.startPicker.date.timeIntervalSinceNow + 60*60), animated: true)
+        self.endPicker.minimumDate = NSDate(timeIntervalSinceNow: self.startPicker.date.timeIntervalSinceNow + 60)
     }
     
     func updateEndLabel() {
@@ -175,7 +176,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     internal func isLocationValid() -> Bool {
-        return self.selectedLocation != nil
+        return self.selectedLocation != nil || true
     }
     
     internal func closeKeyboard() {
@@ -188,8 +189,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     @IBAction func onSubmit(sender: AnyObject) {
+        NSLog("Submitting")
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
-        
         if self.isFormValid() {
             let params: Dictionary<String, AnyObject> = [
                 "name": self.titleLabel.text,
@@ -197,10 +198,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                 "start": serverFormatter.stringFromDate(self.startPicker.date),
                 "end": serverFormatter.stringFromDate(self.endPicker.date),
                 "categories": [
-                    ["category": self.selectedCategory.id]
+                    ["id": self.selectedCategory.id]
                 ],
-                "address": self.selectedLocation["title"]! as String,
-                "address_name": self.selectedLocation["display"]! as String,
+                "address": "Some Address", //self.selectedLocation["title"]! as String,
+                "address_name": "Some Address Name", //self.selectedLocation["display"]! as String,
                 "is_reported": 0
             ]
             self.closeKeyboard()
@@ -218,7 +219,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                 })
             })
         } else {
-            self.view.makeToast("Please ensure you have filled out all the fields correctly.")
+            self.view.makeToast("Please ensure you have filled out all the fields correctly.", duration: 3, position: CSToastPositionCenter)
         }
     }
 }

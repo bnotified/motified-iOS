@@ -116,8 +116,8 @@ class EventDetailViewController: UIViewController {
     }
     
     @IBAction func onNotifyPressed(sender: AnyObject) {
+        self.event.toggleNotify()
         APIManager.sharedInstance.toggleSubscription(self.event, done: { (NSError) -> Void in
-            NSLog("Done toggling")
             self.updateNotifyBtn()
         })
     }
