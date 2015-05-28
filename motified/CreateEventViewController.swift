@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate  {
-
+    
     @IBOutlet weak var titleLabel: UITextField!
     @IBOutlet weak var descriptionTextEdit: UITextView!
     @IBOutlet weak var endLabel: UITextField!
@@ -42,7 +42,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
         self.startLabel.inputView = self.startPicker
         self.endLabel.inputView = self.endPicker
         self.categoryLabel.inputView = self.categoryPicker
-
+        
         // Set up targets
         self.startPicker.addTarget(self, action: "updateStartLabel", forControlEvents: UIControlEvents.ValueChanged)
         self.startPicker.addTarget(self, action: "updateStartLabel", forControlEvents: UIControlEvents.EditingDidBegin)
@@ -136,7 +136,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return self.categories.count
     }
-
+    
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -144,11 +144,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     func isFormValid() -> Bool {
         return (
             self.isTitleValid() &&
-            self.isDescriptionValid() &&
-            self.isStartDateValid() &&
-            self.isEndDateValid() &&
-            self.isLocationValid() &&
-            self.isCategoryValid()
+                self.isDescriptionValid() &&
+                self.isStartDateValid() &&
+                self.isEndDateValid() &&
+                self.isLocationValid() &&
+                self.isCategoryValid()
         )
     }
     
@@ -159,7 +159,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     internal func isDescriptionValid() -> Bool {
         return (
             self.descriptionTextEdit.text.utf16Count > 0 &&
-            self.descriptionTextEdit.text != "Event Description"
+                self.descriptionTextEdit.text != "Event Description"
         )
     }
     
@@ -212,11 +212,20 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                     self.view.makeToast("An error occurred when attempting to create your event.")
                     return ()
                 }
-                self.view.makeToast("Event Created! Once approved, it will appear on the event feed.", duration: 2.5, position: CSToastPositionCenter)
-                delay(2.5, { () -> () in
-                    self.navigationController?.popToRootViewControllerAnimated(true)
-                    return ()
-                })
+                if UserPreferenceManager.isAdmin() {
+                    self.view.makeToast("Event Created!", duration: 1.5, position: CSToastPositionCenter)
+                    APIManager.sharedInstance.reloadEvents({ (NSError) -> Void in
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        return ()
+                    })
+                    
+                } else {
+                    self.view.makeToast("Event Created! Once approved, it will appear on the event feed.", duration: 2.5, position: CSToastPositionCenter)
+                    delay(2.5, { () -> () in
+                        self.navigationController?.popToRootViewControllerAnimated(true)
+                        return ()
+                    })
+                }
             })
         } else {
             self.view.makeToast("Please ensure you have filled out all the fields correctly.", duration: 3, position: CSToastPositionCenter)

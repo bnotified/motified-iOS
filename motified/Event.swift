@@ -161,7 +161,19 @@ class Event: NSObject {
     }
     
     func cancelNotify() {
-        
+        let app = UIApplication.sharedApplication()
+        let notifications = app.scheduledLocalNotifications
+        for nt in notifications as [UILocalNotification] {
+            let userInfo = nt.userInfo as Dictionary<String, AnyObject>!
+            if userInfo != nil {
+                if let uid = userInfo["id"]! as? Int {
+                    if uid == self.id {
+                        NSLog("Cancelling Notification")
+                        app.cancelLocalNotification(nt)
+                    }
+                }
+            }
+        }
     }
     
     func notify() {
@@ -183,6 +195,7 @@ class Event: NSObject {
         let notification = UILocalNotification()
         notification.fireDate = NSDate(timeIntervalSinceNow: interval)
         notification.alertBody = message
+        notification.userInfo = ["id":self.id!]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 }
