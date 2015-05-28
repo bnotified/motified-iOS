@@ -24,6 +24,8 @@ class Event: NSObject {
     var location: CLLocation?
     var isReported: Bool = false
     var isApproved: Bool = false
+    var page: Int!
+    var index: Int!
     
     init(id: Int?, createdBy: String?, title: String?, desc: String?, startDate: NSDate?, endDate: NSDate?, categories: Array<Dictionary<String, AnyObject>>?, isSubscribed: Bool?, subscribedUsers: Int?, address: String?, addressName: String?, isApproved: Bool?, isReported: Bool?) {
         self.id = id

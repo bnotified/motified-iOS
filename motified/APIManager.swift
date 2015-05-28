@@ -24,8 +24,14 @@ class APIManager: NSObject {
     func reloadEvents(done: ((NSError!) -> Void)!) {
         self.currentPage = 1
         self.totalPages = 0
-        self.events.removeAll(keepCapacity: true)
+        
+        self.clearEvents()
         self.loadEvents(done)
+    }
+    
+    func clearEvents() {
+        NSLog("Clearing Events")
+        self.events.removeAll(keepCapacity: true)
     }
     
     func addEvent(params: Dictionary<String, AnyObject>, done: ((NSError!) -> Void)!) -> Void {
@@ -82,7 +88,7 @@ class APIManager: NSObject {
     func loadReportedEvents(done: ((NSError!) -> Void)!) {
         self.currentPage = 1
         self.totalPages = 0
-        self.events.removeAll(keepCapacity: true)
+        self.clearEvents()
         let params = [
             "filters": [["name": "is_reported", "op": "eq", "val": "1"]
             ]
@@ -93,7 +99,7 @@ class APIManager: NSObject {
     func loadUnapprovedEvents(done: ((NSError!) -> Void)!) {
         self.currentPage = 1
         self.totalPages = 0
-        self.events.removeAll(keepCapacity: true)
+        self.clearEvents()
         let params = [
             "filters": [["name": "is_approved", "op": "eq", "val": "0"]
             ]
@@ -102,7 +108,7 @@ class APIManager: NSObject {
     }
     
     func loadEventsForSelectedCategories(done: ((NSError!) -> Void)!) {
-        self.events.removeAll(keepCapacity: true)
+        self.clearEvents()
         self.currentPage = 1
         if self.selectedCategories.count > 0 {
             let params: Dictionary<String, AnyObject> = self.getParamsForCategorySearch()
@@ -152,8 +158,12 @@ class APIManager: NSObject {
         self.updateEvent(event, done: done)
     }
     
-    func deleteEvent(event: Event, done: ((NSError!) -> Void)!) {
-        LoginManager.manager.DELETE("/api/event/\(event.id)", parameters: nil,
+    func deleteEvent(page: Int, index: Int, done: ((NSError!) -> Void)!) {
+        NSLog("Events: %@", self.events)
+        let eventsOnPage = self.events[page]!
+        let event = eventsOnPage[index]
+        self.events[page]?.removeAtIndex(index)
+        LoginManager.manager.DELETE("/event/\(event.id!)", parameters: nil,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
@@ -201,7 +211,7 @@ class APIManager: NSObject {
             ]]]
         ]
         self.currentPage = 1
-        self.events.removeAll(keepCapacity: true)
+        self.clearEvents()
         self.loadEventsWithParams(params, done: done)
     }
     
@@ -210,7 +220,9 @@ class APIManager: NSObject {
     }
     
     func loadCategories(done: ((NSError!) -> Void)!) {
-        LoginManager.manager.GET("/api/categories", parameters: nil,
+        let q = JSONStringify(["order_by": [["field":"category", "direction":"asc"]]])
+        LoginManager.manager.GET("/api/categories",
+            parameters: ["q":q, "results_per_page":"30"],
             success: { (NSURLSessionDataTask, response) -> Void in
                 let json = response as Dictionary<String, AnyObject>
                 let rawCategories = json["objects"]! as Array<Dictionary<String, AnyObject>>

@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 
 class EventDetailViewController: UIViewController {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
@@ -98,18 +98,18 @@ class EventDetailViewController: UIViewController {
             return ()
         })
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     @IBAction func onOpenPressed(sender: AnyObject) {
         if self.mapItem == nil {
             self.view.makeToast("Please wait for the map to finish loading")
             return ()
         }
-
+        
         let options = []
         self.mapItem.openInMapsWithLaunchOptions(nil)
         
@@ -125,7 +125,7 @@ class EventDetailViewController: UIViewController {
     @IBAction func onReportPressed(sender: AnyObject) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         if UserPreferenceManager.isAdmin() {
-            APIManager.sharedInstance.deleteEvent(event, done: { (NSError) -> Void in
+            APIManager.sharedInstance.deleteEvent(self.event.page!, index: self.event.index!, done: { (NSError) -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 if NSError != nil {
                     self.view.makeToast("An error occurred when trying to delete the event")

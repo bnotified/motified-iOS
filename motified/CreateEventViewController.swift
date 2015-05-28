@@ -197,7 +197,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                 "start": serverFormatter.stringFromDate(self.startPicker.date),
                 "end": serverFormatter.stringFromDate(self.endPicker.date),
                 "categories": [
-                    ["category": self.selectedCategory.category]
+                    ["category": self.selectedCategory.id]
                 ],
                 "address": self.selectedLocation["title"]! as String,
                 "address_name": self.selectedLocation["display"]! as String,

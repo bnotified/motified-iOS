@@ -154,9 +154,14 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Selected row")
+        var page = (indexPath.row / 30) as Int
+        let index = indexPath.row - (page * 30)
+        page++
+        NSLog("Page: %d Index: %d", page, index)
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let event = self.getEventAtIndexPath(indexPath)
+        event.page = page
+        event.index = index
         self.performSegueWithIdentifier(SEGUE_ID_EVENT_DETAIL, sender: event)
     }
     
