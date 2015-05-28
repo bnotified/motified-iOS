@@ -48,7 +48,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="310" translatesAutoresizingMaskIntoConstraints="NO" id="D2M-ug-j74">
-                                                    <rect key="frame" x="5" y="78" width="310" height="24"/>
+                                                    <rect key="frame" x="114" y="78" width="92" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -61,7 +61,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yd3-SU-Ms4">
-                                                    <rect key="frame" x="240" y="4" width="75" height="49"/>
+                                                    <rect key="frame" x="240" y="5" width="75" height="49"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="75" translatesAutoresizingMaskIntoConstraints="NO" id="Llf-rR-9qD">
                                                             <rect key="frame" x="0.0" y="0.0" width="75" height="32"/>
@@ -81,6 +81,7 @@
                                                         <constraint firstItem="Llf-rR-9qD" firstAttribute="width" secondItem="yd3-SU-Ms4" secondAttribute="width" id="8j3-9U-nXl"/>
                                                         <constraint firstAttribute="width" secondItem="1be-Mf-wKq" secondAttribute="width" id="Ieg-Wx-dpk"/>
                                                         <constraint firstAttribute="width" constant="75" id="K55-3F-2wn"/>
+                                                        <constraint firstAttribute="height" constant="49" id="X7A-DF-yQI"/>
                                                         <constraint firstItem="Llf-rR-9qD" firstAttribute="top" secondItem="yd3-SU-Ms4" secondAttribute="top" id="bEm-YY-LVO"/>
                                                         <constraint firstAttribute="bottom" secondItem="1be-Mf-wKq" secondAttribute="bottom" constant="5" id="gno-kd-pfh"/>
                                                         <constraint firstAttribute="centerX" secondItem="Llf-rR-9qD" secondAttribute="centerX" id="zKW-rL-sxE"/>
@@ -94,19 +95,16 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="top" secondItem="Kke-x1-nPP" secondAttribute="top" constant="5" id="463-WG-JYr"/>
                                                 <constraint firstItem="yd3-SU-Ms4" firstAttribute="trailing" secondItem="Kke-x1-nPP" secondAttribute="trailing" constant="-5" id="787-oO-5iy"/>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="top" secondItem="Kke-x1-nPP" secondAttribute="top" constant="5" id="7Sy-PC-SZ5"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="centerY" secondItem="8ag-QS-NvP" secondAttribute="centerY" id="AaT-1s-GqN"/>
                                                 <constraint firstAttribute="centerY" secondItem="D2M-ug-j74" secondAttribute="centerY" id="DbF-vt-qP5"/>
-                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="bottom" secondItem="V9V-SM-sDI" secondAttribute="bottom" constant="3" id="F5e-r6-9E6"/>
-                                                <constraint firstAttribute="centerX" secondItem="D2M-ug-j74" secondAttribute="centerX" id="Ghg-gE-5We"/>
-                                                <constraint firstItem="D2M-ug-j74" firstAttribute="trailing" secondItem="Kke-x1-nPP" secondAttribute="trailing" constant="-5" id="GzT-GE-as0"/>
-                                                <constraint firstItem="D2M-ug-j74" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leading" constant="5" id="J4G-Kj-6i9"/>
                                                 <constraint firstItem="V9V-SM-sDI" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leading" constant="10" id="NDy-zk-DbP"/>
                                                 <constraint firstAttribute="bottom" secondItem="APN-qa-yVt" secondAttribute="bottom" constant="5" id="PYf-oC-hIe"/>
-                                                <constraint firstItem="yd3-SU-Ms4" firstAttribute="top" secondItem="V9V-SM-sDI" secondAttribute="top" constant="-1" id="XCv-Lo-oUg"/>
                                                 <constraint firstItem="APN-qa-yVt" firstAttribute="leading" secondItem="8ag-QS-NvP" secondAttribute="trailing" constant="5" id="cZR-pR-GAh"/>
                                                 <constraint firstItem="4Ew-H5-92w" firstAttribute="leading" secondItem="Kke-x1-nPP" secondAttribute="leading" constant="3" id="dab-D2-irQ"/>
+                                                <constraint firstAttribute="centerX" secondItem="D2M-ug-j74" secondAttribute="centerX" id="h3V-JD-lsR"/>
                                                 <constraint firstItem="4Ew-H5-92w" firstAttribute="top" secondItem="D2M-ug-j74" secondAttribute="bottom" constant="10" id="qCa-ZG-dP2"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Ew-H5-92w" secondAttribute="trailing" constant="3" id="qpc-hI-GjX"/>
                                                 <constraint firstAttribute="centerX" secondItem="APN-qa-yVt" secondAttribute="centerX" id="wP4-XJ-oBa"/>

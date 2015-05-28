@@ -65,10 +65,8 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
         cell.setUpWithCategory(category)
         if selectedIndexes.containsObject(indexPath.row) {
-            NSLog("Setting selected")
             cell.setSelected()
         } else {
-            NSLog("SEtting unselected")
             cell.setUnselected()
         }
         cell.separatorInset = UIEdgeInsetsZero
@@ -81,16 +79,13 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("Selecting Cell at index: %d", indexPath.row)
         if self.hasShownToast == false {
             self.showHelperToast()
         }
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
         if selectedIndexes.containsObject(indexPath.row) {
-            NSLog("removing")
             selectedIndexes.removeObject(indexPath.row)
         } else {
-            NSLog("Adding")
             selectedIndexes.addObject(indexPath.row)
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)

@@ -56,8 +56,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if (manager.hasSelectedCategories()) {
             self.wasShowingSelected = true
-            self.navigationController?.navigationBar.makeToast(
-                manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionTop
+            self.tableView.makeToast(
+                manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter
             )
             MBProgressHUD(forView: self.view).show(true)
             manager.loadEventsForSelectedCategories({ (NSError) -> Void in

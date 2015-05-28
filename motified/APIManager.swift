@@ -30,7 +30,6 @@ class APIManager: NSObject {
     
     func addEvent(params: Dictionary<String, AnyObject>, done: ((NSError!) -> Void)!) -> Void {
         LoginManager.manager.POST("/api/events", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
-            NSLog("Created Event!")
             self.callDoneIfNotNil(done, withError: nil)
             }, { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error creating event: %@", NSError)
@@ -314,6 +313,15 @@ class APIManager: NSObject {
             let cat = self.getSelectedCategories()[0]
             let catString = cat.category
             return String(format: "Showing the %@ category", catString)
+        }
+        if self.selectedCategories.count > 4 {
+            NSLog("YAY HERE")
+            let strings = self.getSelectedCategoryStrings()
+            let otherStrings = strings[0..<2]
+            let numMore = strings.count - 2
+            let returnString = String(format: "Showing %@, and %d more", ", ".join(otherStrings), numMore)
+            NSLog("Return String: %@", returnString)
+            return returnString
         }
         return String(format: "Showing categories: %@", ", ".join(self.getSelectedCategoryStrings()))
     }

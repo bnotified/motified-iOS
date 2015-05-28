@@ -7,8 +7,8 @@
 
 import UIKit
 
-//let BASE_URL: String = "http://localhost:5000/"
-let BASE_URL: String = "http://ganemone.pythonanywhere.com/"
+let BASE_URL: String = "http://localhost:5000/"
+//let BASE_URL: String = "http://ganemone.pythonanywhere.com/"
 
 class LoginManager {
     
