@@ -26,3 +26,6 @@ let PREF_DAY_PRIOR_KEY: String = "pref_day_prior_key"
 
 let IS_OS_7_OR_LATER = UIDevice.currentDevice().systemVersion.toInt() >= 7
 let IS_OS_8_OR_LATER = UIDevice.currentDevice().systemVersion.toInt() >= 8
+
+//let BASE_URL: String = "http://localhost:5000/"
+let BASE_URL: String = "http://ganemone.pythonanywhere.com/"

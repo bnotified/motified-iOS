@@ -105,13 +105,11 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func makeRequest() {
         if self.searchBar.text.utf16Count == 0 {
-            NSLog("Changed to nothing")
             if self.events.count == 0 {
                 APIManager.sharedInstance.reloadEvents(nil)
             }
             return ()
         }
-        NSLog("Making Request: %@", self.searchBar.text)
         APIManager.sharedInstance.searchEvents(self.searchBar.text, done: { (NSError) -> Void in
         })
     }

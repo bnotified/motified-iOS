@@ -176,6 +176,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchBar" destination="PQd-iz-PiT" id="6bq-H8-3TH"/>
+                        <outlet property="searchBarConstraint" destination="Gva-b5-Fvl" id="LV0-1T-Trf"/>
                         <outlet property="segmentControlView" destination="w5O-IW-NGx" id="UVm-ym-GYl"/>
                         <outlet property="segmentedControl" destination="ZCa-Yc-lCF" id="uPJ-Hf-Gcj"/>
                         <outlet property="tableView" destination="yHd-MK-1Tg" id="OXh-eJ-Jd2"/>
