@@ -61,6 +61,9 @@ class UserProfileViewController: UIViewController {
     }
     
     @IBAction func onContact(sender: AnyObject) {
+        let email = "bnotified@gmail.com"
+        let url = NSURL(string: "mailto:\(email)")
+        UIApplication.sharedApplication().openURL(url)
     }
     
     @IBAction func onAbout(sender: AnyObject) {
