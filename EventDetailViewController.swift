@@ -147,7 +147,7 @@ class EventDetailViewController: UIViewController {
     }
     
     func showMessageThenPop(message: String) {
-        self.view.makeToast(message, duration: 2, position: CSToastPositionCenter)
+        self.view.makeToast(message, duration: 1.5, position: CSToastPositionCenter)
         delay(2, { () -> () in
             self.navigationController?.popToRootViewControllerAnimated(true)
             return ()

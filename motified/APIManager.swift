@@ -131,6 +131,7 @@ class APIManager: NSObject {
         LoginManager.manager.POST("/api/event_subscriptions", parameters: data,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 event.isSubscribed = true
+                event.subscribedUsers = event.subscribedUsers! + 1
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
             }, { (NSURLSessionDataTask, NSError) -> Void in
@@ -146,6 +147,7 @@ class APIManager: NSObject {
         LoginManager.manager.DELETE("/api/event_subscriptions", parameters: finalParams,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 event.isSubscribed = false
+                event.subscribedUsers = event.subscribedUsers! - 1
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
             }, { (NSURLSessionDataTask, NSError) -> Void in
