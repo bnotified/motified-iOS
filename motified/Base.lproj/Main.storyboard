@@ -224,7 +224,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onAbout:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="6xM-PG-eh7"/>
+                                    <segue destination="Qbe-Bq-bKm" kind="push" id="TNg-z3-dfD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-5z-4lI">
@@ -252,7 +252,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onAgreement:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="Qvf-pL-KIC"/>
+                                    <segue destination="eWM-Ug-IuE" kind="push" identifier="UserAgreementPushSegue" id="hHr-4X-Ied"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lms-SH-Tv0">
@@ -338,6 +338,134 @@
             </objects>
             <point key="canvasLocation" x="1585" y="675"/>
         </scene>
+        <!--About b'Notified-->
+        <scene sceneID="ZPJ-TC-akY">
+            <objects>
+                <viewController id="Qbe-Bq-bKm" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ff5-AR-TQZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="MTr-GJ-mOl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tSM-7b-7X2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng4-H7-C1A">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
+
+Find out about awesome events in town or on campus, and save them directly to your phone’s calendar. You can also instantly access directions to an event from its page.
+ 
+View the entire local feed, or customize your feed using categories to help you find posts that match your interests. 
+
+The content on b’Notified is user-generated, so you can post your own organization’s events to the feed to reach a larger audience – free of charge. Forgo the paper waste, cost, and limited scope of flyering. b’notified is a wide-reaching platform that streamlines information to your audience effectively and efficiently.
+
+With b’Notified, it’s easy to keep up with the buzz on campus. </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="Ng4-H7-C1A" secondAttribute="centerX" id="TR4-RY-LLu"/>
+                            <constraint firstAttribute="height" secondItem="Ng4-H7-C1A" secondAttribute="height" id="bZA-vS-uxI"/>
+                            <constraint firstAttribute="width" secondItem="Ng4-H7-C1A" secondAttribute="width" id="hCR-5f-n4F"/>
+                            <constraint firstAttribute="centerY" secondItem="Ng4-H7-C1A" secondAttribute="centerY" id="n2C-vD-sds"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="About b'Notified" id="De5-aM-PgS"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CpN-qP-yle" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="675"/>
+        </scene>
+        <!--User Agreement-->
+        <scene sceneID="Nhe-yN-7Sc">
+            <objects>
+                <viewController id="eWM-Ug-IuE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="txV-pJ-QOA"/>
+                        <viewControllerLayoutGuide type="bottom" id="JVJ-KW-j2G"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kxw-Er-ROV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMp-X9-pds">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Terms and Conditions of Use
+
+1. Terms
+
+By accessing this application, you are agreeing to be bound by these application Terms and Conditions of Use, all applicable laws and regulations, and agree that you are responsible for compliance with any applicable local laws. If you do not agree with any of these terms, you are prohibited from using or accessing this site. The materials contained in this application are protected by applicable copyright and trade mark law.
+
+2. Use License
+
+Permission is granted to temporarily download one copy of the materials (information or software) on B'Notified's application for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+modify or copy the materials;
+use the materials for any commercial purpose, or for any public display (commercial or non-commercial);
+attempt to decompile or reverse engineer any software contained on B'Notified's application;
+remove any copyright or other proprietary notations from the materials; or
+transfer the materials to another person or "mirror" the materials on any other server.
+This license shall automatically terminate if you violate any of these restrictions and may be terminated by B'Notified at any time. Upon terminating your viewing of these materials or upon the termination of this license, you must destroy any downloaded materials in your possession whether in electronic or printed format.
+3. Disclaimer
+
+The materials on B'Notified's application are provided "as is". B'Notified makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties, including without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights. Further, B'Notified does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its Internet application or otherwise relating to such materials or on any sites linked to this site.
+4. Limitations
+
+In no event shall B'Notified or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption,) arising out of the use or inability to use the materials on B'Notified's Internet site, even if B'Notified or a B'Notified authorized representative has been notified orally or in writing of the possibility of such damage. Because some jurisdictions do not allow limitations on implied warranties, or limitations of liability for consequential or incidental damages, these limitations may not apply to you.
+
+5. Revisions and Errata
+
+The materials appearing on B'Notified's application could include technical, typographical, or photographic errors. B'Notified does not warrant that any of the materials on its application are accurate, complete, or current. B'Notified may make changes to the materials contained on its application at any time without notice. B'Notified does not, however, make any commitment to update the materials.
+
+6. Links
+
+B'Notified has not reviewed all of the sites linked to its Internet application and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by B'Notified of the site. Use of any such linked application is at the user's own risk.
+
+7. Site Terms of Use Modifications
+
+B'Notified may revise these terms of use for its application at any time without notice. By using this application you are agreeing to be bound by the then current version of these Terms and Conditions of Use.
+
+8. Governing Law
+
+Any claim relating to B'Notified's application shall be governed by the laws of the State of Michigan without regard to its conflict of law provisions.
+
+Privacy Policy
+
+Your privacy is very important to us. Accordingly, we have developed this Policy in order for you to understand how we collect, use, communicate and disclose and make use of personal information. The following outlines our privacy policy.
+
+Before or at the time of collecting personal information, we will identify the purposes for which information is being collected.
+We will collect and use of personal information solely with the objective of fulfilling those purposes specified by us and for other compatible purposes, unless we obtain the consent of the individual concerned or as required by law.
+We will only retain personal information as long as necessary for the fulfillment of those purposes.
+We will collect personal information by lawful and fair means and, where appropriate, with the knowledge or consent of the individual concerned.
+Personal data should be relevant to the purposes for which it is to be used, and, to the extent necessary for those purposes, should be accurate, complete, and up-to-date.
+We will protect personal information by reasonable security safeguards against loss or theft, as well as unauthorized access, disclosure, copying, use or modification.
+We will make readily available to customers information about our policies and practices relating to the management of personal information.
+
+We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained.
+
+</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="iMp-X9-pds" secondAttribute="centerX" id="1e1-g5-Bhe"/>
+                            <constraint firstItem="iMp-X9-pds" firstAttribute="width" secondItem="Kxw-Er-ROV" secondAttribute="width" id="QLd-M3-t7Q"/>
+                            <constraint firstAttribute="centerY" secondItem="iMp-X9-pds" secondAttribute="centerY" id="QXb-DI-G1L"/>
+                            <constraint firstItem="iMp-X9-pds" firstAttribute="height" secondItem="Kxw-Er-ROV" secondAttribute="height" id="lK7-1F-wK0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="User Agreement" id="dvJ-wt-C2M"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dq8-ib-Qyt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="1296"/>
+        </scene>
         <!--Categories-->
         <scene sceneID="nop-WT-MbL">
             <objects>
@@ -368,8 +496,8 @@
                                                         <constraint firstAttribute="width" constant="50" id="YZ1-PY-w26"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="209" translatesAutoresizingMaskIntoConstraints="NO" id="mp2-tE-1LH">
-                                                    <rect key="frame" x="66" y="2" width="215" height="65"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="209" translatesAutoresizingMaskIntoConstraints="NO" id="mp2-tE-1LH">
+                                                    <rect key="frame" x="66" y="2" width="42" height="65"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="ePG-9I-PAu"/>
                                                     </constraints>
@@ -842,8 +970,26 @@
                                     <action selector="didPressLogin:" destination="0Ox-7w-tle" eventType="touchUpInside" id="L0T-kS-Asi"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="By registering for or logging into b'Notified, you agree to the Terms and Conditions of use." translatesAutoresizingMaskIntoConstraints="NO" id="xok-fz-ueU">
+                                <rect key="frame" x="5" y="142" width="299" height="67"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="67" id="ZZ9-OA-DgB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VU-27-be4">
+                                <rect key="frame" x="5" y="205" width="186" height="30"/>
+                                <state key="normal" title="View Terms and Conditions">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="eWM-Ug-IuE" kind="push" id="6I1-1c-UCw"/>
+                                </connections>
+                            </button>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Error message goes here" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qb-qg-Daw">
-                                <rect key="frame" x="5" y="142" width="310" height="100"/>
+                                <rect key="frame" x="5" y="243" width="310" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="yja-Zv-BAj"/>
@@ -856,18 +1002,24 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="SNG-7H-JAZ" firstAttribute="trailing" secondItem="R1s-EF-MJw" secondAttribute="trailing" id="1cA-N7-7Us"/>
-                            <constraint firstItem="6qb-qg-Daw" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="122" id="8qh-hj-3VL"/>
                             <constraint firstItem="R1s-EF-MJw" firstAttribute="trailing" secondItem="Uq1-ci-Uq1" secondAttribute="trailing" constant="-5" id="93B-1R-gYn"/>
                             <constraint firstItem="58W-Sc-zya" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="8" id="CLN-hM-Tqf"/>
+                            <constraint firstItem="0VU-27-be4" firstAttribute="leading" secondItem="58W-Sc-zya" secondAttribute="leading" id="GCM-2x-7l7"/>
                             <constraint firstItem="58W-Sc-zya" firstAttribute="leading" secondItem="Uq1-ci-Uq1" secondAttribute="leading" constant="5" id="GkX-nO-Xfl"/>
                             <constraint firstItem="R1s-EF-MJw" firstAttribute="leading" secondItem="Uq1-ci-Uq1" secondAttribute="leading" constant="5" id="Ilg-A0-H99"/>
+                            <constraint firstItem="58W-Sc-zya" firstAttribute="leading" secondItem="xok-fz-ueU" secondAttribute="leading" id="JA7-B8-hqG"/>
+                            <constraint firstItem="0VU-27-be4" firstAttribute="top" secondItem="xok-fz-ueU" secondAttribute="bottom" constant="-4" id="Lol-iC-Mea"/>
                             <constraint firstItem="R1s-EF-MJw" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="46" id="PaV-eg-XmF"/>
                             <constraint firstItem="SNG-7H-JAZ" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="84" id="RVN-DP-h3a"/>
                             <constraint firstItem="6qb-qg-Daw" firstAttribute="leading" secondItem="58W-Sc-zya" secondAttribute="leading" id="Tfu-Qo-Ldp"/>
+                            <constraint firstItem="6qb-qg-Daw" firstAttribute="top" secondItem="0VU-27-be4" secondAttribute="bottom" constant="8" id="boj-8d-iQh"/>
                             <constraint firstItem="hLK-Y2-C0k" firstAttribute="leading" secondItem="R1s-EF-MJw" secondAttribute="leading" id="eUg-fW-ifz"/>
                             <constraint firstItem="58W-Sc-zya" firstAttribute="trailing" secondItem="Uq1-ci-Uq1" secondAttribute="trailing" constant="-5" id="ehq-9i-X37"/>
+                            <constraint firstItem="xok-fz-ueU" firstAttribute="top" secondItem="hLK-Y2-C0k" secondAttribute="bottom" constant="8" id="fxo-W0-NZu"/>
                             <constraint firstItem="hLK-Y2-C0k" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="84" id="hPM-PB-vgp"/>
                             <constraint firstItem="6qb-qg-Daw" firstAttribute="trailing" secondItem="58W-Sc-zya" secondAttribute="trailing" id="m1D-0V-RUH"/>
+                            <constraint firstItem="58W-Sc-zya" firstAttribute="trailing" secondItem="xok-fz-ueU" secondAttribute="trailing" constant="11" id="nKL-a6-vvY"/>
+                            <constraint firstItem="0VU-27-be4" firstAttribute="trailing" secondItem="58W-Sc-zya" secondAttribute="trailing" constant="-124" id="zWG-sr-Bts"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="b'Notified" id="y4p-b8-ePq"/>
@@ -955,7 +1107,103 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cCf-a7-2lZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-328" y="0.0"/>
+            <point key="canvasLocation" x="-342" y="0.0"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="9o3-mL-yQT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ECt-Yh-y1V" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1tH-ck-Z4t">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Qbe-Bq-bKm" kind="relationship" relationship="rootViewController" id="ekL-2G-Qfg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="086-sc-3hX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1965" y="675"/>
+        </scene>
+        <!--About b'Notified-->
+        <scene sceneID="PhO-Za-G2v">
+            <objects>
+                <viewController id="hMv-Gd-bV6" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lgO-A7-gI0"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xjc-H1-FGi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DRV-WA-Uuc">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDm-ch-Y7h">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
+
+Find out about awesome events in town or on campus, and save them directly to your phone’s calendar. You can also instantly access directions to an event from its page.
+ 
+View the entire local feed, or customize your feed using categories to help you find posts that match your interests. 
+
+The content on b’Notified is user-generated, so you can post your own organization’s events to the feed to reach a larger audience – free of charge. Forgo the paper waste, cost, and limited scope of flyering. b’notified is a wide-reaching platform that streamlines information to your audience effectively and efficiently.
+
+With b’Notified, it’s easy to keep up with the buzz on campus. </mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="tDm-ch-Y7h" secondAttribute="centerY" id="5Pr-3Y-Jmx"/>
+                            <constraint firstAttribute="height" secondItem="tDm-ch-Y7h" secondAttribute="height" id="Mvn-d1-WtB"/>
+                            <constraint firstAttribute="width" secondItem="tDm-ch-Y7h" secondAttribute="width" id="UHf-o6-ZIw"/>
+                            <constraint firstAttribute="centerX" secondItem="tDm-ch-Y7h" secondAttribute="centerX" id="kVx-MR-fth"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="About b'Notified" id="Y6i-MF-Mjd"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c3Z-JO-v3e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2355" y="675"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="QCV-T5-QXy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7UT-SC-u26" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hHb-rB-4kq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="hMv-Gd-bV6" kind="relationship" relationship="rootViewController" id="pUX-jw-nPm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ROP-B4-rWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1965" y="675"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IUW-E0-UFJ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1Ti-6s-KNk" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="1rl-T5-sIW">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="eWM-Ug-IuE" kind="relationship" relationship="rootViewController" id="bGx-qR-fP3"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iir-hA-Qtw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1967" y="1296"/>
         </scene>
     </scenes>
     <resources>
@@ -970,8 +1218,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="b4E-xH-XIR"/>
         <segue reference="p3W-ef-F0q"/>
+        <segue reference="5vp-XU-0nC"/>
+        <segue reference="TNg-z3-dfD"/>
+        <segue reference="hHr-4X-Ied"/>
         <segue reference="wBx-K2-qvi"/>
         <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>
