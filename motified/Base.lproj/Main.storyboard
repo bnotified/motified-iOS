@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="0Ox-7w-tle">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kyy-P1-ZMi">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -224,7 +224,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="Qbe-Bq-bKm" kind="push" id="TNg-z3-dfD"/>
+                                    <segue destination="Qbe-Bq-bKm" kind="push" identifier="SegueIDAboutBnotified" id="TNg-z3-dfD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIe-5z-4lI">
@@ -238,7 +238,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onLogout:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="H5r-Nb-hgx"/>
+                                    <action selector="onLogout:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="R1k-Iv-DvL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mA-mc-Eed">
@@ -331,12 +331,12 @@
                         <outlet property="hourPriorSwitch" destination="lms-SH-Tv0" id="JDc-R2-5WP"/>
                         <outlet property="logoutBtn" destination="tIe-5z-4lI" id="JCi-Eq-2Gi"/>
                         <outlet property="onStartSwitch" destination="x58-HZ-kyO" id="hO9-hp-sY9"/>
-                        <segue destination="0Ox-7w-tle" kind="modal" identifier="segue_id_logout" id="b4E-xH-XIR"/>
+                        <segue destination="0Ox-7w-tle" kind="push" identifier="segue_id_logout" id="IwF-uZ-lqy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="675"/>
+            <point key="canvasLocation" x="1457" y="675"/>
         </scene>
         <!--About b'Notified-->
         <scene sceneID="ZPJ-TC-akY">
@@ -464,7 +464,7 @@ We are committed to conducting our business in accordance with these principles 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dq8-ib-Qyt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2355" y="1296"/>
+            <point key="canvasLocation" x="2383" y="1424"/>
         </scene>
         <!--Categories-->
         <scene sceneID="nop-WT-MbL">
@@ -550,7 +550,7 @@ We are committed to conducting our business in accordance with these principles 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6H8-TE-0wd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1585" y="-22"/>
+            <point key="canvasLocation" x="2117" y="-22"/>
         </scene>
         <!--Event Detail-->
         <scene sceneID="WE4-yF-Ky8">
@@ -687,7 +687,7 @@ We are committed to conducting our business in accordance with these principles 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="icE-eM-1Ln" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2443" y="-384"/>
+            <point key="canvasLocation" x="2975" y="-384"/>
         </scene>
         <!--New Event-->
         <scene sceneID="ReT-bo-8x3">
@@ -861,7 +861,7 @@ We are committed to conducting our business in accordance with these principles 
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="532" y="0.0"/>
+            <point key="canvasLocation" x="1064" y="0.0"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="d6t-Ov-H7J">
@@ -912,13 +912,16 @@ We are committed to conducting our business in accordance with these principles 
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Sny-1H-GUr">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="7tf-Tb-PIf" kind="relationship" relationship="rootViewController" id="XKJ-mk-wO4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Acx-YU-KGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1053" y="-3"/>
+            <point key="canvasLocation" x="1585" y="-3"/>
         </scene>
         <!--b'Notified-->
         <scene sceneID="bu0-gr-yzh">
@@ -933,17 +936,17 @@ We are committed to conducting our business in accordance with these principles 
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="58W-Sc-zya">
-                                <rect key="frame" x="5" y="28" width="310" height="30"/>
+                                <rect key="frame" x="5" y="72" width="310" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1s-EF-MJw">
-                                <rect key="frame" x="5" y="66" width="310" height="30"/>
+                                <rect key="frame" x="5" y="110" width="310" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-Y2-C0k">
-                                <rect key="frame" x="5" y="104" width="80" height="30"/>
+                                <rect key="frame" x="5" y="148" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.50196078430000002" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="vZC-i4-enR"/>
@@ -957,7 +960,7 @@ We are committed to conducting our business in accordance with these principles 
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNG-7H-JAZ">
-                                <rect key="frame" x="235" y="104" width="80" height="30"/>
+                                <rect key="frame" x="235" y="148" width="80" height="30"/>
                                 <color key="backgroundColor" red="0.16078431369999999" green="0.50196078430000002" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="MKP-4L-rdY"/>
@@ -971,7 +974,7 @@ We are committed to conducting our business in accordance with these principles 
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="By registering for or logging into b'Notified, you agree to the Terms and Conditions of use." translatesAutoresizingMaskIntoConstraints="NO" id="xok-fz-ueU">
-                                <rect key="frame" x="5" y="142" width="299" height="67"/>
+                                <rect key="frame" x="1" y="186" width="303" height="67"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="67" id="ZZ9-OA-DgB"/>
@@ -980,16 +983,16 @@ We are committed to conducting our business in accordance with these principles 
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0VU-27-be4">
-                                <rect key="frame" x="5" y="205" width="186" height="30"/>
+                                <rect key="frame" x="5" y="249" width="186" height="30"/>
                                 <state key="normal" title="View Terms and Conditions">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="eWM-Ug-IuE" kind="push" id="6I1-1c-UCw"/>
+                                    <segue destination="eWM-Ug-IuE" kind="push" identifier="SegueIDAbout" id="6I1-1c-UCw"/>
                                 </connections>
                             </button>
                             <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Error message goes here" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6qb-qg-Daw">
-                                <rect key="frame" x="5" y="243" width="310" height="100"/>
+                                <rect key="frame" x="1" y="287" width="314" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="yja-Zv-BAj"/>
@@ -1007,11 +1010,11 @@ We are committed to conducting our business in accordance with these principles 
                             <constraint firstItem="0VU-27-be4" firstAttribute="leading" secondItem="58W-Sc-zya" secondAttribute="leading" id="GCM-2x-7l7"/>
                             <constraint firstItem="58W-Sc-zya" firstAttribute="leading" secondItem="Uq1-ci-Uq1" secondAttribute="leading" constant="5" id="GkX-nO-Xfl"/>
                             <constraint firstItem="R1s-EF-MJw" firstAttribute="leading" secondItem="Uq1-ci-Uq1" secondAttribute="leading" constant="5" id="Ilg-A0-H99"/>
-                            <constraint firstItem="58W-Sc-zya" firstAttribute="leading" secondItem="xok-fz-ueU" secondAttribute="leading" id="JA7-B8-hqG"/>
+                            <constraint firstItem="58W-Sc-zya" firstAttribute="leading" secondItem="xok-fz-ueU" secondAttribute="leading" constant="4" id="JA7-B8-hqG"/>
                             <constraint firstItem="0VU-27-be4" firstAttribute="top" secondItem="xok-fz-ueU" secondAttribute="bottom" constant="-4" id="Lol-iC-Mea"/>
                             <constraint firstItem="R1s-EF-MJw" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="46" id="PaV-eg-XmF"/>
                             <constraint firstItem="SNG-7H-JAZ" firstAttribute="top" secondItem="4NT-Zh-a31" secondAttribute="bottom" constant="84" id="RVN-DP-h3a"/>
-                            <constraint firstItem="6qb-qg-Daw" firstAttribute="leading" secondItem="58W-Sc-zya" secondAttribute="leading" id="Tfu-Qo-Ldp"/>
+                            <constraint firstItem="6qb-qg-Daw" firstAttribute="leading" secondItem="58W-Sc-zya" secondAttribute="leading" constant="-4" id="Tfu-Qo-Ldp"/>
                             <constraint firstItem="6qb-qg-Daw" firstAttribute="top" secondItem="0VU-27-be4" secondAttribute="bottom" constant="8" id="boj-8d-iQh"/>
                             <constraint firstItem="hLK-Y2-C0k" firstAttribute="leading" secondItem="R1s-EF-MJw" secondAttribute="leading" id="eUg-fW-ifz"/>
                             <constraint firstItem="58W-Sc-zya" firstAttribute="trailing" secondItem="Uq1-ci-Uq1" secondAttribute="trailing" constant="-5" id="ehq-9i-X37"/>
@@ -1034,7 +1037,7 @@ We are committed to conducting our business in accordance with these principles 
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0J-yO-EqI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="44" y="0.0"/>
+            <point key="canvasLocation" x="450" y="0.0"/>
         </scene>
         <!--Profile-->
         <scene sceneID="udP-73-Ft7">
@@ -1089,25 +1092,7 @@ We are committed to conducting our business in accordance with these principles 
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="scS-lg-wag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2033" y="-384"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="p9f-cV-hKj">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2f2-hW-LAF" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="G3g-ni-MfW">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="0Ox-7w-tle" kind="relationship" relationship="rootViewController" id="5vp-XU-0nC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cCf-a7-2lZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-342" y="0.0"/>
+            <point key="canvasLocation" x="2565" y="-384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="9o3-mL-yQT">
@@ -1203,7 +1188,25 @@ With b’Notified, it’s easy to keep up with the buzz on campus. </mutableStri
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iir-hA-Qtw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1967" y="1296"/>
+            <point key="canvasLocation" x="1977" y="1424"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xPZ-jX-wAc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Kyy-P1-ZMi" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="7ma-dV-FJz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0Ox-7w-tle" kind="relationship" relationship="rootViewController" id="zTS-wi-f04"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xS7-We-Vmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="44" y="0.0"/>
         </scene>
     </scenes>
     <resources>
@@ -1219,9 +1222,9 @@ With b’Notified, it’s easy to keep up with the buzz on campus. </mutableStri
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="p3W-ef-F0q"/>
-        <segue reference="5vp-XU-0nC"/>
+        <segue reference="IwF-uZ-lqy"/>
         <segue reference="TNg-z3-dfD"/>
-        <segue reference="hHr-4X-Ied"/>
+        <segue reference="6I1-1c-UCw"/>
         <segue reference="wBx-K2-qvi"/>
         <segue reference="aGT-W0-eI1"/>
     </inferredMetricsTieBreakers>

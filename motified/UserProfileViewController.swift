@@ -65,11 +65,5 @@ class UserProfileViewController: UIViewController {
         let url = NSURL(string: "mailto:\(email)")
         UIApplication.sharedApplication().openURL(url)
     }
-    
-    @IBAction func onAbout(sender: AnyObject) {
-    }
-    
-    @IBAction func onAgreement(sender: AnyObject) {
-    }
 }
 

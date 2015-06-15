@@ -22,6 +22,7 @@ class AuthManagingViewController: UIViewController {
         super.viewDidLoad()
         addBorder(self.registerBtn)
         addBorder(self.loginBtn)
+        self.navigationItem.hidesBackButton = true
     }
     
     override func viewDidAppear(animated: Bool) {
