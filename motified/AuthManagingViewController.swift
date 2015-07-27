@@ -55,10 +55,10 @@ class AuthManagingViewController: UIViewController {
         let password = UserPreferenceManager.loadPassword()
         self.usernameTextField.text = username
         self.passwordTextField.text = password
-        self.loginWithUsername(username, password: password)
+        self.loginWithUsername(username, password: password, count: 0);
     }
     
-    func loginWithUsername(username: String, password: String) {
+    func loginWithUsername(username: String, password: String, count: Int) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.loginWithUsername(username, password: password,
             { () -> Void in
@@ -69,6 +69,9 @@ class AuthManagingViewController: UIViewController {
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 if let response: NSHTTPURLResponse = NSURLSessionDataTask.response as? NSHTTPURLResponse {
                     NSLog("Status Code: %@", response)
+                    if count < 3 {
+                        return self.loginWithUsername(username, password: password, count: count + 1)
+                    }
                     if response.statusCode == 500 {
                         self.showError("Internal server error. Please try again latter")
                     } else if response.statusCode == 401 {
@@ -134,6 +137,6 @@ class AuthManagingViewController: UIViewController {
     @IBAction func didPressLogin(sender: AnyObject) {
         let username = self.usernameTextField.text
         let password = self.passwordTextField.text
-        self.loginWithUsername(username, password: password)
+        self.loginWithUsername(username, password: password, count: 0)
     }
 }

@@ -176,7 +176,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     internal func isLocationValid() -> Bool {
-        return self.selectedLocation != nil || true
+        return self.selectedLocation != nil
     }
     
     internal func closeKeyboard() {
@@ -200,8 +200,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                 "categories": [
                     ["id": self.selectedCategory.id]
                 ],
-                "address": "Some Address", //self.selectedLocation["title"]! as String,
-                "address_name": "Some Address Name", //self.selectedLocation["display"]! as String,
+                "address": self.selectedLocation["title"]! as String,
+                "address_name": self.selectedLocation["display"]! as String,
                 "is_reported": 0
             ]
             self.closeKeyboard()
