@@ -38,7 +38,7 @@ class UserProfileViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SEGUE_ID_LOGOUT {
-            let dest = segue.destinationViewController as AuthManagingViewController
+            let dest = segue.destinationViewController as! AuthManagingViewController
             dest.shouldLogIn = false
         }
     }
@@ -62,7 +62,7 @@ class UserProfileViewController: UIViewController {
     
     @IBAction func onContact(sender: AnyObject) {
         let email = "bnotified@gmail.com"
-        let url = NSURL(string: "mailto:\(email)")
+        let url: NSURL = NSURL(string: "mailto:\(email)")!
         UIApplication.sharedApplication().openURL(url)
     }
 }

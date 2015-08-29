@@ -13,7 +13,7 @@ class CategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var categoryImageView: UIImageView!
     
-    var isSelected: Bool = false
+    var _isSelected: Bool = false
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,12 +30,12 @@ class CategoryTableViewCell: UITableViewCell {
     }
     
     func setSelected() {
-        self.isSelected = true
+        self._isSelected = true
         self.accessoryType = UITableViewCellAccessoryType.Checkmark
     }
     
     func setUnselected() {
-        self.isSelected = false
+        self._isSelected = false
         self.accessoryType = UITableViewCellAccessoryType.None
     }
 

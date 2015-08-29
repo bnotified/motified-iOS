@@ -61,7 +61,7 @@ class AuthManagingViewController: UIViewController {
     func loginWithUsername(username: String, password: String, count: Int) {
         MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         LoginManager.loginWithUsername(username, password: password,
-            { () -> Void in
+            success: { () -> Void in
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 self.didLogIn()
                 return ()
@@ -69,7 +69,7 @@ class AuthManagingViewController: UIViewController {
                 MBProgressHUD.hideAllHUDsForView(self.view, animated: true)
                 if let response: NSHTTPURLResponse = NSURLSessionDataTask.response as? NSHTTPURLResponse {
                     NSLog("Status Code: %@", response)
-                    if count < 3 {
+                    if count < 1 {
                         return self.loginWithUsername(username, password: password, count: count + 1)
                     }
                     if response.statusCode == 500 {
@@ -108,13 +108,13 @@ class AuthManagingViewController: UIViewController {
     
     func isPasswordValid(password: String) -> Bool {
         let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        return (password.utf16Count >= 6 && password.rangeOfCharacterFromSet(whitespace) == nil)
+        return (count(password) >= 6 && password.rangeOfCharacterFromSet(whitespace) == nil)
     }
     
     func isUsernameValid(username: String) -> Bool {
         let validSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_")
         let invertedSet = validSet.invertedSet
-        return (username.utf16Count >= 1 && username.rangeOfCharacterFromSet(invertedSet) == nil)
+        return (count(username) >= 1 && username.rangeOfCharacterFromSet(invertedSet) == nil)
     }
     
     override func didReceiveMemoryWarning() {

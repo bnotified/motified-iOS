@@ -60,7 +60,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var selectedIndexes = APIManager.sharedInstance.selectedCategories
-        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as CategoryTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CategoryTableViewCell
         cell.backgroundColor = ColorManager.getColorPurple()
         let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
         cell.setUpWithCategory(category)

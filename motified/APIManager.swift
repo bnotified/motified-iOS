@@ -37,7 +37,7 @@ class APIManager: NSObject {
     func addEvent(params: Dictionary<String, AnyObject>, done: ((NSError!) -> Void)!) -> Void {
         LoginManager.manager.POST("/api/events", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
             self.callDoneIfNotNil(done, withError: nil)
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error creating event: %@", NSError)
                 self.callDoneIfNotNil(done, withError: NSError)
         })
@@ -54,7 +54,7 @@ class APIManager: NSObject {
             if finalParams.indexForKey("filters") == nil {
                 finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
             }
-            var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"]! as Array<Dictionary<String, AnyObject>>
+            var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"] as! Array<Dictionary<String, AnyObject>>
             filters.append(["and": [
                 ["name":"is_approved", "op":"eq", "val": true],
                 ["name":"is_reported", "op":"eq", "val": false]
@@ -66,13 +66,13 @@ class APIManager: NSObject {
             parameters: ["q": JSONStringify(finalParams), "page": self.currentPage, "results_per_page": 30],
             success: { (NSURLSessionDataTask, response) -> Void in
                 self.currentPage++
-                let json = response as Dictionary<String, AnyObject>
+                let json = response as! Dictionary<String, AnyObject>
                 self.setEventsFromResponse(json)
                 if done != nil {
                     done(nil)
                 }
                 self.emitEventsChanged()
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error loading events %@", NSError)
                 if done != nil {
                     done(NSError)
@@ -134,7 +134,7 @@ class APIManager: NSObject {
                 event.subscribedUsers = event.subscribedUsers! + 1
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 self.callDoneIfNotNil(done, withError: NSError)
         })
     }
@@ -150,7 +150,7 @@ class APIManager: NSObject {
                 event.subscribedUsers = event.subscribedUsers! - 1
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 self.callDoneIfNotNil(done, withError: NSError)
         })
     }
@@ -169,7 +169,7 @@ class APIManager: NSObject {
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 self.callDoneIfNotNil(done, withError: NSError)
         })
     }
@@ -180,7 +180,7 @@ class APIManager: NSObject {
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 self.callDoneIfNotNil(done, withError: nil)
                 self.emitEventsChanged()
-            }, { (NSURLSessionDataTask, NSError) -> Void in
+            }, failure: { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error updating event: %@", NSError)
                 self.callDoneIfNotNil(done, withError: NSError)
         })
@@ -226,15 +226,17 @@ class APIManager: NSObject {
         LoginManager.manager.GET("/api/categories",
             parameters: ["q":q, "results_per_page":"30"],
             success: { (NSURLSessionDataTask, response) -> Void in
-                let json = response as Dictionary<String, AnyObject>
-                let rawCategories = json["objects"]! as Array<Dictionary<String, AnyObject>>
+                let json = response as! Dictionary<String, AnyObject>
+                let rawCategories = json["objects"] as! Array<Dictionary<String, AnyObject>>
                 self.categories = rawCategories.map({ (cat) -> EventCategory in
-                    return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
+                    println("Mapping Category");
+                    println(cat);
+                    return EventCategory(category: cat["category"] as! String, id: cat["id"] as! Int)
                 })
                 self.emitCategoriesChanged()
                 self.callDoneIfNotNil(done, withError: nil)
             },
-            { (NSURLSessionDataTask, NSError) -> Void in
+            failure: { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error loading categories: %@", NSError)
                 self.emitCategoriesError()
                 self.callDoneIfNotNil(done, withError: NSError)
@@ -244,7 +246,7 @@ class APIManager: NSObject {
     func getSelectedCategories() -> Array<EventCategory> {
         var selected: Array<EventCategory> = Array<EventCategory>()
         for index in self.selectedCategories {
-            selected.append(self.categories[index as Int])
+            selected.append(self.categories[index as! Int])
         }
         return selected
     }
@@ -269,31 +271,31 @@ class APIManager: NSObject {
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss"
         
-        let num_results = response["num_results"]! as Int
-        let objects = response["objects"]! as Array<AnyObject>
-        let page = response["page"]! as Int
-        self.totalPages = response["total_pages"]! as Int
+        let num_results = response["num_results"]! as! Int
+        let objects = response["objects"] as! Array<AnyObject>
+        let page = response["page"] as! Int
+        self.totalPages = response["total_pages"] as! Int
         
         self.clearPage(page)
         for obj in objects {
-            let startStr = obj["start"] as String?
-            let endStr = obj["end"] as String?
+            let startStr = obj["start"] as! String?
+            let endStr = obj["end"] as! String?
             let start =  dateFormatter.dateFromString(startStr!) as NSDate?
             let end = dateFormatter.dateFromString(endStr!) as NSDate?
             let event = Event(
-                id: obj["id"] as Int?,
-                createdBy: obj["created_by"] as String?,
-                title: obj["name"] as String?,
-                desc: obj["description"] as String?,
+                id: obj["id"] as! Int?,
+                createdBy: obj["created_by"] as! String?,
+                title: obj["name"] as! String?,
+                desc: obj["description"] as! String?,
                 startDate: start,
                 endDate: end,
-                categories: obj["categories"] as Array<Dictionary<String, AnyObject>>?,
-                isSubscribed: obj["is_subscribed"] as Bool?,
-                subscribedUsers: obj["subscribed_users"] as Int?,
-                address: obj["address"] as String?,
-                addressName: obj["address_name"] as String?,
-                isApproved: obj["is_approved"] as Bool?,
-                isReported: obj["is_reported"] as Bool?
+                categories: obj["categories"] as! Array<Dictionary<String, AnyObject>>?,
+                isSubscribed: obj["is_subscribed"] as! Bool?,
+                subscribedUsers: obj["subscribed_users"] as! Int?,
+                address: obj["address"] as! String?,
+                addressName: obj["address_name"] as! String?,
+                isApproved: obj["is_approved"] as! Bool?,
+                isReported: obj["is_reported"] as! Bool?
             )
             self.events[page]?.append(event)
         }

@@ -71,8 +71,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == SEGUE_ID_EVENT_DETAIL {
-            let event = sender as Event
-            let dest = segue.destinationViewController as EventDetailViewController
+            let event = sender as! Event
+            let dest = segue.destinationViewController as! EventDetailViewController
             dest.event = event
         }
     }
@@ -104,7 +104,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func makeRequest() {
-        if self.searchBar.text.utf16Count == 0 {
+        if count(self.searchBar.text) == 0 {
             if self.events.count == 0 {
                 APIManager.sharedInstance.reloadEvents(nil)
             }
@@ -137,7 +137,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
             self.currentPage++
             loadEvents()
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as EventTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as! EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)
         cell.setUpWithEvent(ev)
         cell.contentView.backgroundColor = ColorManager.getColorForIndex(indexPath.row)
@@ -212,7 +212,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func isSearching() -> Bool {
-        return self.searchBar.text.utf16Count > 0
+        return count(self.searchBar.text) > 0
     }
 }
 

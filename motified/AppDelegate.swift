@@ -15,8 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         UserPreferenceManager.setPrefIfNecessary()
-        let now = NSDate()
-        let formatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+//        let now = NSDate()
+//        let formatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+        if(UIApplication.instancesRespondToSelector(Selector("registerUserNotificationSettings:")))
+        {
+            UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Sound, categories: nil));
+        }
         return true
     }
     

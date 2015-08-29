@@ -27,14 +27,16 @@ func imageNameForCategoryID(id: Int) -> String {
 }
 
 class EventCategory: NSObject {
-    
+
     var category: String
     var id: Int
     var image: UIImage
     
     init(category: String, id: Int) {
+        println("Creating Category with id")
+        println(id)
         self.category = category
         self.id = id
-        self.image = UIImage(named:imageNameForCategoryID(id))
+        self.image = UIImage(named:imageNameForCategoryID(id))!
     }
 }

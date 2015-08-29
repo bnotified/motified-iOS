@@ -42,7 +42,7 @@ class Event: NSObject {
         self.isReported = isReported!
         //self.location = coords
         self.categories = categories?.map({ (cat) -> EventCategory in
-            return EventCategory(category: cat["category"]! as String, id: cat["id"]! as Int)
+            return EventCategory(category: cat["category"] as! String, id: cat["id"] as! Int)
         })
     }
     
@@ -60,7 +60,7 @@ class Event: NSObject {
     }
     
     func getDisplayAddress() -> String {
-        if self.addressName != nil && self.addressName?.utf16Count > 0 {
+        if (self.addressName != nil && self.addressName?.isEmpty == false) {
             return self.addressName!
         }
         return self.address!
@@ -113,7 +113,7 @@ class Event: NSObject {
             "is_reported": true
         ]
         let url = NSString(format: "api/events/%d" , self.id!)
-        LoginManager.manager.PATCH(url, parameters: params,
+        LoginManager.manager.PATCH(url as String, parameters: params,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 done(nil)
             },
@@ -163,8 +163,8 @@ class Event: NSObject {
     func cancelNotify() {
         let app = UIApplication.sharedApplication()
         let notifications = app.scheduledLocalNotifications
-        for nt in notifications as [UILocalNotification] {
-            let userInfo = nt.userInfo as Dictionary<String, AnyObject>!
+        for nt in notifications as! [UILocalNotification] {
+            let userInfo = nt.userInfo as! Dictionary<String, AnyObject>!
             if userInfo != nil {
                 if let uid = userInfo["id"]! as? Int {
                     if uid == self.id {

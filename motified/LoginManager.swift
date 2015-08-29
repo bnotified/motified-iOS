@@ -24,7 +24,7 @@ class LoginManager {
             "confirm": confirm
         ]
         self.manager.POST("api/users", parameters: params, success: { (NSURLSessionDataTask, response) -> Void in
-            var jsonResult = response as Dictionary<String, AnyObject>
+            var jsonResult = response as! Dictionary<String, AnyObject>
             APIManager.sharedInstance.loadEvents(nil)
             APIManager.sharedInstance.loadCategories(nil)
             success()
@@ -66,8 +66,8 @@ class LoginManager {
     
     class func isLoggedIn(done: (Bool!, NSError!) -> Void) -> Void {
         self.manager.GET("user/isLoggedIn", parameters: nil, success: { (NSURLSessionDataTask, response) -> Void in
-            let jsonResult: Dictionary<String, AnyObject> = response as Dictionary<String, AnyObject>
-            let result: Bool = jsonResult["isLoggedIn"]! as Bool
+            let jsonResult: Dictionary<String, AnyObject> = response as! Dictionary<String, AnyObject>
+            let result: Bool = jsonResult["isLoggedIn"]! as! Bool
             done(result, nil)
             }) { (NSURLSessionDataTask, NSError) -> Void in
                 NSLog("Error: %@", NSError)
@@ -81,7 +81,7 @@ class LoginManager {
     }
     
     class func getCookies() -> Array<NSHTTPCookie> {
-        return NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/"))! as Array<NSHTTPCookie>
+        return NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/")!)! as! Array<NSHTTPCookie>
     }
     
     class func getCookie() -> NSHTTPCookie! {

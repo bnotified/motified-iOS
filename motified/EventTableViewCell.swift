@@ -44,12 +44,12 @@ class EventTableViewCell: UITableViewCell {
         let dateFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.ClientLong)
         let start = dateFormatter.stringFromDate(event.startDate!.toLocalTime())
         let end = dateFormatter.stringFromDate(event.endDate!.toLocalTime())
-        self.dateLabel.text = NSString(format: "%@ - %@", start, end)
+        self.dateLabel.text = NSString(format: "%@ - %@", start, end) as String
         
         self.subscriberContainer.layer.borderColor = UIColor.whiteColor().CGColor
         self.subscriberContainer.layer.borderWidth = 1.0
         self.subscriberContainer.layer.cornerRadius = 8
-        self.subscribedLabel.text = NSString(format: "%d", self.event!.subscribedUsers!)
+        self.subscribedLabel.text = NSString(format: "%d", self.event!.subscribedUsers!) as String
         
         self.locationLabel.text = event.getDisplayAddress()
     }

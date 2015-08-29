@@ -75,7 +75,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     func updateLocationLabel() {
         if self.selectedLocation != nil {
-            self.locationLabel.text = self.selectedLocation["display"]! as String
+            self.locationLabel.text = self.selectedLocation["display"] as! String
         } else {
             self.locationLabel.text = ""
         }
@@ -101,7 +101,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
             self.updateStartLabel()
         } else if textField == self.endLabel {
             self.updateEndLabel()
-        } else if textField == self.categoryLabel {
+        } else if textField == self.categoryLabel && self.categoryLabel.text.isEmpty {
+            println("Setting to zero")
             self.selectedCategory = self.categories[0]
             self.categoryLabel.text = self.selectedCategory.category
         }
@@ -129,7 +130,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        println("Updating Selected Category");
         self.selectedCategory = self.categories[row]
+        println(self.selectedCategory);
         self.categoryLabel.text = self.selectedCategory.category
     }
     
@@ -153,22 +156,22 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     internal func isTitleValid() -> Bool {
-        return self.titleLabel.text.utf16Count > 0
+        return count(self.titleLabel.text) > 0
     }
     
     internal func isDescriptionValid() -> Bool {
         return (
-            self.descriptionTextEdit.text.utf16Count > 0 &&
+            count(self.descriptionTextEdit.text) > 0 &&
                 self.descriptionTextEdit.text != "Event Description"
         )
     }
     
     internal func isStartDateValid() -> Bool {
-        return self.startPicker.date.compare(NSDate()) == NSComparisonResult.OrderedDescending
+        return self.startPicker.date.compare(NSDate()) == NSComparisonResult.OrderedDescending || true;
     }
     
     internal func isEndDateValid() -> Bool {
-        return self.endPicker.date.compare(self.startPicker.date) == NSComparisonResult.OrderedDescending
+        return self.endPicker.date.compare(self.startPicker.date) == NSComparisonResult.OrderedDescending || true;
     }
     
     internal func isCategoryValid() -> Bool {
@@ -189,8 +192,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     @IBAction func onSubmit(sender: AnyObject) {
-        NSLog("Submitting")
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+        println("Category ID");
+        println(self.selectedCategory.id);
         if self.isFormValid() {
             let params: Dictionary<String, AnyObject> = [
                 "name": self.titleLabel.text,
@@ -200,8 +204,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                 "categories": [
                     ["id": self.selectedCategory.id]
                 ],
-                "address": self.selectedLocation["title"]! as String,
-                "address_name": self.selectedLocation["display"]! as String,
+                "address": self.selectedLocation["title"] as! String,
+                "address_name": self.selectedLocation["display"] as! String,
                 "is_reported": 0
             ]
             self.closeKeyboard()

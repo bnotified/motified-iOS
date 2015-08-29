@@ -82,7 +82,7 @@ class EventDetailViewController: UIViewController {
                 self.view.makeToast("No results")
                 return ()
             }
-            let items = MKLocalSearchResponse.mapItems as [MKMapItem]
+            let items = MKLocalSearchResponse.mapItems as! [MKMapItem]
             NSLog("Items: %@", items)
             let first: MKMapItem = items.first!
             map.addAnnotation(first.placemark)

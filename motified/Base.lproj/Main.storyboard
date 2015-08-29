@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kyy-P1-ZMi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Kyy-P1-ZMi">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -353,7 +353,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ng4-H7-C1A">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
+                                <string key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
 
 Find out about awesome events in town or on campus, and save them directly to your phone’s calendar. You can also instantly access directions to an event from its page.
  
@@ -361,7 +361,7 @@ View the entire local feed, or customize your feed using categories to help you 
 
 The content on b’Notified is user-generated, so you can post your own organization’s events to the feed to reach a larger audience – free of charge. Forgo the paper waste, cost, and limited scope of flyering. b’notified is a wide-reaching platform that streamlines information to your audience effectively and efficiently.
 
-With b’Notified, it’s easy to keep up with the buzz on campus. </mutableString>
+With b’Notified, it’s easy to keep up with the buzz on campus. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -395,7 +395,7 @@ With b’Notified, it’s easy to keep up with the buzz on campus. </mutableStri
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMp-X9-pds">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Terms and Conditions of Use
+                                <string key="text">Terms and Conditions of Use
 
 1. Terms
 
@@ -447,7 +447,7 @@ We will make readily available to customers information about our policies and p
 
 We are committed to conducting our business in accordance with these principles in order to ensure that the confidentiality of personal information is protected and maintained.
 
-</mutableString>
+</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
@@ -938,12 +938,12 @@ We are committed to conducting our business in accordance with these principles 
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="58W-Sc-zya">
                                 <rect key="frame" x="5" y="72" width="310" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R1s-EF-MJw">
                                 <rect key="frame" x="5" y="110" width="310" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLK-Y2-C0k">
                                 <rect key="frame" x="5" y="148" width="80" height="30"/>
@@ -1127,7 +1127,7 @@ We are committed to conducting our business in accordance with these principles 
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tDm-ch-Y7h">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
+                                <string key="text">b’Notified serves Ann Arbor and the University of Michigan as a virtual posting wall for the multitude of exciting events and opportunities taking place here every day. With its user-generated feed, b’notified connects hundreds of groups and organizations on and off campus to one another, and to prospective new participants, in just a few simple steps.
 
 Find out about awesome events in town or on campus, and save them directly to your phone’s calendar. You can also instantly access directions to an event from its page.
  
@@ -1135,7 +1135,7 @@ View the entire local feed, or customize your feed using categories to help you 
 
 The content on b’Notified is user-generated, so you can post your own organization’s events to the feed to reach a larger audience – free of charge. Forgo the paper waste, cost, and limited scope of flyering. b’notified is a wide-reaching platform that streamlines information to your audience effectively and efficiently.
 
-With b’Notified, it’s easy to keep up with the buzz on campus. </mutableString>
+With b’Notified, it’s easy to keep up with the buzz on campus. </string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
