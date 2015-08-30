@@ -167,11 +167,11 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     internal func isStartDateValid() -> Bool {
-        return self.startPicker.date.compare(NSDate()) == NSComparisonResult.OrderedDescending || true;
+        return self.startPicker.date.compare(NSDate()) == NSComparisonResult.OrderedDescending
     }
     
     internal func isEndDateValid() -> Bool {
-        return self.endPicker.date.compare(self.startPicker.date) == NSComparisonResult.OrderedDescending || true;
+        return self.endPicker.date.compare(self.startPicker.date) == NSComparisonResult.OrderedDescending
     }
     
     internal func isCategoryValid() -> Bool {
