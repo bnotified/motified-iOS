@@ -50,17 +50,24 @@ class APIManager: NSObject {
         if params != nil {
             finalParams.update(params)
         }
+        let now = NSDate();
+        let formatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
+        let stringDate = formatter.stringFromDate(now)
+        print(stringDate)
+        if finalParams.indexForKey("filters") == nil {
+            finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
+        }
+        var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"] as! Array<Dictionary<String, AnyObject>>
+        filters.append(["and": [
+            ["name":"start", "op":"gte", "val": stringDate]
+        ]])
         if !UserPreferenceManager.isAdmin() {
-            if finalParams.indexForKey("filters") == nil {
-                finalParams.updateValue([] as Array<Dictionary<String, AnyObject>>, forKey: "filters")
-            }
-            var filters: Array<Dictionary<String, AnyObject>> = finalParams["filters"] as! Array<Dictionary<String, AnyObject>>
             filters.append(["and": [
                 ["name":"is_approved", "op":"eq", "val": true],
                 ["name":"is_reported", "op":"eq", "val": false]
             ]])
-            finalParams.updateValue(filters, forKey: "filters")
         }
+        finalParams.updateValue(filters, forKey: "filters")
         LoginManager.manager.GET(
             "/api/events",
             parameters: ["q": JSONStringify(finalParams), "page": self.currentPage, "results_per_page": 30],
@@ -127,7 +134,7 @@ class APIManager: NSObject {
     }
     
     func subscribeToEvent(event: Event, done: ((NSError!) -> Void)!) {
-        var data = ["event_id": event.id!]
+        let data = ["event_id": event.id!]
         LoginManager.manager.POST("/api/event_subscriptions", parameters: data,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 event.isSubscribed = true
@@ -140,10 +147,10 @@ class APIManager: NSObject {
     }
     
     func unsubscribeFromEvent(event: Event, done: ((NSError!) -> Void)!) {
-        var data = ["filters": [["and" : [
+        let data = ["filters": [["and" : [
             ["name":"event_id", "op":"eq", "val": event.id!]
         ]]]]
-        var finalParams = ["q": JSONStringify(data)]
+        let finalParams = ["q": JSONStringify(data)]
         LoginManager.manager.DELETE("/api/event_subscriptions", parameters: finalParams,
             success: { (NSURLSessionDataTask, AnyObject) -> Void in
                 event.isSubscribed = false
@@ -187,7 +194,7 @@ class APIManager: NSObject {
     }
     
     internal func getParamsForCategorySearch() -> Dictionary<String, AnyObject> {
-        var categories: Array<EventCategory> = self.getSelectedCategories()
+        let categories: Array<EventCategory> = self.getSelectedCategories()
         if categories.count > 1 {
             var or: Array<Dictionary<String, AnyObject>> = []
             for category in categories {
@@ -229,8 +236,8 @@ class APIManager: NSObject {
                 let json = response as! Dictionary<String, AnyObject>
                 let rawCategories = json["objects"] as! Array<Dictionary<String, AnyObject>>
                 self.categories = rawCategories.map({ (cat) -> EventCategory in
-                    println("Mapping Category");
-                    println(cat);
+                    print("Mapping Category");
+                    print(cat);
                     return EventCategory(category: cat["category"] as! String, id: cat["id"] as! Int)
                 })
                 self.emitCategoriesChanged()
@@ -315,7 +322,7 @@ class APIManager: NSObject {
     func getEventsInRange(page: Int) -> Array<Event> {
         var events = self.getEventsOnPage(1)
         for var i = 2; i <= page; i++ {
-            events.extend(self.getEventsOnPage(i))
+            events.appendContentsOf(self.getEventsOnPage(i))
         }
         return events
     }
@@ -331,15 +338,13 @@ class APIManager: NSObject {
             return String(format: "Showing the %@ category", catString)
         }
         if self.selectedCategories.count > 4 {
-            NSLog("YAY HERE")
             let strings = self.getSelectedCategoryStrings()
             let otherStrings = strings[0..<2]
             let numMore = strings.count - 2
-            let returnString = String(format: "Showing %@, and %d more", ", ".join(otherStrings), numMore)
-            NSLog("Return String: %@", returnString)
+            let returnString = String(format: "Showing %@, and %d more", otherStrings.joinWithSeparator(", "), numMore)
             return returnString
         }
-        return String(format: "Showing categories: %@", ", ".join(self.getSelectedCategoryStrings()))
+        return String(format: "Showing categories: %@", self.getSelectedCategoryStrings().joinWithSeparator(", "))
     }
     
     func getSelectedCategoryStrings() -> Array<String> {

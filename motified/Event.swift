@@ -163,7 +163,7 @@ class Event: NSObject {
     func cancelNotify() {
         let app = UIApplication.sharedApplication()
         let notifications = app.scheduledLocalNotifications
-        for nt in notifications as! [UILocalNotification] {
+        for nt in notifications! as [UILocalNotification] {
             let userInfo = nt.userInfo as! Dictionary<String, AnyObject>!
             if userInfo != nil {
                 if let uid = userInfo["id"]! as? Int {

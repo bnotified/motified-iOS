@@ -26,9 +26,7 @@
 		3A20C40D1AB0A0E30055BBF4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A20C39A1AAF7CB40055BBF4 /* Main.storyboard */; };
 		3A20C40F1AB0A0EA0055BBF4 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */; };
 		3A20C4101AB0A0ED0055BBF4 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */; };
-		3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */; };
 		3A20C4141AB49C620055BBF4 /* UserPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */; };
-		3A20C4151AB4A1170055BBF4 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */; };
 		3A20C4161AB4A1F90055BBF4 /* UserPreferenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */; };
 		3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4171AB4A6960055BBF4 /* delay.swift */; };
 		3A20C4191AB4A6960055BBF4 /* delay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A20C4171AB4A6960055BBF4 /* delay.swift */; };
@@ -106,6 +104,7 @@
 		3A68FBCC1AFA80D2003C7438 /* sun@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3A68FBB41AFA80D2003C7438 /* sun@3x.png */; };
 		3A8FCBF11AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */; };
 		3A8FCBF21AFBCB3E00AC32AE /* DictionaryExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */; };
+		3A9A67CC1BC064A400C2B353 /* BMInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A9A67CB1BC064A400C2B353 /* BMInputBox.swift */; settings = {ASSET_TAGS = (); }; };
 		3AB859E81AF91F2F00D79F6A /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859E71AF91F2F00D79F6A /* json.swift */; };
 		3AB859E91AF920B100D79F6A /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859E71AF91F2F00D79F6A /* json.swift */; };
 		3AB859EB1AF92E5A00D79F6A /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB859EA1AF92E5A00D79F6A /* CategoryTableViewCell.swift */; };
@@ -171,7 +170,6 @@
 		3A20C3F01AAF805C0055BBF4 /* LoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		3A20C3F21AAF8C5F0055BBF4 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3A20C3F41AAF8C850055BBF4 /* MainTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
-		3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMInputBox.swift; sourceTree = "<group>"; };
 		3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPreferenceManager.swift; sourceTree = "<group>"; };
 		3A20C4171AB4A6960055BBF4 /* delay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = delay.swift; sourceTree = "<group>"; };
 		3A20C41A1AB4AC670055BBF4 /* AuthManagingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManagingViewController.swift; sourceTree = "<group>"; };
@@ -225,6 +223,7 @@
 		3A68FBB31AFA80D2003C7438 /* sun@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun@2x.png"; sourceTree = "<group>"; };
 		3A68FBB41AFA80D2003C7438 /* sun@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sun@3x.png"; sourceTree = "<group>"; };
 		3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtension.swift; sourceTree = "<group>"; };
+		3A9A67CB1BC064A400C2B353 /* BMInputBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BMInputBox.swift; sourceTree = "<group>"; };
 		3AB859E71AF91F2F00D79F6A /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		3AB859EA1AF92E5A00D79F6A /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		3AB859ED1AF93DFF00D79F6A /* CategoryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
@@ -482,6 +481,7 @@
 		3ADC50DF1AC31B2700545255 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3A9A67CB1BC064A400C2B353 /* BMInputBox.swift */,
 				3A8FCBF01AFBCB3E00AC32AE /* DictionaryExtension.swift */,
 				3AD1716F1AF2AB4C00523A5D /* debounce.swift */,
 				3AB859E71AF91F2F00D79F6A /* json.swift */,
@@ -490,7 +490,6 @@
 				3A20C4131AB49C620055BBF4 /* UserPreferenceManager.swift */,
 				3A20C3ED1AAF80060055BBF4 /* BridgingHeader.h */,
 				3A20C4171AB4A6960055BBF4 /* delay.swift */,
-				3A20C4111AB49AAD0055BBF4 /* BMInputBox.swift */,
 				3A5152EB1AB871A500DC290B /* MotifiedDateFormatter.swift */,
 				3ABD29541AB73A4D0022CE9E /* constants.swift */,
 			);
@@ -592,7 +591,9 @@
 		3A20C3871AAF7CB40055BBF4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Giancarlo Anemone";
 				TargetAttributes = {
 					3A20C38E1AAF7CB40055BBF4 = {
@@ -765,12 +766,12 @@
 				3AB859EE1AF93DFF00D79F6A /* CategoryListViewController.swift in Sources */,
 				3A20C4181AB4A6960055BBF4 /* delay.swift in Sources */,
 				3ADC50E41AC31F2300545255 /* NSDateExtension.swift in Sources */,
-				3A20C4121AB49AAD0055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C3991AAF7CB40055BBF4 /* UserProfileViewController.swift in Sources */,
 				3A20C3F31AAF8C5F0055BBF4 /* MainViewController.swift in Sources */,
 				3A5153071ABC802D00DC290B /* LocationPickerViewController.swift in Sources */,
 				3AC9EDA81AC465F3005F5ADB /* EventCategory.swift in Sources */,
 				3A20C3951AAF7CB40055BBF4 /* AppDelegate.swift in Sources */,
+				3A9A67CC1BC064A400C2B353 /* BMInputBox.swift in Sources */,
 				3ADC50E71AC3495800545255 /* ColorManager.swift in Sources */,
 				3A5152E91AB7BE4700DC290B /* CreateEventViewController.swift in Sources */,
 				3AD171701AF2AB4C00523A5D /* debounce.swift in Sources */,
@@ -814,7 +815,6 @@
 				3A20C3AD1AAF7CB40055BBF4 /* motifiedTests.swift in Sources */,
 				3AB859E91AF920B100D79F6A /* json.swift in Sources */,
 				3A20C4091AB0A0CF0055BBF4 /* Event.swift in Sources */,
-				3A20C4151AB4A1170055BBF4 /* BMInputBox.swift in Sources */,
 				3A20C4081AB0A0CD0055BBF4 /* LoginManager.swift in Sources */,
 				3A5152ED1AB871A500DC290B /* MotifiedDateFormatter.swift in Sources */,
 				3AB859EC1AF92E5A00D79F6A /* CategoryTableViewCell.swift in Sources */,
@@ -863,6 +863,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -926,12 +927,14 @@
 			baseConfigurationReference = 8F0EA92544ED70729F437F9B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = motified/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bnotified.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 			};
 			name = Debug;
@@ -941,11 +944,14 @@
 			baseConfigurationReference = 2387A0DB163D8F90DAEF6FA5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = motified/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bnotified.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 			};
 			name = Release;
@@ -965,6 +971,7 @@
 				);
 				INFOPLIST_FILE = motifiedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.bnotified.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motified.app/motified";
@@ -982,6 +989,7 @@
 				);
 				INFOPLIST_FILE = motifiedTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "co.bnotified.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = motified/BridgingHeader.h;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/motified.app/motified";

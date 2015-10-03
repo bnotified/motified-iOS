@@ -10,7 +10,7 @@ import Foundation
 
 func JSONStringify(value: AnyObject) -> String {
     if NSJSONSerialization.isValidJSONObject(value) {
-        if let data = NSJSONSerialization.dataWithJSONObject(value, options: nil, error: nil) {
+        if let data = try? NSJSONSerialization.dataWithJSONObject(value, options: []) {
             if let string: String? = NSString(data: data, encoding: NSUTF8StringEncoding) as String? {
                 return string!
             }

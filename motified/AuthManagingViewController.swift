@@ -108,13 +108,13 @@ class AuthManagingViewController: UIViewController {
     
     func isPasswordValid(password: String) -> Bool {
         let whitespace = NSCharacterSet.whitespaceAndNewlineCharacterSet()
-        return (count(password) >= 6 && password.rangeOfCharacterFromSet(whitespace) == nil)
+        return (password.characters.count >= 6 && password.rangeOfCharacterFromSet(whitespace) == nil)
     }
     
     func isUsernameValid(username: String) -> Bool {
         let validSet = NSCharacterSet(charactersInString: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_")
         let invertedSet = validSet.invertedSet
-        return (count(username) >= 1 && username.rangeOfCharacterFromSet(invertedSet) == nil)
+        return (username.characters.count >= 1 && username.rangeOfCharacterFromSet(invertedSet) == nil)
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,18 +125,18 @@ class AuthManagingViewController: UIViewController {
     @IBAction func didPressRegister(sender: AnyObject) {
         let username = self.usernameTextField.text
         let password = self.passwordTextField.text
-        if self.isUsernameValid(username) == false {
+        if self.isUsernameValid(username!) == false {
             return self.showError("A username be at least 1 character long and contain only alphaneumeric charcters and underscores")
         }
-        if self.isPasswordValid(password) == false {
+        if self.isPasswordValid(password!) == false {
             return self.showError("A password must be at least 6 characters long and not contain any whitespace")
         }
-        self.register(username, password: password)
+        self.register(username!, password: password!)
     }
     
     @IBAction func didPressLogin(sender: AnyObject) {
         let username = self.usernameTextField.text
         let password = self.passwordTextField.text
-        self.loginWithUsername(username, password: password, count: 0)
+        self.loginWithUsername(username!, password: password!, count: 0)
     }
 }

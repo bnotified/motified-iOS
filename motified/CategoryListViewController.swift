@@ -26,9 +26,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.dataSource = self
         self.tableView.delegate = self
         self.tableView.separatorInset = UIEdgeInsetsZero
-        if IS_OS_8_OR_LATER {
-            self.tableView.layoutMargins = UIEdgeInsetsZero
-        }
+        self.tableView.layoutMargins = UIEdgeInsetsZero
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,7 +57,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var selectedIndexes = APIManager.sharedInstance.selectedCategories
+        let selectedIndexes = APIManager.sharedInstance.selectedCategories
         let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier, forIndexPath: indexPath) as! CategoryTableViewCell
         cell.backgroundColor = ColorManager.getColorPurple()
         let category = APIManager.sharedInstance.categories[indexPath.row] as EventCategory
@@ -71,9 +69,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         }
         cell.separatorInset = UIEdgeInsetsZero
         
-        if IS_OS_8_OR_LATER {
-            cell.layoutMargins = UIEdgeInsetsZero
-        }
+        cell.layoutMargins = UIEdgeInsetsZero
         
         return cell
     }
@@ -82,7 +78,7 @@ class CategoryListViewController: UIViewController, UITableViewDelegate, UITable
         if self.hasShownToast == false {
             self.showHelperToast()
         }
-        var selectedIndexes = APIManager.sharedInstance.selectedCategories
+        let selectedIndexes = APIManager.sharedInstance.selectedCategories
         if selectedIndexes.containsObject(indexPath.row) {
             selectedIndexes.removeObject(indexPath.row)
         } else {

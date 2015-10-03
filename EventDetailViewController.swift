@@ -75,14 +75,14 @@ class EventDetailViewController: UIViewController {
         let localSearch = MKLocalSearch(request: request)
         localSearch.startWithCompletionHandler { (MKLocalSearchResponse, NSError) -> Void in
             if NSError != nil {
-                NSLog("Error: %@", NSError)
+                NSLog("Error: %@", NSError!)
                 return ()
             }
-            if MKLocalSearchResponse.mapItems.count == 0 {
+            if MKLocalSearchResponse!.mapItems.count == 0 {
                 self.view.makeToast("No results")
                 return ()
             }
-            let items = MKLocalSearchResponse.mapItems as! [MKMapItem]
+            let items = MKLocalSearchResponse!.mapItems as [MKMapItem]
             NSLog("Items: %@", items)
             let first: MKMapItem = items.first!
             map.addAnnotation(first.placemark)
@@ -93,7 +93,7 @@ class EventDetailViewController: UIViewController {
     
     func handleNoEvent() {
         self.view.makeToast("Error: No event loaded")
-        delay(2, { () -> () in
+        delay(2, closure: { () -> () in
             self.navigationController?.popViewControllerAnimated(true)
             return ()
         })
@@ -148,7 +148,7 @@ class EventDetailViewController: UIViewController {
     
     func showMessageThenPop(message: String) {
         self.view.makeToast(message, duration: 1.5, position: CSToastPositionCenter)
-        delay(2, { () -> () in
+        delay(2, closure: { () -> () in
             self.navigationController?.popToRootViewControllerAnimated(true)
             return ()
         })

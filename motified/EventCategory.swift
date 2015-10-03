@@ -33,8 +33,8 @@ class EventCategory: NSObject {
     var image: UIImage
     
     init(category: String, id: Int) {
-        println("Creating Category with id")
-        println(id)
+        print("Creating Category with id")
+        print(id)
         self.category = category
         self.id = id
         self.image = UIImage(named:imageNameForCategoryID(id))!

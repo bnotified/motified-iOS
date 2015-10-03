@@ -24,7 +24,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     let categories: Array<EventCategory> = APIManager.sharedInstance.categories
     var selectedCategory: EventCategory!
-    var selectedLocation: Dictionary<String, AnyObject>!
+    var selectedLocation: [String: AnyObject]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +101,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
             self.updateStartLabel()
         } else if textField == self.endLabel {
             self.updateEndLabel()
-        } else if textField == self.categoryLabel && self.categoryLabel.text.isEmpty {
-            println("Setting to zero")
+        } else if textField == self.categoryLabel && self.categoryLabel.text!.isEmpty {
+            print("Setting to zero")
             self.selectedCategory = self.categories[0]
             self.categoryLabel.text = self.selectedCategory.category
         }
@@ -130,9 +130,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        println("Updating Selected Category");
+        print("Updating Selected Category");
         self.selectedCategory = self.categories[row]
-        println(self.selectedCategory);
+        print(self.selectedCategory);
         self.categoryLabel.text = self.selectedCategory.category
     }
     
@@ -156,12 +156,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     }
     
     internal func isTitleValid() -> Bool {
-        return count(self.titleLabel.text) > 0
+        return self.titleLabel.text!.characters.count > 0
     }
     
     internal func isDescriptionValid() -> Bool {
         return (
-            count(self.descriptionTextEdit.text) > 0 &&
+            self.descriptionTextEdit.text.characters.count > 0 &&
                 self.descriptionTextEdit.text != "Event Description"
         )
     }
@@ -193,19 +193,20 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
     
     @IBAction func onSubmit(sender: AnyObject) {
         let serverFormatter = MotifiedDateFormatter(format: MotifiedDateFormat.Server)
-        println("Category ID");
-        println(self.selectedCategory.id);
+        let categoryId: Int = self.selectedCategory.id
+        let categories: [String: Int] = ["id": categoryId]
+        let title = self.selectedLocation!["title"] as! String
+        let display = self.selectedLocation["display"] as! String
+
         if self.isFormValid() {
-            let params: Dictionary<String, AnyObject> = [
+            let params: [String: AnyObject!] = [
                 "name": self.titleLabel.text,
                 "description": self.descriptionTextEdit.text,
                 "start": serverFormatter.stringFromDate(self.startPicker.date),
                 "end": serverFormatter.stringFromDate(self.endPicker.date),
-                "categories": [
-                    ["id": self.selectedCategory.id]
-                ],
-                "address": self.selectedLocation["title"] as! String,
-                "address_name": self.selectedLocation["display"] as! String,
+                "categories": [categories],
+                "address": title,
+                "address_name": display,
                 "is_reported": 0
             ]
             self.closeKeyboard()
@@ -225,7 +226,7 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate, UITextVi
                     
                 } else {
                     self.view.makeToast("Event Created! Once approved, it will appear on the event feed.", duration: 2.5, position: CSToastPositionCenter)
-                    delay(2.5, { () -> () in
+                    delay(2.5, closure: { () -> () in
                         self.navigationController?.popToRootViewControllerAnimated(true)
                         return ()
                     })

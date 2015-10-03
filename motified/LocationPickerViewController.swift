@@ -70,7 +70,7 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         // Optional setup
         self.locationPickerView.shouldCreateHideMapButton = true
         
-        self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
+        self.debouncedSearch = debounce(NSTimeInterval(0.25), queue: dispatch_get_main_queue(), action: self.makeRequest)
     }
 
     override func didReceiveMemoryWarning() {
@@ -84,25 +84,25 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     }
     
     func makeRequest() {
-        if self.searchBar.text.isEmpty {
+        if self.searchBar.text!.isEmpty {
             return ()
         }
         let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = self.searchBar.text + "Ann Arbor, Michigan, United States"
+        request.naturalLanguageQuery = self.searchBar.text! + "Ann Arbor, Michigan, United States"
         let map = self.locationPickerView.mapView
         request.region = map.region
         
         let localSearch = MKLocalSearch(request: request)
         localSearch.startWithCompletionHandler { (MKLocalSearchResponse, NSError) -> Void in
             if NSError != nil {
-                NSLog("Error: %@", NSError)
+                NSLog("Error: %@", NSError!)
                 return ()
             }
-            if MKLocalSearchResponse.mapItems.count == 0 {
+            if MKLocalSearchResponse!.mapItems.count == 0 {
                 self.view.makeToast("No results")
                 return ()
             }
-            let items = MKLocalSearchResponse.mapItems as! [MKMapItem]
+            let items = MKLocalSearchResponse!.mapItems as [MKMapItem]
             self.clearAnnotations()
             self.updateSearchResults(items)
             self.updateAnnotations(items)
@@ -117,13 +117,13 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         let localSearch = MKLocalSearch(request: request)
         localSearch.startWithCompletionHandler { (MKLocalSearchResponse, NSError) -> Void in
             if NSError != nil {
-                NSLog("Error: %@", NSError)
+                NSLog("Error: %@", NSError!)
                 return ()
             }
-            if MKLocalSearchResponse.mapItems.count == 0 {
+            if MKLocalSearchResponse!.mapItems.count == 0 {
                 return ()
             }
-            let items = MKLocalSearchResponse.mapItems as! [MKMapItem]
+            let items = MKLocalSearchResponse!.mapItems as! [MKMapItem]
             let placemark = items.first!.placemark
             map.showAnnotations([placemark], animated: false)
             map.region.span.longitudeDelta = 0.05
@@ -147,14 +147,14 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
         let localSearch = MKLocalSearch(request: request)
         localSearch.startWithCompletionHandler { (MKLocalSearchResponse, NSError) -> Void in
             if NSError != nil {
-                self.view.makeToast(NSString(format: "Error: %@", NSError) as String)
+                self.view.makeToast(NSString(format: "Error: %@", NSError!) as String)
                 return ()
             }
-            if MKLocalSearchResponse.mapItems.count == 0 {
+            if MKLocalSearchResponse!.mapItems.count == 0 {
                 self.view.makeToast("No results")
                 return ()
             }
-            let items = MKLocalSearchResponse.mapItems as! [MKMapItem]
+            let items = MKLocalSearchResponse!.mapItems as [MKMapItem]
             let item = items.first!
             let placemark = item.placemark as MKPlacemark
             let address = self.getFormattedAddress(item)
@@ -178,14 +178,15 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     
     internal func getName(item: MKMapItem) -> String {
         let placemark = item.placemark
-        if let street: AnyObject = placemark.addressDictionary["Street"] {
-            if let st = street as? String {
-                if placemark.name == st {
-                    return ""
-                }
-            }
-        }
-        return placemark.name
+//        placemark.addressDictionary.
+//        if let street: AnyObject = placemark.addressDictionary["Street"] {
+//            if let st = street as? String {
+//                if placemark.name == st {
+//                    return ""
+//                }
+//            }
+//        }
+        return placemark.name!
     }
     
     func updateSearchResults(mapItems: Array<MKMapItem>) {
@@ -208,7 +209,7 @@ class LocationPickerViewController: UIViewController, UISearchBarDelegate, UITab
     func updateAnnotations(mapItems: Array<MKMapItem>) {
         let map = self.locationPickerView.mapView
         for item in mapItems as [MKMapItem] {
-            for annotation in map.annotations as! [MKAnnotation] {
+            for annotation in map.annotations {
                 if(annotation.coordinate.latitude == item.placemark.coordinate.latitude &&
                     annotation.coordinate.longitude == item.placemark.coordinate.longitude) {
                         return ()

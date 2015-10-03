@@ -81,7 +81,7 @@ class LoginManager {
     }
     
     class func getCookies() -> Array<NSHTTPCookie> {
-        return NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/")!)! as! Array<NSHTTPCookie>
+        return NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: "http://localhost:5000/")!)! 
     }
     
     class func getCookie() -> NSHTTPCookie! {

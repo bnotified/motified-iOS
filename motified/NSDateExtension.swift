@@ -15,10 +15,10 @@ extension NSDate {
     }
     
     class func areDatesSameDay(dateOne:NSDate,dateTwo:NSDate) -> Bool {
-        var calender = NSCalendar.currentCalendar()
-        let flags: NSCalendarUnit = .DayCalendarUnit | .MonthCalendarUnit | .YearCalendarUnit
-        var compOne: NSDateComponents = calender.components(flags, fromDate: dateOne)
-        var compTwo: NSDateComponents = calender.components(flags, fromDate: dateTwo);
+        let calender = NSCalendar.currentCalendar()
+        let flags: NSCalendarUnit = [NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year  ]
+        let compOne: NSDateComponents = calender.components(flags, fromDate: dateOne)
+        let compTwo: NSDateComponents = calender.components(flags, fromDate: dateTwo);
         return (compOne.day == compTwo.day && compOne.month == compTwo.month && compOne.year == compTwo.year);
     }
     

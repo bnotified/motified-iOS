@@ -33,7 +33,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         center.addObserver(self, selector: "onEventsChanged", name: NOTIFICATION_SELECTED_EVENTS_CHANGED, object: nil)
         center.addObserver(self, selector: "onEventsError", name: NOTIFICATION_ERROR_EVENTS, object: nil)
         self.searchBar.delegate = self
-        self.debouncedSearch = debounce(NSTimeInterval(0.25), dispatch_get_main_queue(), self.makeRequest)
+        self.debouncedSearch = debounce(NSTimeInterval(0.25), queue: dispatch_get_main_queue(), action: self.makeRequest)
         self.sunnyRefreshControl = YALSunnyRefreshControl.attachToScrollView(self.tableView, target: self, refreshAction: "sunnyControlDidStartAnimation", delegate: self)
         if UserPreferenceManager.isAdmin() {
             self.segmentedControl.addTarget(self, action: "onSegmentChanged", forControlEvents: UIControlEvents.ValueChanged)
@@ -48,7 +48,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         let manager = APIManager.sharedInstance
         if (self.wasShowingSelected && !manager.hasSelectedCategories()) {
             self.wasShowingSelected = false
-            MBProgressHUD(forView: self.view).show(true)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true);
             manager.reloadEvents({ (NSError) -> Void in
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 return ()
@@ -56,12 +56,8 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         else if (manager.hasSelectedCategories()) {
             self.wasShowingSelected = true
-            self.tableView.makeToast(
-                manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter
-            )
-            MBProgressHUD(forView: self.view).show(true)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true);
             manager.loadEventsForSelectedCategories({ (NSError) -> Void in
-                NSLog("Done Loading")
                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                 return ()
             })
@@ -96,7 +92,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func sunnyControlDidStartAnimation() {
         APIManager.sharedInstance.reloadEvents({ (NSError) -> Void in
-            delay(0.5, { () -> () in
+            delay(0.5, closure: { () -> () in
                 self.sunnyRefreshControl?.endRefreshing()
                 return ()
             })
@@ -104,21 +100,26 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func makeRequest() {
-        if count(self.searchBar.text) == 0 {
+        if self.searchBar.text!.characters.count == 0 {
             if self.events.count == 0 {
                 APIManager.sharedInstance.reloadEvents(nil)
             }
             return ()
         }
-        APIManager.sharedInstance.searchEvents(self.searchBar.text, done: { (NSError) -> Void in
+        APIManager.sharedInstance.searchEvents(self.searchBar.text!, done: { (NSError) -> Void in
         })
     }
     
     func onEventsChanged() {
         self.events = APIManager.sharedInstance.getEventsInRange(self.currentPage)
         self.tableView.reloadData()
+        let manager = APIManager.sharedInstance
         if self.events.count == 0 {
             self.tableView.makeToast("No Results", duration: 2, position: CSToastPositionCenter)
+        } else if manager.hasSelectedCategories() {
+            self.tableView.makeToast(
+                manager.getSelectedCategoryMessage(), duration: 2, position: CSToastPositionCenter
+            )
         }
     }
     
@@ -137,7 +138,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
             self.currentPage++
             loadEvents()
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as! EventTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("EventTableViewCell", forIndexPath: indexPath) as! EventTableViewCell
         let ev = self.getEventAtIndexPath(indexPath)
         cell.setUpWithEvent(ev)
         cell.contentView.backgroundColor = ColorManager.getColorForIndex(indexPath.row)
@@ -212,7 +213,7 @@ class EventFeedViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func isSearching() -> Bool {
-        return count(self.searchBar.text) > 0
+        return self.searchBar.text!.characters.count > 0
     }
 }
 
